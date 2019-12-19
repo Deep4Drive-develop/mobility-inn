@@ -53,21 +53,21 @@
 		                    //var scene = document.querySelector('#target_Tower');
 		                    var scene = document.querySelector('a-scene');
 				    
+				    /*
                                     var cylinder = document.createElement('a-cylinder');
                                     cylinder.setAttribute('color', '#FF9500');
                                     cylinder.setAttribute('height', '2');
                                     cylinder.setAttribute('radius', '0.75');
                                     cylinder.setAttribute('position', '3 1 0');
                                     scene.appendChild(cylinder);
-				    /*
+				    */
 		                    for(var i = 2; i <= 33; i++) {
 		                        var tower_ = document.createElement('a-gltf-model');
                                         tower_.setAttribute('src', '#tower' + String(i));
                                         tower_.setAttribute('id', 'tower_' + String(i));
 		                        tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
-		                        scale.appendChild(tower_);
+		                        scene.appendChild(tower_);
 		                    }
-				    */
 
 				    const showImage = ({detail}) => {
 					    document.querySelector('#mall').setAttribute("visible", "false");
@@ -101,7 +101,7 @@
 		<div id="photoModeContainer" style="display: none">
 			<img id="photoModeImage">
 			<div id="flash"></div>
-			<div id="shutterButton" data-link="https://twitter.com/intent/tweet?text=Hello%20world&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo" style=""></div>
+			<div id="shutterButton" data-link="https://twitter.com/intent/tweet?text=Hello%20world&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo" style="">tw</div>
 			<div id="closeButton" style=""></div>
 		</div>
 		<a-scene
@@ -165,12 +165,13 @@
       			<a-light type="ambient" intensity="1"></a-light>
 
       			<a-entity target-tower xrextras-named-image-target="name: targetTower" id="target_Tower">
-			    <a-sky src="#backimage" id="backimage" phi-length=180 phi-start=0></a-sky>
+			    <a-sky src="#backimage" id="backimage" phi-length="180" phi-start="90"></a-sky>
 			    <a-gltf-model src="#ground" id="ground" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 			    <a-gltf-model src="#mall" id="mall" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 			    <a-gltf-model src="#mall_h13" id="mall_h13" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 			    <a-gltf-model src="#h13_top" id="h13_top" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 	                    <a-gltf-model src="#tower1" id="tower_1" scale="0.0125 0.0125 0.0125"> </a-gltf-model>
+			    <!--
 			    <a-gltf-model src="#tower2" id="tower_2" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 			    <a-gltf-model src="#tower3" id="tower_3" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 			    <a-gltf-model src="#tower4" id="tower_4" scale="0.0125 0.0125 0.0125"></a-gltf-model>
@@ -203,6 +204,7 @@
 			    <a-gltf-model src="#tower31" id="tower_31" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 			    <a-gltf-model src="#tower32" id="tower_32" scale="0.0125 0.0125 0.0125"></a-gltf-model>
 			    <a-gltf-model src="#tower33" id="tower_33" scale="0.0125 0.0125 0.0125"></a-gltf-model>
+			    -->
 			</a-entity>
 		</a-scene>
 	</body>
