@@ -87,7 +87,13 @@
 		                    }
 
 				    const showImage = ({detail}) => {
-					    if(flag === false) {
+					    document.querySelector('#mall').removeAttribute("animation")
+					    document.querySelector('#mall_h13').removeAttribute("animation")
+					    document.querySelector('#h13_top').removeAttribute("animation")
+					    for(var i = 1; i <= 33; i++) {
+					        document.querySelector('#tower_'+String(i)).removeAttribute("animation")
+				            }
+
 					    document.querySelector('#ground').setAttribute("visible", "true");
 					    document.querySelector('#mall').setAttribute("visible", "false");
 					    document.querySelector('#mall_h13').setAttribute("visible", "false");
@@ -99,8 +105,6 @@
 					    document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
 					    document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
 					    document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
-					    flag = true;
-					    }
 				    }
 				    const hideImage = ({detail}) => {
 					    /*
