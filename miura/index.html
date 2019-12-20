@@ -16,7 +16,6 @@
 		<script async src="//apps.8thwall.com/xrweb?appKey=bnWBr8smMOtm8hsLzv1M3AsjyZEPcHize0Tqflu9nYQxqu0yf0fp8mul8iPtRtqb0oR3LW"></script>
 
 		<script>
-			var flag;
 		        AFRAME.registerComponent('photo-mode', {
 		        	init: function() {
 		        		const container = document.getElementById('photoModeContainer');
@@ -43,14 +42,11 @@
 		        	}
 		        })
 
-			AFRAME.registerComponent('target-tower', {
+			AFRAME.registerComponent('tower', {
 			    schema: {
 			        name: { type: 'string' }
 			    },
 			    init: function() {
-				    flag = false;
-				    //entity?は上手くいかない
-		                    //var scene = document.querySelector('#target_Tower');
 		                    var scene = document.querySelector('a-scene');
 				    
 		                    var model = document.createElement('a-gltf-model');
@@ -86,41 +82,13 @@
 		                        scene.appendChild(tower_);
 		                    }
 
-				    const showImage = ({detail}) => {
-					    document.querySelector('#mall').removeAttribute("animation")
-					    document.querySelector('#mall_h13').removeAttribute("animation")
-					    document.querySelector('#h13_top').removeAttribute("animation")
-					    for(var i = 1; i <= 33; i++) {
-					        document.querySelector('#tower_'+String(i)).removeAttribute("animation")
-				            }
-
-					    document.querySelector('#ground').setAttribute("visible", "true");
-					    document.querySelector('#mall').setAttribute("visible", "false");
-					    document.querySelector('#mall_h13').setAttribute("visible", "false");
-					    document.querySelector('#h13_top').setAttribute("visible", "false");
-					    for(var i = 1; i <= 33; i++) {
-					        document.querySelector('#tower_'+String(i)).setAttribute("visible", "false");
-					        document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
-					    }
-					    document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
-					    document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
-					    document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
+				    document.querySelector('#ground').setAttribute("visible", "true");
+				    for(var i = 1; i <= 33; i++) {
+					document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
 				    }
-				    const hideImage = ({detail}) => {
-					    /*
-					    document.querySelector('#ground').setAttribute("visible", "false");
-
-					    document.querySelector('#mall').removeAttribute("animation")
-					    document.querySelector('#mall_h13').removeAttribute("animation")
-					    document.querySelector('#h13_top').removeAttribute("animation")
-					    for(var i = 1; i <= 33; i++) {
-					        document.querySelector('#tower_'+String(i)).removeAttribute("animation")
-				            }
-					    */
-				    }
-				    this.el.sceneEl.addEventListener('xrimagefound', showImage)
-				    this.el.sceneEl.addEventListener('xrimagelost', hideImage)
-				    this.el.sceneEl.addEventListener('xrimagescanning', hideImage)
+				    document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
+				    document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
+				    document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
 			    }
 			})
 		</script>
@@ -129,7 +97,7 @@
 	<body>
 		<div id="photoModeContainer" style="display: none">
 			<img id="photoModeImage">
-			<div id="shutterButton" data-link="https://twitter.com/intent/tweet?text=Hello%20world&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo" style="">tweet</div>
+			<div id="shutterButton" data-link="https://twitter.com/intent/tweet?text=Hello%20world&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo" style="">ツイート</div>
 			<div id="closeButton" style=""></div>
 		</div>
 		<a-scene
@@ -137,7 +105,8 @@
 		      xrextras-almost-there
 		      xrextras-runtime-error
 		      xrextras-loading
-		      photo-mode>
+		      photo-mode
+		      tower>
 			<a-assets>
 				<a-asset-item id="ground" src="model/ground.glb"></a-asset-item>
 				<a-asset-item id="mall" src="model/mall.glb"></a-asset-item>
@@ -192,48 +161,7 @@
 
       			<a-light type="ambient" intensity="1"></a-light>
 
-      			<a-entity target-tower xrextras-named-image-target="name: targetTower" id="target_Tower">
-			    <a-sky src="#backimage" id="backimage" phi-length="360" phi-start="0" theta-length="90" theta-start="0"></a-sky>
-			    <!--
-			    <a-gltf-model src="#ground" id="ground" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#mall" id="mall" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#mall_h13" id="mall_h13" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#h13_top" id="h13_top" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-	                    <a-gltf-model src="#tower1" id="tower_1" scale="0.0125 0.0125 0.0125"> </a-gltf-model>
-			    <a-gltf-model src="#tower2" id="tower_2" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower3" id="tower_3" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower4" id="tower_4" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower5" id="tower_5" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower6" id="tower_6" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower7" id="tower_7" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower8" id="tower_8" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower9" id="tower_9" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower10" id="tower_10" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower11" id="tower_11" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower12" id="tower_12" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower13" id="tower_13" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower14" id="tower_14" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower15" id="tower_15" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower16" id="tower_16" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower17" id="tower_17" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower18" id="tower_18" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower19" id="tower_19" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower20" id="tower_20" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower21" id="tower_21" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower22" id="tower_22" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower23" id="tower_23" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower24" id="tower_24" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower25" id="tower_25" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower26" id="tower_26" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower27" id="tower_27" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower28" id="tower_28" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower29" id="tower_29" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower30" id="tower_30" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower31" id="tower_31" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower32" id="tower_32" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    <a-gltf-model src="#tower33" id="tower_33" scale="0.0125 0.0125 0.0125"></a-gltf-model>
-			    -->
-			</a-entity>
+		        <a-sky src="#backimage" id="backimage" phi-length="360" phi-start="0" theta-length="90" theta-start="0"></a-sky>
 		</a-scene>
 	</body>
 </html>
