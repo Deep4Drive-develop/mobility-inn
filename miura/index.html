@@ -26,7 +26,11 @@
 		        		// Container starts hidden so it isn't visible when the page is still loading
 		        		container.style.display = 'block';
 
-		        		closeButton.addEventListener('click', () => {
+				        closeButton.addEventListener('click', () => {
+				        	container.classList.remove('photo');
+				        })
+
+		        		shutterButton.addEventListener('click', () => {
 						// Emit a screenshotrequest to the xrweb component
 						this.el.sceneEl.emit('screenshotrequest');
 
