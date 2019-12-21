@@ -27,17 +27,37 @@
 		        		container.style.display = 'block';
 
 		        		closeButton.addEventListener('click', () => {
-		        			container.classList.remove('photo');
-		        		})
+						// Emit a screenshotrequest to the xrweb component
+						this.el.sceneEl.emit('screenshotrequest');
 
-		        		shutterButton.addEventListener('click', () => {
-		        			// Emit a screenshotrequest to the xrweb component
-		        			// this.el.sceneEl.emit('screenshotrequest');
+						// Show the flash while the image is being taken
+						container.classList.add('flash');
+					})
+
+					this.el.sceneEl.addEventListener('screenshotready', e => {
+		        			container.classList.remove('flash');
+						// If an error occurs while trying to take the screenshot, e.detail will be empty.
+						// We could either retry or return control to the user
+						if (!e.detail) {
+							return;
+						}
+
+						// e.detail is the base64 representation of the JPEG screenshot
+						/*
+						image.src = 'data:image/jpeg;base64,' + e.detail;
+
+						var a = document.createElement('a');
+						a.href = image.src;
+						a.download = "download.jpg";
+						a.click();
+						*/
+
+						// Show the photo
+						//container.classList.add('photo');
 
 						//var link = this.getAttribute('data-link');
 						link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
 						location.href = link;
-		        			container.classList.add('photo');
 		        		})
 		        	}
 		        })
@@ -97,6 +117,7 @@
 	<body>
 		<div id="photoModeContainer" style="display: none">
 			<img id="photoModeImage">
+			<div id="flash"></div>
 			<div id="shutterButton" data-link="https://twitter.com/intent/tweet?text=Hello%20world&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo" style="">ツイート</div>
 			<div id="closeButton" style=""></div>
 		</div>
