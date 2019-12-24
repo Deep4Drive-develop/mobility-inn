@@ -18,29 +18,36 @@
 		<script src="./js/oauth.min.js"></script>
 
 		<script>
+                        var message;
 			function twitter_init() {
 		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
 			    OAuth.popup('twitter')
                             .done(function(result){
     			        localStorage.setItem("oauth_token", result.oauth_token); 
     			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
-    
+   
+                                /* 
                                 result.post('/1.1/statuses/update.json', {
                                     data: {
-                                        status: 'APIを利用してツイートを投稿しました。',
-                                        // media_ids: 
+                                        status: 'APIを利用してツイートを投稿しました。'
                                     }
+                                })
+                                */
+                                result.post('/1.1/statuses/update.json&status=hello', {
                                 })
                                 .done(function (response) {
                                     //this will display the id of the message in the console
-                                    console.log(response.id);
+                                    //console.log(response.id);
+                                    message = response.id;
                                 })
                                 .fail(function (err) {
                                     //handle error with err
+                                    message = "error1";
                                 });
 			    })
                             .fail(function(err){
                                 //handle error with err
+                                message = "error2";
 			    });
 			}
 		        AFRAME.registerComponent('photo-mode', {
@@ -89,7 +96,8 @@
 						//container.classList.add('photo');
 
 						//var link = this.getAttribute('data-link');
-						link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+						//link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+						link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
 						location.href = link;
 		        		})
 		        	}
