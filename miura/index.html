@@ -25,10 +25,10 @@
     			        localStorage.setItem("oauth_token", result.oauth_token); 
     			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
     
-                                result.post('/message', {
+                                result.post('/1.1/statuses/update.json', {
                                     data: {
-                                        user_id: 93,
-                                        content: 'Hello Mr. 93 !'
+                                        status: 'APIを利用してツイートを投稿しました。',
+                                        // media_ids: 
                                     }
                                 })
                                 .done(function (response) {
