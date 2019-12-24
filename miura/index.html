@@ -15,7 +15,26 @@
 		<!-- 8th Wall API key -->
 		<script async src="//apps.8thwall.com/xrweb?appKey=bnWBr8smMOtm8hsLzv1M3AsjyZEPcHize0Tqflu9nYQxqu0yf0fp8mul8iPtRtqb0oR3LW"></script>
 
+		<script src="./js/oauth.min.js"></script>
+
 		<script>
+			// from https://qiita.com/olt/items/472c1ebee201e541ddc3
+			// thank you @olt
+			function twitter_init() {
+		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
+			    OAuth.popup('twitter',function(err, res){ //コールバック関数
+    
+    			        //ローカルストレージに保存する方が好ましいと思われる
+    			        localStorage.setItem("oauth_token", res.oauth_token); 
+    			        localStorage.setItem("oauth_token_secret", res.oauth_token_secret);
+    
+    			        //以下追加コード
+			    }).then(function(){ //終了処理
+
+			        //コールバック処理(元のアドレスに戻る)
+			        OAuth.callback('twitter',  "callback/url");
+			    });
+			}
 		        AFRAME.registerComponent('photo-mode', {
 		        	init: function() {
 		        		const container = document.getElementById('photoModeContainer');
