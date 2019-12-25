@@ -21,8 +21,7 @@
                         var message;
 			function twitter_init() {
 		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
-			    OAuth.popup('twitter')
-                            .done(function(result){
+			    OAuth.popup('twitter', function(err, result) {
     			        localStorage.setItem("oauth_token", result.oauth_token); 
     			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
    
@@ -33,12 +32,13 @@
                                     }
                                 })
                                 */
-                                result.post('/1.1/statuses/update.json&status=hello', {
-                                })
+                                result.post('/1.1/statuses/update.json&status=hello')
                                 .done(function (response) {
                                     //this will display the id of the message in the console
                                     //console.log(response.id);
-                                    message = response.id;
+                                    
+                                    //message = response.screen_name;
+                                    message = response.created_at;
                                 })
                                 .fail(function (err) {
                                     //handle error with err
