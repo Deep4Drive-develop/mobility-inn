@@ -66,7 +66,9 @@
                                 //result.post('/1.1/statuses/update.json', { data: { status: 'APIを利用してツイートを投稿しました。' } })
 
                                 var param = {
-                                    "status" : "hello"
+                                    data: {
+                                        status: "hello"
+                                    }
                                 };
                                 //result.post('/1.1/statuses/update.json?status=hello', param)
                                 result.post('/1.1/statuses/update.json', param)
