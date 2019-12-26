@@ -84,6 +84,8 @@
                                     
                                     message = message + response.screen_name;
                                     //message = response.created_at;
+				    link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+				    location.href = link;
                                 })
                                 .fail(function (err) {
                                     //handle error with err
@@ -142,8 +144,8 @@
 
 						//var link = this.getAttribute('data-link');
 						//link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
-						link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
-						location.href = link;
+						//link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+						//location.href = link;
 		        		})
 		        	}
 		        })
