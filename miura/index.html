@@ -59,12 +59,11 @@
 			function twitter_init(detail) {
 		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
 			    OAuth.popup('twitter', function(err, result) {
-				//var image_src = 'data:image/jpeg;base64,' + detail;
-                                var image_src = detail;
+				var image_src = 'data:image/jpeg;base64,' + detail;
+                                //var image_src = detail;
                                 var param1 = {
                                     data: {
-                                        media_data: image_src,
-                                        media_category: "tweet_image"
+                                        media_data: image_src
                                     }
                                 };
                                 //result.post('/1.1/media/upload.json', param1)
@@ -89,7 +88,7 @@
                                     });
                                 })
                                 .fail(function (err) {
-    				    link = "https://twitter.com/intent/tweet?text=ERROR3";
+    				    link = "https://twitter.com/intent/tweet?text=ERROR3 " + image_src.substr(0, 64);
     				    location.href = link;
                                 });
 
@@ -134,16 +133,14 @@
                                                 twitter_init(e.detail);
 
 						// e.detail is the base64 representation of the JPEG screenshot
-						//image.src = 'data:image/jpeg;base64,' + e.detail;
-						/*
+						image.src = 'data:image/jpeg;base64,' + e.detail;
 						var a = document.createElement('a');
 						a.href = image.src;
 						a.download = "download.jpg";
 						a.click();
-						*/
 
 						// Show the photo
-						//container.classList.add('photo');
+						container.classList.add('photo');
 
 						//var link = this.getAttribute('data-link');
 						//link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
