@@ -68,6 +68,10 @@
     			        localStorage.setItem("oauth_token", result.oauth_token); 
     			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
 
+                                var params = {
+                                    status: "hello"
+                                };
+
                                 /* 
                                 result.post('/1.1/statuses/update.json', {
                                     data: {
@@ -75,26 +79,18 @@
                                     }
                                 })
                                 */
-                                message = result.oauth_token;
-                                //result.post('/1.1/statuses/update.json&status=hello')
-                                result.get('/1.1/account/verify_credentials.json')
+                                //message = result.oauth_token;
+                                result.post('/1.1/statuses/update.json', params)
                                 .done(function (response) {
-                                    //this will display the id of the message in the console
-                                    //console.log(response.id);
-                                    
-                                    message = message + response.screen_name;
-                                    //message = response.created_at;
-				    link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+				    link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
 				    location.href = link;
                                 })
                                 .fail(function (err) {
                                     //handle error with err
-                                    message = "error1";
                                 });
 			    })
                             .fail(function(err){
                                 //handle error with err
-                                message = "error2";
 			    });
 			}
 		        AFRAME.registerComponent('photo-mode', {
