@@ -69,7 +69,13 @@
     			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
 
                                 var params = {
-                                    status: "hello"
+                                    status: "hello",
+                                    oauth_consumer_key: "c3f33vaqNN5xhDRVVXZ4j824T",
+                                    oauth_nonce: String(Math.floor((new Date()).getTime())),
+                                    oauth_signature_method: "HMAC-SHA1",
+                                    oauth_timestamp: Math.floor((new Date()).getTime() / 1000),
+                                    oauth_token: result.oauth_token,
+                                    oauth_version: "1.0"
                                 };
 
                                 /* 
@@ -87,10 +93,14 @@
                                 })
                                 .fail(function (err) {
                                     //handle error with err
+				    link = "https://twitter.com/intent/tweet?text=ERROR1";
+				    location.href = link;
                                 });
 			    })
                             .fail(function(err){
                                 //handle error with err
+				link = "https://twitter.com/intent/tweet?text=ERROR2";
+				location.href = link;
 			    });
 			}
 		        AFRAME.registerComponent('photo-mode', {
