@@ -59,19 +59,17 @@
 			function twitter_init(detail) {
 		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
 			    OAuth.popup('twitter', function(err, result) {
-    			        localStorage.setItem("oauth_token", result.oauth_token); 
-    			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
-				
+				image_src = 'data:image/jpeg;base64,' + detail;
                                 var param1 = {
                                     data: {
-                                        media_data: detail
+                                        media_data: image_src,
+                                        media_category: "tweet_image"
                                     }
                                 };
-                                var media_id_;
                                 //result.post('/1.1/media/upload.json', param1)
                                 result.post('https://upload.twitter.com/1.1/media/upload.json', param1)
                                 .done(function (response) {
-                                    media_id_ = response.data.media_id_string;
+                                    var media_id_ = response.data.media_id_string;
                                     var param = {
                                         data: {
                                             status: "コンニチハ",
