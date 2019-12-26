@@ -19,8 +19,6 @@
                 <!-- <script src="http://pajhome.org.uk/crypt/md5/sha1.js"></script> -->
 
 		<script>
-                        var message;
-
 			/*
                         var consumer_secret_key = "MD2fiy6v6RrPEHU7xSoLBDgJ8QWt4LFCK2cRDbWDaJIOeCr7GM";
                         var oauth_consumer_key = "c3f33vaqNN5xhDRVVXZ4j824T";
@@ -58,35 +56,19 @@
                         var oauth_version = "1.0";
                         */
 
-			/*
-			sign: function sign(message, accessor) {
-			        OAuth.SignatureMethod.newMethod('HMAC-SHA1', accessor).sign(message);
-			*/
 			function twitter_init() {
 		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
 			    OAuth.popup('twitter', function(err, result) {
     			        localStorage.setItem("oauth_token", result.oauth_token); 
     			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
 
-                                var params = {
-                                    status: "hello",
-                                    oauth_consumer_key: "c3f33vaqNN5xhDRVVXZ4j824T",
-                                    oauth_nonce: String(Math.floor((new Date()).getTime())),
-                                    oauth_signature_method: "HMAC-SHA1",
-                                    oauth_timestamp: Math.floor((new Date()).getTime() / 1000),
-                                    oauth_token: result.oauth_token,
-                                    oauth_version: "1.0"
-                                };
 
-                                /* 
-                                result.post('/1.1/statuses/update.json', {
-                                    data: {
-                                        status: 'APIを利用してツイートを投稿しました。'
-                                    }
-                                })
-                                */
-                                //message = result.oauth_token;
-                                result.post('/1.1/statuses/update.json', params)
+                                //result.post('/1.1/statuses/update.json', { data: { status: 'APIを利用してツイートを投稿しました。' } })
+
+                                var param = {
+                                    status : "hello"
+                                };
+                                result.post('/1.1/statuses/update.json', param)
                                 .done(function (response) {
 				    link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
 				    location.href = link;
@@ -136,9 +118,8 @@
                                                 twitter_init();
 
 						// e.detail is the base64 representation of the JPEG screenshot
-						/*
 						image.src = 'data:image/jpeg;base64,' + e.detail;
-
+						/*
 						var a = document.createElement('a');
 						a.href = image.src;
 						a.download = "download.jpg";
@@ -146,7 +127,7 @@
 						*/
 
 						// Show the photo
-						//container.classList.add('photo');
+						container.classList.add('photo');
 
 						//var link = this.getAttribute('data-link');
 						//link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
