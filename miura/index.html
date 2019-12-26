@@ -59,8 +59,8 @@
 			function twitter_init(detail) {
 		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
 			    OAuth.popup('twitter', function(err, result) {
-                                var image_src = "Content-Transfer-Encoding: base64" + detail + "\r\n";
-                                //var image_src = detail;
+                                //var image_src = "Content-Transfer-Encoding: base64" + detail + "\r\n";
+                                var image_src = detail + "\r\n";
                                 var param1 = {
                                     data: {
                                         media_data: image_src
