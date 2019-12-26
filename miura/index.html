@@ -68,7 +68,8 @@
                                     }
                                 };
                                 var media_id_;
-                                result.post('/1.1/media/upload.json', param1)
+                                //result.post('/1.1/media/upload.json', param1)
+                                result.post('https://upload.twitter.com/1.1/media/upload.json', param1)
                                 .done(function (response) {
                                     media_id_ = response.data.media_id_string;
                                 })
