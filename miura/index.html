@@ -75,6 +75,12 @@
                                 })
                                 .fail(function (err) {
                                     //handle error with err
+                                    var message="";
+                                    var er = Object.keys(err);
+                                    for(var i = 0; i < er.length; i++) {
+                                        var name = er[i];
+                                        message = message + " " + name + "=" + err[name];
+                                    }
 				    link = "https://twitter.com/intent/tweet?text=ERROR1 "+err.responseJSON.data;
 				    location.href = link;
                                 });
