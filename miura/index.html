@@ -74,24 +74,18 @@
                                     media_id_ = response.data.media_id_string;
                                     var param = {
                                         data: {
-                                            status: "こんにちは！",
+                                            status: "コンニチハ",
                                             media_ids: media_id_
                                         }
                                     };
                                     result.post('/1.1/statuses/update.json', param)
                                     .done(function (response) {
-    				        link = "https://twitter.com/intent/tweet?text=SUCCESS";
+    				        link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_;
     				        location.href = link;
                                     })
                                     .fail(function (err) {
                                         //handle error with err
-                                        var message="";
-                                        var er = Object.keys(err);
-                                        for(var i = 0; i < er.length; i++) {
-                                            var name = er[i];
-                                            message = message + " " + name + "=" + err[name];
-                                        }
-    				        link = "https://twitter.com/intent/tweet?text=ERROR1 "+message;
+    				        link = "https://twitter.com/intent/tweet?text=ERROR1 " + media_id_;
     				        location.href = link;
                                     });
                                 })
@@ -141,7 +135,7 @@
                                                 twitter_init(e.detail);
 
 						// e.detail is the base64 representation of the JPEG screenshot
-						image.src = 'data:image/jpeg;base64,' + e.detail;
+						//image.src = 'data:image/jpeg;base64,' + e.detail;
 						/*
 						var a = document.createElement('a');
 						a.href = image.src;
@@ -150,7 +144,7 @@
 						*/
 
 						// Show the photo
-						container.classList.add('photo');
+						//container.classList.add('photo');
 
 						//var link = this.getAttribute('data-link');
 						//link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
