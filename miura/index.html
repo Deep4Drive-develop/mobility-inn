@@ -68,6 +68,7 @@
                                 var param = {
                                     "status" : "hello"
                                 };
+                                //result.post('/1.1/statuses/update.json?status=hello', param)
                                 result.post('/1.1/statuses/update.json', param)
                                 .done(function (response) {
 				    link = "https://twitter.com/intent/tweet?text=SUCCESS";
@@ -81,7 +82,7 @@
                                         var name = er[i];
                                         message = message + " " + name + "=" + err[name];
                                     }
-				    link = "https://twitter.com/intent/tweet?text=ERROR1 "+err.responseJSON.data;
+				    link = "https://twitter.com/intent/tweet?text=ERROR1 "+message;
 				    location.href = link;
                                 });
 			    })
