@@ -16,15 +16,56 @@
 		<script async src="//apps.8thwall.com/xrweb?appKey=bnWBr8smMOtm8hsLzv1M3AsjyZEPcHize0Tqflu9nYQxqu0yf0fp8mul8iPtRtqb0oR3LW"></script>
 
 		<script src="./js/oauth.min.js"></script>
+                <script src="http://pajhome.org.uk/crypt/md5/sha1.js"></script>
 
 		<script>
                         var message;
+
+                        var consumer_secret_key = "MD2fiy6v6RrPEHU7xSoLBDgJ8QWt4LFCK2cRDbWDaJIOeCr7GM";
+                        var oauth_consumer_key = "c3f33vaqNN5xhDRVVXZ4j824T";
+                        var oauth_nonce = String(Math.floor((new Date()).getTime()));
+                        b64pad = '=';
+                        var oauth_signature; // 他の全てのリクエストパラメータと二つの秘密情報を署名アルゴリズムで処理して作成した値を設定します。
+
+                        var paramString = "";
+                        paramString = paramString + "oauth_consumer_key=";
+                        paramString = paramString + encodeURIComponent(oauth_consumer_key) + "&";
+                        paramString = paramString + "oauth_nonce=";
+                        paramString = paramString + encodeURIComponent(oauth_nonce) + "&";
+                        paramString = paramString + "oauth_signature_method=";
+                        paramString = paramString + encodeURIComponent(oauth_signature_method) + "&";
+                        paramString = paramString + "oauth_timestamp=";
+                        paramString = paramString + encodeURIComponent(oauth_timestamp) + "&";
+                        paramString = paramString + "oauth_token=";
+                        paramString = paramString + encodeURIComponent(oauth_token) + "&";
+                        paramString = paramString + "oauth_version=";
+                        paramString = paramString + encodeURIComponent(oauth_version) + "&";
+                        paramString = paramString + "status=";
+                        paramString = paramString + encodeURIComponent("hello");
+
+                        var baseString = "POST";
+                        baseString = baseString + "&";
+                        baseString = baseString + "https%3A%2F%2Fapi.twitter.com%2F1%2Fstatuses%2Fupdate.json";
+                        baseString = baseString + "&";
+                        baseString = baseString + encodeURIComponent(paramString);
+                        // encodeURIComponent
+                        oauth_signature = b64_hmac_sha1(consumer_secret_key+"&"+oauth_token_secret, baseString);
+
+                        var oauth_signature_method = 'HMAC-SHA1';
+                        var oauth_timestamp = Math.floor((new Date()).getTime() / 1000);
+                        var oauth_token;
+                        var oauth_version = "1.0";
+
+			/*
+			sign: function sign(message, accessor) {
+			        OAuth.SignatureMethod.newMethod('HMAC-SHA1', accessor).sign(message);
+			*/
 			function twitter_init() {
 		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
 			    OAuth.popup('twitter', function(err, result) {
     			        localStorage.setItem("oauth_token", result.oauth_token); 
     			        localStorage.setItem("oauth_token_secret", result.oauth_token_secret);
-   
+
                                 /* 
                                 result.post('/1.1/statuses/update.json', {
                                     data: {
@@ -32,13 +73,14 @@
                                     }
                                 })
                                 */
-                                result.post('/1.1/statuses/update.json&status=hello')
+                                //result.post('/1.1/statuses/update.json&status=hello')
+                                result.get('/1.1/account/verify_credentials.json');
                                 .done(function (response) {
                                     //this will display the id of the message in the console
                                     //console.log(response.id);
                                     
-                                    //message = response.screen_name;
-                                    message = response.created_at;
+                                    message = response.screen_name;
+                                    //message = response.created_at;
                                 })
                                 .fail(function (err) {
                                     //handle error with err
