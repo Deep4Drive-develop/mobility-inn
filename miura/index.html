@@ -56,52 +56,53 @@
                         var oauth_version = "1.0";
                         */
 
-			function twitter_init(detail) {
-		            OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
-			    OAuth.popup('twitter', function(err, result) {
-                                //var image_src = "Content-Transfer-Encoding: base64" + detail + "\r\n";
-                                var bound_text = "s-y-n-c-e-r---------------15ffb88d5e79a4d87b7103b4a4eca9fa";
-                                var image_src = "--" + bound_text + "\r\n" +
+            function twitter_init(detail) {
+                OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
+                OAuth.popup('twitter', function(err, result) {
+                    //var image_src = "Content-Transfer-Encoding: base64" + detail + "\r\n";
+                    var bound_text = "s-y-n-c-e-r---------------15ffb88d5e79a4d87b7103b4a4eca9fa";
+                    var image_src = "--" + bound_text + "\r\n" +
                         detail + "\r\n" + "--" + bound_text + "--\r\n";
-                                var param1 = {
-                                    headers: { 
-                                        'Content-Transfer-Encoding': 'base64',
-                                        'Content-Type: multipart/form-data; boundary': bound_text
-                                    },
-                                    data: {
-                                        media_data: image_src
-                                    }
-                                };
-                                //result.post('/1.1/media/upload.json', param1)
-                                result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
-                                    var media_id_ = response.data.media_id_string;
-                                    var param = {
-                                        data: {
-                                            status: "コンニチハ",
-                                            media_ids: media_id_
-                                        }
-                                    };
-
-                                    result.post('/1.1/statuses/update.json', param).done(function (response) {
-    				        link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_;
-    				        location.href = link;
-                                    }).fail(function (err) {
-                                        //handle error with err
-    				        link = "https://twitter.com/intent/tweet?text=ERROR1 " + media_id_;
-    				        location.href = link;
-                                    });
-
-                                }).fail(function (err) {
-    				    link = "https://twitter.com/intent/tweet?text=ERROR3 " + image_src.substr(0, 64);
-    				    location.href = link;
-                                });
-
-			    }).fail(function(err){
-                                //handle error with err
-				link = "https://twitter.com/intent/tweet?text=ERROR2";
-				location.href = link;
-			    });
-			}
+                    var param1 = {
+                        headers: { 
+                            'Content-Transfer-Encoding': 'base64',
+                            'Content-Type' : 'multipart/form-data; boundary=' + bound_text
+                        },
+                        data: {
+                            media_data: image_src
+                        }
+                    };
+                    //result.post('/1.1/media/upload.json', param1)
+                    result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
+                        var media_id_ = response.data.media_id_string;
+                        var param = {
+                            data: {
+                                status: "コンニチハ",
+                                media_ids: media_id_,
+                                media_category: "tweet_image"
+                            }
+                        };
+            
+                        result.post('/1.1/statuses/update.json', param).done(function (response) {
+                            link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_;
+                            location.href = link;
+                        }).fail(function (err) {
+                            //handle error with err
+                            link = "https://twitter.com/intent/tweet?text=ERROR1 " + media_id_;
+                            location.href = link;
+                        });
+            
+                    }).fail(function (err) {
+                        link = "https://twitter.com/intent/tweet?text=ERROR3 " + image_src.substr(0, 64);
+                        location.href = link;
+                    });
+            
+                }).fail(function(err){
+                    //handle error with err
+                    link = "https://twitter.com/intent/tweet?text=ERROR2";
+                    location.href = link;
+                });
+            }
 		        AFRAME.registerComponent('photo-mode', {
 		        	init: function() {
 		        		const container = document.getElementById('photoModeContainer');
