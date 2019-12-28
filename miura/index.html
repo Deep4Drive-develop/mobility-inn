@@ -62,6 +62,9 @@
                                 //var image_src = "Content-Transfer-Encoding: base64" + detail + "\r\n";
                                 var image_src = detail + "\r\n";
                                 var param1 = {
+                                    headers: { 
+                                        'Content-Transfer-Encoding': 'base64'
+                                    },
                                     data: {
                                         media_data: image_src
                                     }
