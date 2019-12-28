@@ -61,7 +61,8 @@
 			    OAuth.popup('twitter', function(err, result) {
                                 //var image_src = "Content-Transfer-Encoding: base64" + detail + "\r\n";
                                 var bound_text = "s-y-n-c-e-r---------------15ffb88d5e79a4d87b7103b4a4eca9fa";
-                                var image_src = bound_text + "\r\n" + detail + "\r\n" + bound_text + "\r\n";
+                                var image_src = "--" + bound_text + "\r\n" +
+                        detail + "\r\n" + "--" + bound_text + "--\r\n";
                                 var param1 = {
                                     headers: { 
                                         'Content-Transfer-Encoding': 'base64',
