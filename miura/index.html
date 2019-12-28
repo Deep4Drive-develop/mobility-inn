@@ -70,11 +70,11 @@
                         detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
                     var param1 = {
                         headers: { 
-                            'Content-Transfer-Encoding': 'base64',
                             'Content-Type' : 'multipart/form-data; boundary=' + bound_text
                         },
                         data: {
-                            media_data: image_src
+                            media_data: image_src,
+                            media_category: "tweet_image"
                         }
                     };
                     //result.post('/1.1/media/upload.json', param1)
@@ -83,8 +83,7 @@
                         var param = {
                             data: {
                                 status: "コンニチハ",
-                                media_ids: media_id_,
-                                media_category: "tweet_image"
+                                media_ids: media_id_
                             }
                         };
             
