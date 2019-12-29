@@ -83,9 +83,7 @@
                         headers: {
                             Authorization: auth
                         },
-                        data: {
-                            status: "hello"
-                        }
+                        data: "status=hello"
                     }).done(function(data, textStatus, jqXHR) {
                         link = "https://twitter.com/intent/tweet?text=SUCCESS(update):";
                         location.href = link;
