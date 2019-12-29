@@ -35,6 +35,7 @@
                     var oauth_timestamp = String(Math.floor((new Date()).getTime() / 1000));
                     var oauth_token = result.oauth_token;
                     var oauth_version = "1.0";
+                    var oauth_token_secret = result.oauth_token_secret;
 
                     var paramString = "";
                     paramString = paramString + "oauth_consumer_key=";
@@ -210,8 +211,9 @@
             var oauth_signature; // 他の全てのリクエストパラメータと二つの秘密情報を署名アルゴリズムで処理して作成した値を設定します。
             var oauth_signature_method = 'HMAC-SHA1';
             var oauth_timestamp = String(Math.floor((new Date()).getTime() / 1000));
-            var oauth_token = result.oauth_token;
+            var oauth_token = "6065472-jxDzenRRBsKjdqwDdwPmJtG0CEi6kI8yycUblT7PlL";
             var oauth_version = "1.0";
+            var oauth_token_secret = "0KTgPp8demFhL21C2oA0IKGlJGg5uVj64JyUdSsgeIiGU";
 
             var paramString = "";
             paramString = paramString + "oauth_consumer_key=";
