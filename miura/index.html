@@ -19,7 +19,8 @@
         <script src="./js/sha1.js"></script>
 
 		<script>
-            function twitter_init(detail) {
+            //function twitter_init(detail) {
+            function twitter_init() {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter', function(err, result) {
                     b64pad = '=';
@@ -147,6 +148,7 @@
                         //location.href = link;
                     })
                 }
+                twitter_init();
             })
 
 			AFRAME.registerComponent('tower', {
