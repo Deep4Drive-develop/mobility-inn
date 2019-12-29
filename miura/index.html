@@ -82,7 +82,7 @@
 
                     // timeout : 30s
                     $.ajax({
-                        type: "POST",
+                        method: "POST",
                         timeout: 30000,
                         url: url1,
                         headers: {
@@ -256,7 +256,8 @@
             auth = auth + "oauth_signature=";
             auth = auth + encodeURIComponent(oauth_signature);
 
-            // timeout : 30s
+            console.log(auth);
+
             $.ajax({
                 method: "POST",
                 timeout: 30000,
