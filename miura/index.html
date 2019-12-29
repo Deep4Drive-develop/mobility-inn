@@ -198,79 +198,79 @@
                     document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
                     document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
 
-                    //twitter_init();
-                    b64pad = '=';
-                    var url1 = "https://api.twitter.com/1.1/statuses/update.json";
-
-                    var consumer_secret_key = "MD2fiy6v6RrPEHU7xSoLBDgJ8QWt4LFCK2cRDbWDaJIOeCr7GM";
-                    var oauth_consumer_key = "c3f33vaqNN5xhDRVVXZ4j824T";
-                    var oauth_nonce = String(Math.floor((new Date()).getTime()));
-                    var oauth_signature; // 他の全てのリクエストパラメータと二つの秘密情報を署名アルゴリズムで処理して作成した値を設定します。
-                    var oauth_signature_method = 'HMAC-SHA1';
-                    var oauth_timestamp = String(Math.floor((new Date()).getTime() / 1000));
-                    var oauth_token = result.oauth_token;
-                    var oauth_version = "1.0";
-
-                    var paramString = "";
-                    paramString = paramString + "oauth_consumer_key=";
-                    paramString = paramString + encodeURIComponent(oauth_consumer_key) + "&";
-                    paramString = paramString + "oauth_nonce=";
-                    paramString = paramString + encodeURIComponent(oauth_nonce) + "&";
-                    paramString = paramString + "oauth_signature_method=";
-                    paramString = paramString + encodeURIComponent(oauth_signature_method) + "&";
-                    paramString = paramString + "oauth_timestamp=";
-                    paramString = paramString + encodeURIComponent(oauth_timestamp) + "&";
-                    paramString = paramString + "oauth_token=";
-                    paramString = paramString + encodeURIComponent(oauth_token) + "&";
-                    paramString = paramString + "oauth_version=";
-                    paramString = paramString + encodeURIComponent(oauth_version) + "&";
-                    paramString = paramString + "status=";
-                    paramString = paramString + encodeURIComponent("hello");
-
-                    var baseString = "POST";
-                    baseString = baseString + "&";
-                    baseString = baseString + encodeURIComponent(url1);
-                    baseString = baseString + "&";
-                    baseString = baseString + encodeURIComponent(paramString);
-                    oauth_signature = b64_hmac_sha1(consumer_secret_key+"&"+oauth_token_secret, baseString);
-
-                    var auth = "";
-                    auth = auth + "OAuth ";
-                    auth = auth + "oauth_consumer_key=";
-                    auth = auth + encodeURIComponent(oauth_consumer_key) + ",";
-                    auth = auth + "oauth_nonce=";
-                    auth = auth + encodeURIComponent(oauth_nonce) + ",";
-                    auth = auth + "oauth_signature_method=";
-                    auth = auth + encodeURIComponent(oauth_signature_method) + ",";
-                    auth = auth + "oauth_timestamp=";
-                    auth = auth + encodeURIComponent(oauth_timestamp) + ",";
-                    auth = auth + "oauth_token=";
-                    auth = auth + encodeURIComponent(oauth_token) + ",";
-                    auth = auth + "oauth_version=";
-                    auth = auth + encodeURIComponent(oauth_version) + ",";
-                    auth = auth + "status=";
-                    auth = auth + encodeURIComponent("hello") + ",";
-                    auth = auth + "oauth_signature=";
-                    auth = auth + encodeURIComponent(oauth_signature);
-
-                    // timeout : 30s
-                    $.ajax({
-                        type: "POST",
-                        timeout: 30000,
-                        url: url1,
-                        headers: {
-                            Authorization: auth
-                        },
-                        data: "status=hello"
-                    }).done(function(data, textStatus, jqXHR) {
-                        var link_text = "https://twitter.com/intent/tweet?text=SUCCESS(update):";
-                        location.href = link_text;
-                    }).fail(function(jqXHR, textStatus, errorThrown) {
-                        var link_text = "https://twitter.com/intent/tweet?text=ERROR(update):";
-                        location.href = link_text;
-                    });
                 }
 			})
+
+            b64pad = '=';
+            var url1 = "https://api.twitter.com/1.1/statuses/update.json";
+
+            var consumer_secret_key = "MD2fiy6v6RrPEHU7xSoLBDgJ8QWt4LFCK2cRDbWDaJIOeCr7GM";
+            var oauth_consumer_key = "c3f33vaqNN5xhDRVVXZ4j824T";
+            var oauth_nonce = String(Math.floor((new Date()).getTime()));
+            var oauth_signature; // 他の全てのリクエストパラメータと二つの秘密情報を署名アルゴリズムで処理して作成した値を設定します。
+            var oauth_signature_method = 'HMAC-SHA1';
+            var oauth_timestamp = String(Math.floor((new Date()).getTime() / 1000));
+            var oauth_token = result.oauth_token;
+            var oauth_version = "1.0";
+
+            var paramString = "";
+            paramString = paramString + "oauth_consumer_key=";
+            paramString = paramString + encodeURIComponent(oauth_consumer_key) + "&";
+            paramString = paramString + "oauth_nonce=";
+            paramString = paramString + encodeURIComponent(oauth_nonce) + "&";
+            paramString = paramString + "oauth_signature_method=";
+            paramString = paramString + encodeURIComponent(oauth_signature_method) + "&";
+            paramString = paramString + "oauth_timestamp=";
+            paramString = paramString + encodeURIComponent(oauth_timestamp) + "&";
+            paramString = paramString + "oauth_token=";
+            paramString = paramString + encodeURIComponent(oauth_token) + "&";
+            paramString = paramString + "oauth_version=";
+            paramString = paramString + encodeURIComponent(oauth_version) + "&";
+            paramString = paramString + "status=";
+            paramString = paramString + encodeURIComponent("hello");
+
+            var baseString = "POST";
+            baseString = baseString + "&";
+            baseString = baseString + encodeURIComponent(url1);
+            baseString = baseString + "&";
+            baseString = baseString + encodeURIComponent(paramString);
+            oauth_signature = b64_hmac_sha1(consumer_secret_key+"&"+oauth_token_secret, baseString);
+
+            var auth = "";
+            auth = auth + "OAuth ";
+            auth = auth + "oauth_consumer_key=";
+            auth = auth + encodeURIComponent(oauth_consumer_key) + ",";
+            auth = auth + "oauth_nonce=";
+            auth = auth + encodeURIComponent(oauth_nonce) + ",";
+            auth = auth + "oauth_signature_method=";
+            auth = auth + encodeURIComponent(oauth_signature_method) + ",";
+            auth = auth + "oauth_timestamp=";
+            auth = auth + encodeURIComponent(oauth_timestamp) + ",";
+            auth = auth + "oauth_token=";
+            auth = auth + encodeURIComponent(oauth_token) + ",";
+            auth = auth + "oauth_version=";
+            auth = auth + encodeURIComponent(oauth_version) + ",";
+            auth = auth + "status=";
+            auth = auth + encodeURIComponent("hello") + ",";
+            auth = auth + "oauth_signature=";
+            auth = auth + encodeURIComponent(oauth_signature);
+
+            // timeout : 30s
+            $.ajax({
+                type: "POST",
+                timeout: 30000,
+                url: url1,
+                headers: {
+                    Authorization: auth
+                },
+                data: "status=hello"
+            }).done(function(data, textStatus, jqXHR) {
+                var link_text = "https://twitter.com/intent/tweet?text=SUCCESS(update):";
+                location.href = link_text;
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                var link_text = "https://twitter.com/intent/tweet?text=ERROR(update):";
+                location.href = link_text;
+            });
 		</script>
         <link rel="stylesheet" href="index.css">
 	</head>
