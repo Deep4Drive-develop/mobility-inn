@@ -31,7 +31,7 @@
                     var oauth_nonce = String(Math.floor((new Date()).getTime()));
                     var oauth_signature; // 他の全てのリクエストパラメータと二つの秘密情報を署名アルゴリズムで処理して作成した値を設定します。
                     var oauth_signature_method = 'HMAC-SHA1';
-                    var oauth_timestamp = Math.floor((new Date()).getTime() / 1000);
+                    var oauth_timestamp = String(Math.floor((new Date()).getTime() / 1000));
                     var oauth_token = result.oauth_token;
                     var oauth_version = "1.0";
 
