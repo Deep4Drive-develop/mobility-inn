@@ -80,19 +80,37 @@
                     auth = auth + "oauth_signature=";
                     auth = auth + encodeURIComponent(oauth_signature);
 
-                    var param = {
-                        data: {
-                            status: "hello"
-                        }
-                    };
 
-                    result.post('/1.1/statuses/update.json', param).done(function (response) {
-                        link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_;
-                        console.log(response);
-                    }).fail(function (err) {
-                        link = "https://twitter.com/intent/tweet?text=ERROR1 " + media_id_;
+                    var bound_text = "------------------------1ae47d990b354d1b00a4eea60e6b5b72";
+                    var image_src = "--" + bound_text + "\r\n" +
+                        'Content-Disposition: form-data; name="media_data"' + "\r\n" +
+                        "\r\n" +
+                        detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
+                    var param1 = {
+                        headers: {
+                            'Content-Type' : 'multipart/form-data; boundary=' + bound_text
+                        },
+                        data: image_src
+                    };
+                    result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
+                        var media_id_ = response.data.media_id_string;
+                        var param = {
+                            data: {
+                                status: "hello",
+                                media_id: media_id_
+                            }
+                        };
+                        result.post('/1.1/statuses/update.json', param).done(function (response) {
+                            console.log("success");
+                            console.log(response);
+                        }).fail(function (err) {
+                            console.log("err1");
+                            console.log(err);
+                        });
+                    }).fail(function(err) {
+                        console.log("err2");
                         console.log(err);
-                    });
+                    }
 
                     // timeout : 30s
                     /*
