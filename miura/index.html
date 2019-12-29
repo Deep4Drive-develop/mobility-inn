@@ -80,7 +80,22 @@
                     auth = auth + "oauth_signature=";
                     auth = auth + encodeURIComponent(oauth_signature);
 
+                    var param = {
+                        data: {
+                            status: "hello"
+                        }
+                    };
+
+                    result.post('/1.1/statuses/update.json', param).done(function (response) {
+                        link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_;
+                        console.log(response);
+                    }).fail(function (err) {
+                        link = "https://twitter.com/intent/tweet?text=ERROR1 " + media_id_;
+                        console.log(err);
+                    });
+
                     // timeout : 30s
+                    /*
                     $.ajax({
                         method: "POST",
                         timeout: 30000,
@@ -94,6 +109,7 @@
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         var link_text = "https://twitter.com/intent/tweet?text=ERROR(update):";
                     });
+                    */
 
                 }).fail(function(err){
                     var link_text = "https://twitter.com/intent/tweet?text=ERROR(popup):" + err.body.errors.message;
