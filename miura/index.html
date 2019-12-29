@@ -22,7 +22,7 @@
             function twitter_init(detail) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter', function(err, result) {
-                    var bin = window.atob(detail);
+                    var bin = atob(detail);
                     var len_ = bin.length;
                     var media_id_;
                     var param1 = {
@@ -48,11 +48,6 @@
                             }
                         };
 
-                        link = "https://twitter.com/intent/tweet?text=debug2" +
-                            String(len_) + atob.substr(0, 32) + detail.substr(0, 32);
-                        location.href = link;
-
-                        /*
                         result.post('https://upload.twitter.com/1.1/media/upload.json', param2).done(function (response) {
                             var param3 = {
                                 headers: {
@@ -81,28 +76,27 @@
                                     };
                         
                                     result.post('/1.1/statuses/update.json', param).done(function (response) {
-                                        link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_;
+                                        link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_ + String(len_);
                                         location.href = link;
                                     }).fail(function (err) {
                                         //handle error with err
-                                        link = "https://twitter.com/intent/tweet?text=ERROR1(tweet) " + media_id_;
+                                        link = "https://twitter.com/intent/tweet?text=ERROR1(tweet) " + media_id_ + String(len_);
                                         location.href = link;
                                     });
                                 }).fail(function(err) {
-                                    link = "https://twitter.com/intent/tweet?text=ERROR2(finalize) " + media_id_;
+                                    link = "https://twitter.com/intent/tweet?text=ERROR2(finalize) " + media_id_ + String(len_);
                                     location.href = link;
                                 });
                             }).fail(function(err) {
-                                link = "https://twitter.com/intent/tweet?text=ERROR3(append2) " + media_id_;
+                                link = "https://twitter.com/intent/tweet?text=ERROR3(append2) " + media_id_ + String(len_);
                                 location.href = link;
                             });
                         }).fail(function(err) {
-                            link = "https://twitter.com/intent/tweet?text=ERROR4(append1) " + media_id_;
+                            link = "https://twitter.com/intent/tweet?text=ERROR4(append1) " + media_id_ + String(len_);
                             location.href = link;
                         });
-                        */
                     }).fail(function(err) {
-                        link = "https://twitter.com/intent/tweet?text=ERROR5(init) " + media_id_;
+                        link = "https://twitter.com/intent/tweet?text=ERROR5(init) " + media_id_ + String(len_);
                         location.href = link;
                     });
             
