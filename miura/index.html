@@ -22,7 +22,8 @@
             function twitter_init(detail) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter', function(err, result) {
-                    var len_ = new Uint8Array(window.atob(detail)).length;
+                    var bin = atob(detail);
+                    var len_ = bin.length;
                     var media_id_;
                     var param1 = {
                         data: {
@@ -32,14 +33,15 @@
                         }
                     };
 
-                    link = "https://twitter.com/intent/tweet?text=debug " + String(len_);
+                    link = "https://twitter.com/intent/tweet?text=debug2 " +
+                        String(len_) + " " + atob.substr(0, 32) + " " + detail.substr(0, 32);
                     location.href = link;
 
                     /*
                     result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
                         media_id_ = response.media_id_string;
 
-                        var param2 {
+                        var param2 = {
                             headers: {
                                 'Content-Transfer-Encoding': 'base64'
                             },
@@ -51,7 +53,7 @@
                             }
                         };
                         result.post('https://upload.twitter.com/1.1/media/upload.json', param2).done(function (response) {
-                            var param3 {
+                            var param3 = {
                                 headers: {
                                     'Content-Transfer-Encoding': 'base64'
                                 },
@@ -63,7 +65,7 @@
                                 }
                             }
                             result.post('https://upload.twitter.com/1.1/media/upload.json', param3).done(function (response) {
-                                var param4 {
+                                var param4 = {
                                     data: {
                                         command: 'FINALIZE',
                                         media_id: media_id_
