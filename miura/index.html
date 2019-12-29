@@ -91,10 +91,8 @@
                         data: "status=hello"
                     }).done(function(data, textStatus, jqXHR) {
                         var link_text = "https://twitter.com/intent/tweet?text=SUCCESS(update):";
-                        location.href = link_text;
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         var link_text = "https://twitter.com/intent/tweet?text=ERROR(update):";
-                        location.href = link_text;
                     });
 
                 }).fail(function(err){
