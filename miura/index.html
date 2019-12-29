@@ -22,7 +22,7 @@
 		<script>
             function twitter_init(detail) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
-                OAuth.popup('twitter').done(function(result) {
+                OAuth.popup('twitter').then(function(result) {
 
                     var bound_text = "------------------------1ae47d990b354d1b00a4eea60e6b5b72";
                     var image_src = "--" + bound_text + "\r\n" +
@@ -40,7 +40,7 @@
                         var media_id_ = response.media_id_string;
                         var param = {
                             data: {
-                                status: "おばんです",
+                                status: "Twitter APIをテストしています。",
                                 media_ids: media_id_
                             }
                         };
