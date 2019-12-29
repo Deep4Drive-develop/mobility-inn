@@ -19,60 +19,23 @@
                 <!-- <script src="http://pajhome.org.uk/crypt/md5/sha1.js"></script> -->
 
 		<script>
-			/*
-                        var consumer_secret_key = "MD2fiy6v6RrPEHU7xSoLBDgJ8QWt4LFCK2cRDbWDaJIOeCr7GM";
-                        var oauth_consumer_key = "c3f33vaqNN5xhDRVVXZ4j824T";
-                        var oauth_nonce = String(Math.floor((new Date()).getTime()));
-                        b64pad = '=';
-                        var oauth_signature; // 他の全てのリクエストパラメータと二つの秘密情報を署名アルゴリズムで処理して作成した値を設定します。
-
-                        var paramString = "";
-                        paramString = paramString + "oauth_consumer_key=";
-                        paramString = paramString + encodeURIComponent(oauth_consumer_key) + "&";
-                        paramString = paramString + "oauth_nonce=";
-                        paramString = paramString + encodeURIComponent(oauth_nonce) + "&";
-                        paramString = paramString + "oauth_signature_method=";
-                        paramString = paramString + encodeURIComponent(oauth_signature_method) + "&";
-                        paramString = paramString + "oauth_timestamp=";
-                        paramString = paramString + encodeURIComponent(oauth_timestamp) + "&";
-                        paramString = paramString + "oauth_token=";
-                        paramString = paramString + encodeURIComponent(oauth_token) + "&";
-                        paramString = paramString + "oauth_version=";
-                        paramString = paramString + encodeURIComponent(oauth_version) + "&";
-                        paramString = paramString + "status=";
-                        paramString = paramString + encodeURIComponent("hello");
-
-                        var baseString = "POST";
-                        baseString = baseString + "&";
-                        baseString = baseString + "https%3A%2F%2Fapi.twitter.com%2F1%2Fstatuses%2Fupdate.json";
-                        baseString = baseString + "&";
-                        baseString = baseString + encodeURIComponent(paramString);
-                        // encodeURIComponent
-                        oauth_signature = b64_hmac_sha1(consumer_secret_key+"&"+oauth_token_secret, baseString);
-
-                        var oauth_signature_method = 'HMAC-SHA1';
-                        var oauth_timestamp = Math.floor((new Date()).getTime() / 1000);
-                        var oauth_token;
-                        var oauth_version = "1.0";
-                        */
-
             function twitter_init(detail) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter', function(err, result) {
-                    var len = new Uint8Array(window.atob(detail)).length;
-                    //var image_src = "Content-Transfer-Encoding: base64" + detail + "\r\n";
-                    //var bound_text = "s-y-n-c-e-r---------------15ffb88d5e79a4d87b7103b4a4eca9fa";
-                    //var bound_text = "s-y-n-c-e-r---------------6cae55be457de138a80f1a790955ae51";
-                    //var bound_text = '--' + '12345678900987654321';
-
+                    var len_ = new Uint8Array(window.atob(detail)).length;
                     var media_id_;
                     var param1 = {
                         data: {
                             command: 'INIT',
                             media_type: 'image/jpeg',
-                            total_bytes: len
+                            total_bytes: len_
                         }
                     };
+
+                    link = "https://twitter.com/intent/tweet?text=debug " + String(len_);
+                    location.href = link;
+
+                    /*
                     result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
                         media_id_ = response.media_id_string;
 
@@ -138,43 +101,6 @@
                         link = "https://twitter.com/intent/tweet?text=ERROR5(init) " + media_id_;
                         location.href = link;
                     });
-
-                    /*
-                    var image_src = "--" + bound_text + "\r\n" +
-                        'Content-Disposition: form-data; name="image"' + "\r\n" +
-                        "\r\n" +
-                        detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
-                    var param1 = {
-                        headers: { 
-                            'Content-Type' : 'multipart/form-data; boundary=' + bound_text
-                        },
-                        data: {
-                            media_data: image_src,
-                            media_category: "tweet_image"
-                        }
-                    };
-                    result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
-                        var media_id_ = response.data.media_id_string;
-                        var param = {
-                            data: {
-                                status: "コンニチハ",
-                                media_ids: media_id_
-                            }
-                        };
-            
-                        result.post('/1.1/statuses/update.json', param).done(function (response) {
-                            link = "https://twitter.com/intent/tweet?text=SUCCESS " + media_id_;
-                            location.href = link;
-                        }).fail(function (err) {
-                            //handle error with err
-                            link = "https://twitter.com/intent/tweet?text=ERROR1 " + media_id_;
-                            location.href = link;
-                        });
-            
-                    }).fail(function (err) {
-                        link = "https://twitter.com/intent/tweet?text=ERROR3 " + image_src.substr(0, 64);
-                        location.href = link;
-                    });
                     */
             
                 }).fail(function(err){
@@ -183,108 +109,108 @@
                     location.href = link;
                 });
             }
-		        AFRAME.registerComponent('photo-mode', {
-		        	init: function() {
-		        		const container = document.getElementById('photoModeContainer');
-		        		const image = document.getElementById('photoModeImage');
-		        		const shutterButton = document.getElementById('shutterButton');
-		        		const closeButton = document.getElementById('closeButton');
+            AFRAME.registerComponent('photo-mode', {
+                init: function() {
+                    const container = document.getElementById('photoModeContainer');
+                    const image = document.getElementById('photoModeImage');
+                    const shutterButton = document.getElementById('shutterButton');
+                    const closeButton = document.getElementById('closeButton');
 
-		        		// Container starts hidden so it isn't visible when the page is still loading
-		        		container.style.display = 'block';
+                    // Container starts hidden so it isn't visible when the page is still loading
+                    container.style.display = 'block';
 
-				        closeButton.addEventListener('click', () => {
-				        	container.classList.remove('photo');
-				        })
+                    closeButton.addEventListener('click', () => {
+                        container.classList.remove('photo');
+                    })
 
-		        		shutterButton.addEventListener('click', () => {
-						// Emit a screenshotrequest to the xrweb component
-						this.el.sceneEl.emit('screenshotrequest');
+                    shutterButton.addEventListener('click', () => {
+                        // Emit a screenshotrequest to the xrweb component
+                        this.el.sceneEl.emit('screenshotrequest');
 
-						// Show the flash while the image is being taken
-						container.classList.add('flash');
-					})
+                        // Show the flash while the image is being taken
+                        container.classList.add('flash');
+                    })
 
-					this.el.sceneEl.addEventListener('screenshotready', e => {
-		        			container.classList.remove('flash');
-						// If an error occurs while trying to take the screenshot, e.detail will be empty.
-						// We could either retry or return control to the user
-						if (!e.detail) {
-							return;
-						}
+                    this.el.sceneEl.addEventListener('screenshotready', e => {
+                        container.classList.remove('flash');
+                        // If an error occurs while trying to take the screenshot, e.detail will be empty.
+                        // We could either retry or return control to the user
+                        if (!e.detail) {
+                            return;
+                        }
 
-                                                //twitter_init();
-                                                twitter_init(e.detail);
+                        //twitter_init();
+                        twitter_init(e.detail);
 
-						// e.detail is the base64 representation of the JPEG screenshot
-						image.src = 'data:image/jpeg;base64,' + e.detail;
-						var a = document.createElement('a');
-						a.href = image.src;
-						a.download = "download.jpg";
-						a.click();
+                        // e.detail is the base64 representation of the JPEG screenshot
+                        image.src = 'data:image/jpeg;base64,' + e.detail;
+                        var a = document.createElement('a');
+                        a.href = image.src;
+                        a.download = "download.jpg";
+                        a.click();
 
-						// Show the photo
-						container.classList.add('photo');
+                        // Show the photo
+                        container.classList.add('photo');
 
-						//var link = this.getAttribute('data-link');
-						//link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
-						//link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
-						//location.href = link;
-		        		})
-		        	}
-		        })
+                        //var link = this.getAttribute('data-link');
+                        //link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+                        //link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+                        //location.href = link;
+                    })
+                }
+            })
 
 			AFRAME.registerComponent('tower', {
-			    schema: {
-			        name: { type: 'string' }
-			    },
-			    init: function() {
-		                    var scene = document.querySelector('a-scene');
-				    
-		                    var model = document.createElement('a-gltf-model');
-                                    model.setAttribute('src', '#ground');
-                                    model.setAttribute('id', 'ground');
-		                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
-			            //model.setAttribute("visible", "false");
-		                    scene.appendChild(model);
-		                    model = document.createElement('a-gltf-model');
-                                    model.setAttribute('src', '#mall');
-                                    model.setAttribute('id', 'mall');
-		                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
-			            model.setAttribute("visible", "false");
-		                    scene.appendChild(model);
-		                    model = document.createElement('a-gltf-model');
-                                    model.setAttribute('src', '#mall_h13');
-                                    model.setAttribute('id', 'mall_h13');
-		                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
-			            model.setAttribute("visible", "false");
-		                    scene.appendChild(model);
-		                    model = document.createElement('a-gltf-model');
-                                    model.setAttribute('src', '#h13_top');
-                                    model.setAttribute('id', 'h13_top');
-		                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
-			            model.setAttribute("visible", "false");
-		                    scene.appendChild(model);
-		                    for(var i = 1; i <= 33; i++) {
-		                        var tower_ = document.createElement('a-gltf-model');
-                                        tower_.setAttribute('src', '#tower' + String(i));
-                                        tower_.setAttribute('id', 'tower_' + String(i));
-		                        tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
-			                tower_.setAttribute("visible", "false");
-		                        scene.appendChild(tower_);
-		                    }
+                schema: {
+                    name: { type: 'string' }
+                },
+                init: function() {
+                    var scene = document.querySelector('a-scene');
 
-				    document.querySelector('#ground').setAttribute("visible", "true");
-				    for(var i = 1; i <= 33; i++) {
-					document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
-				    }
-				    document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
-				    document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
-				    document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
-			    }
+                    var model = document.createElement('a-gltf-model');
+                    model.setAttribute('src', '#ground');
+                    model.setAttribute('id', 'ground');
+                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
+                    //model.setAttribute("visible", "false");
+                    scene.appendChild(model);
+                    model = document.createElement('a-gltf-model');
+                    model.setAttribute('src', '#mall');
+                    model.setAttribute('id', 'mall');
+                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
+                    model.setAttribute("visible", "false");
+                    scene.appendChild(model);
+                    model = document.createElement('a-gltf-model');
+                    model.setAttribute('src', '#mall_h13');
+                    model.setAttribute('id', 'mall_h13');
+                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
+                    model.setAttribute("visible", "false");
+                    scene.appendChild(model);
+                    model = document.createElement('a-gltf-model');
+                    model.setAttribute('src', '#h13_top');
+                    model.setAttribute('id', 'h13_top');
+                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
+                    model.setAttribute("visible", "false");
+                    scene.appendChild(model);
+                    for(var i = 1; i <= 33; i++) {
+                        var tower_ = document.createElement('a-gltf-model');
+                        tower_.setAttribute('src', '#tower' + String(i));
+                        tower_.setAttribute('id', 'tower_' + String(i));
+                        tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
+                        tower_.setAttribute("visible", "false");
+                        scene.appendChild(tower_);
+                    }
+
+                    document.querySelector('#ground').setAttribute("visible", "true");
+                    for(var i = 1; i <= 33; i++) {
+                        document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
+                    }
+                    document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
+                    document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
+                    document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
+                }
 			})
 		</script>
-	        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="index.css">
 	</head>
 	<body>
 		<div id="photoModeContainer" style="display: none">
