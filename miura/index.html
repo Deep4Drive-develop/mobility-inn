@@ -20,6 +20,8 @@
 
 		<script>
             function twitter_init(detail) {
+                var link_text = "https://twitter.com/intent/tweet?text=no";
+
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter', function(err, result) {
                     b64pad = '=';
@@ -77,25 +79,26 @@
                     auth = auth + "oauth_signature=";
                     auth = auth + encodeURIComponent(oauth_signature);
 
+                    // timeout : 30s
                     $.ajax({
                         type: "POST",
+                        timeout: 30000,
                         url: url1,
                         headers: {
                             Authorization: auth
                         },
                         data: "status=hello"
                     }).done(function(data, textStatus, jqXHR) {
-                        link = "https://twitter.com/intent/tweet?text=SUCCESS(update):";
-                        location.href = link;
+                        link_text = "https://twitter.com/intent/tweet?text=SUCCESS(update):";
                     }).fail(function(jqXHR, textStatus, errorThrown) {
-                        link = "https://twitter.com/intent/tweet?text=ERROR(update):";
-                        location.href = link;
+                        link_text = "https://twitter.com/intent/tweet?text=ERROR(update):";
                     });
 
                 }).fail(function(err){
-                    link = "https://twitter.com/intent/tweet?text=ERROR(popup):" + err.body.errors.message;
-                    location.href = link;
+                    link_text = "https://twitter.com/intent/tweet?text=ERROR(popup):" + err.body.errors.message;
                 });
+
+                return link_text;
             }
             AFRAME.registerComponent('photo-mode', {
                 init: function() {
@@ -127,7 +130,7 @@
                             return;
                         }
 
-                        twitter_init(e.detail);
+                        var link = twitter_init(e.detail);
 
                         // e.detail is the base64 representation of the JPEG screenshot
                         image.src = 'data:image/jpeg;base64,' + e.detail;
@@ -142,7 +145,7 @@
                         //var link = this.getAttribute('data-link');
                         //link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
                         //link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
-                        //location.href = link;
+                        location.href = link;
                     })
                 }
             })
