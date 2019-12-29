@@ -92,11 +92,12 @@
                         data: image_src
                     };
                     result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
-                        var media_id_ = response.data.media_id_string;
+                        console.log(response);
+                        //var media_id_ = response.data.media_id_string;
+                                //media_id: media_id_
                         var param = {
                             data: {
-                                status: "hello",
-                                media_id: media_id_
+                                status: "hello"
                             }
                         };
                         result.post('/1.1/statuses/update.json', param).done(function (response) {
