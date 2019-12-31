@@ -61,7 +61,8 @@
 }
 
 #shutterButton {
-	background-image: url('https://1.bp.blogspot.com/-h1QFGKB3Q18/UnXnOgFQVCI/AAAAAAAAaKo/OVoco8B7dPE/s800/kaden_camera_compact.png');
+	/* background-image: url('https://1.bp.blogspot.com/-h1QFGKB3Q18/UnXnOgFQVCI/AAAAAAAAaKo/OVoco8B7dPE/s800/kaden_camera_compact.png'); */
+    background-color: white
 }
 
 .photo #shutterButton {
