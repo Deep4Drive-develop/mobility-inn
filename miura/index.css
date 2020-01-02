@@ -99,11 +99,11 @@
 	pointer-events: auto;
 }
 
-#tweetButton2 {
+#tweet2Button {
 	position: absolute;
 	width: 30vmin;
 	height: 30vmin;
-    top: 10vmin;
+    top: 20vmin;
 	left: 65%; 
 	pointer-events: auto;
     z-index: 16;
@@ -113,4 +113,48 @@
 
 .photo #tweetButton2 {
 	display: block;
+}
+
+#tweet3Button {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+    bottom: 20vmin;
+	left: 65%; 
+	pointer-events: auto;
+    z-index: 17;
+
+	display: none;
+}
+
+#tweet3CancelButton {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+    bottom: 20vmin;
+	left: 25%; 
+	pointer-events: auto;
+    z-index: 17;
+
+	display: none;
+}
+
+#tweet3Text {
+	position: absolute;
+	width: 80vmin;
+	height: 30vmin;
+	left: 15%; 
+    z-index: 17;
+
+	display: none;
+}
+
+.tweet #tweet3Button {
+    display: block;
+}
+.tweet #tweet3CancelButton {
+    display: block;
+}
+.tweet #tweet3Text {
+    display: block;
 }

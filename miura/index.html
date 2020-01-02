@@ -19,7 +19,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
-            function twitter_init(detail) {
+            function twitter_init(detail, tweet_text) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter').then(function(result) {
 
@@ -39,7 +39,7 @@
                         var media_id_ = response.media_id_string;
                         var param = {
                             data: {
-                                status: "Twitter APIをテストしています。",
+                                status: tweet_text,
                                 media_ids: media_id_
                             }
                         };
@@ -68,7 +68,10 @@
                     const shutterButton = document.getElementById('shutterButton');
                     const closeButton = document.getElementById('closeButton');
                     const tweetButton = document.getElementById('tweetButton');
-                    const tweetButton2 = document.getElementById('tweetButton2');
+                    const tweet2Button = document.getElementById('tweet2Button');
+                    const tweet3Button = document.getElementById('tweet3Button');
+                    const tweet3CancelButton = document.getElementById('tweet3CancelButton');
+                    const tweet3Text = document.getElementById('tweet3Text');
 
                     var photo_image;
             
@@ -84,9 +87,17 @@
                         location.href = link;
                     })
             
-                    tweetButton2.addEventListener('click', () => {
-                        twitter_init(photo_image);
+                    tweet2Button.addEventListener('click', () => {
+                        container.classList.add('tweet');
                     })
+
+                    tweet3Button.addEventListener('click', () => {
+                        twitter_init(photo_image, tweet3Text.value);
+                    })
+
+                    tweet3CancelButton.addEventListener('click', () => {
+                        container.classList.remove('tweet');
+                    }
             
                     shutterButton.addEventListener('click', () => {
                         // Emit a screenshotrequest to the xrweb component
@@ -181,7 +192,12 @@
             <div id="closeButton"></div>
             <div id="actionButton">ACTION</div>
             <div id="tweetButton">TWEET</div>
-            <div id="tweetButton2">TWEET &gt;</div>
+            <div id="tweet2Button">TWEET &gt;</div>
+            <form name="form1">
+                <textarea id="tweet3Text"></textarea>
+            </form>
+            <div id="tweet3Button">TWEET</div>
+            <div id="tweet3CancelButton">Cancel</div>
         </div>
         <a-scene
             xrweb="disableWorldTracking: true"
