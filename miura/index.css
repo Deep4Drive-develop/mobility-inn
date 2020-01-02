@@ -83,8 +83,8 @@
 
 #actionButton {
 	position: absolute;
-	width: 30vmin;
-	height: 30vmin;
+	width: 15vmin;
+	height: 15vmin;
 	bottom: 2vmax;
 	left: 5%;
 	pointer-events: auto;
@@ -92,8 +92,8 @@
 
 #tweetButton {
 	position: absolute;
-	width: 30vmin;
-	height: 30vmin;
+	width: 15vmin;
+	height: 15vmin;
 	bottom: 2vmax;
 	left: 65%; 
 	pointer-events: auto;
