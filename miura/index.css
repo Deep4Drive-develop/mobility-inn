@@ -37,6 +37,8 @@
 	border-radius: 2vmax;
 	opacity: 0;
 	transition: 0.5s;
+
+    z-index: 15;
 }
 
 .photo #photoModeImage {
@@ -85,10 +87,6 @@
 	height: 30vmin;
 	bottom: 2vmax;
 	left: 5%;
-	/* transform: translateX(-50%); */
-	/* background-size: 50%; */
-	/* background-repeat: no-repeat; */
-	/* background-position: center center; */
 	pointer-events: auto;
 }
 
@@ -98,10 +96,6 @@
 	height: 30vmin;
 	bottom: 2vmax;
 	left: 65%; 
-	/* transform: translateX(-50%); */
-	/* background-size: 50%; */
-	/* background-repeat: no-repeat; */
-	/* background-position: center center; */
 	pointer-events: auto;
 }
 
@@ -111,11 +105,8 @@
 	height: 30vmin;
     top: 10vmin;
 	left: 65%; 
-	/* transform: translateX(-50%); */
-	/* background-size: 50%; */
-	/* background-repeat: no-repeat; */
-	/* background-position: center center; */
 	pointer-events: auto;
+    z-index: 16;
 
 	display: none;
 }
