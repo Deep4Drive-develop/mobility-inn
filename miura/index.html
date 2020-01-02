@@ -83,12 +83,13 @@
                     })
 
                     tweetButton.addEventListener('click', () => {
-                        link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+                        var link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
                         location.href = link;
                     })
             
                     tweet2Button.addEventListener('click', () => {
                         container.classList.add('tweet');
+                        tweet3Text.disabled=false;
                     })
 
                     tweet3Button.addEventListener('click', () => {
@@ -96,6 +97,7 @@
                     })
 
                     tweet3CancelButton.addEventListener('click', () => {
+                        tweet3Text.disabled=true;
                         container.classList.remove('tweet');
                     })
             
@@ -193,9 +195,7 @@
             <div id="actionButton">ACTION</div>
             <div id="tweetButton">TWEET</div>
             <div id="tweet2Button">TWEET &gt;</div>
-            <form name="form1">
-                <textarea id="tweet3Text" name="tweet3" cols="33" rows="5"></textarea>
-            </form>
+            <textarea id="tweet3Text" cols="33" rows="5">test message</textarea>
             <div id="tweet3Button">TWEET</div>
             <div id="tweet3CancelButton">Cancel</div>
         </div>

@@ -88,7 +88,6 @@
 	bottom: 2vmax;
 	left: 5%;
 	pointer-events: auto;
-    z-index: 15;
 }
 
 #tweetButton {
@@ -98,7 +97,6 @@
 	bottom: 2vmax;
 	left: 65%; 
 	pointer-events: auto;
-    z-index: 15;
 }
 
 #tweet2Button {
