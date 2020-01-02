@@ -67,12 +67,25 @@
                     const image = document.getElementById('photoModeImage');
                     const shutterButton = document.getElementById('shutterButton');
                     const closeButton = document.getElementById('closeButton');
+                    const tweetButton = document.getElementById('tweetButton');
+                    const tweetButton2 = document.getElementById('tweetButton2');
+
+                    var photo_image;
             
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
             
                     closeButton.addEventListener('click', () => {
                         container.classList.remove('photo');
+                    })
+
+                    tweetButton.addEventListener('click', () => {
+                        link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
+                        location.href = link;
+                    })
+            
+                    tweetButton2.addEventListener('click', () => {
+                        twitter_init(photo_image);
                     })
             
                     shutterButton.addEventListener('click', () => {
@@ -90,23 +103,18 @@
                         if (!e.detail) {
                             return;
                         }
-            
-                        // twitter_init(e.detail);
-            
+
                         // e.detail is the base64 representation of the JPEG screenshot
                         image.src = 'data:image/jpeg;base64,' + e.detail;
-                        var a = document.createElement('a');
-                        a.href = image.src;
-                        a.download = "download.jpg";
-                        a.click();
+
+                        // photo download
+                        // var a = document.createElement('a');
+                        // a.href = image.src;
+                        // a.download = "download.jpg";
+                        // a.click();
             
                         // Show the photo
                         container.classList.add('photo');
-            
-                        //var link = this.getAttribute('data-link');
-                        //link = "https://twitter.com/intent/tweet?text=あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
-                        //link = "https://twitter.com/intent/tweet?text="+message+"あなたの東京タワーにまつわる思い出を投稿しよう！&url=https%3A%2F%2Fdeep4drive-develop.github.io%2Fmobility-inn%2F&hashtags=demo";
-                        //location.href = link;
                     })
                 }
             })
