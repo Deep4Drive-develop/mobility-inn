@@ -78,3 +78,48 @@
 .photo #closeButton {
 	display: block;
 }
+
+#actionButton {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+	bottom: 2vmax;
+	left: 5%;
+	/* transform: translateX(-50%); */
+	/* background-size: 50%; */
+	/* background-repeat: no-repeat; */
+	/* background-position: center center; */
+	pointer-events: auto;
+}
+
+#tweetButton {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+	bottom: 2vmax;
+	left: 65%; 
+	/* transform: translateX(-50%); */
+	/* background-size: 50%; */
+	/* background-repeat: no-repeat; */
+	/* background-position: center center; */
+	pointer-events: auto;
+}
+
+#tweetButton2 {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+    top: 10vmin;
+	left: 65%; 
+	/* transform: translateX(-50%); */
+	/* background-size: 50%; */
+	/* background-repeat: no-repeat; */
+	/* background-position: center center; */
+	pointer-events: auto;
+
+	display: none;
+}
+
+.photo #tweetButton2 {
+	display: block;
+}
