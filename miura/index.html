@@ -73,7 +73,9 @@
                     const tweet3Button = document.getElementById('tweet3Button');
                     const tweet3CancelButton = document.getElementById('tweet3CancelButton');
                     const tweet3Text = document.getElementById('tweet3Text');
+                    const backImage = document.getElementById('backimage');
 
+                    var flag = 0;
                     var photo_image;
             
                     // Container starts hidden so it isn't visible when the page is still loading
@@ -84,7 +86,13 @@
                     })
 
                     actionButton.addEventListener('click', () => {
-                        //container.classList.add('photo');
+                        if(flag == 0) {
+                            backImage.src = "";
+                            flag = 1;
+                        } else {
+                            backImage.src = "#backimage";
+                            flag = 0;
+                        }
                     })
 
                     tweetButton.addEventListener('click', () => {
