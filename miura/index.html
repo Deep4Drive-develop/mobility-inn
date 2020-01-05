@@ -73,7 +73,7 @@
                     const tweet3Button = document.getElementById('tweet3Button');
                     const tweet3CancelButton = document.getElementById('tweet3CancelButton');
                     const tweet3Text = document.getElementById('tweet3Text');
-                    const backImage = document.getElementById('backimage');
+		    const backImage = document.querySelector('#backimage');
 
                     var flag = 0;
                     var photo_image;
@@ -87,10 +87,10 @@
 
                     actionButton.addEventListener('click', () => {
                         if(flag == 0) {
-                            backImage.src = "";
+			    backImage.removeAttribute('src');
                             flag = 1;
                         } else {
-                            backImage.src = "#backimage";
+			    backImage.setAttribute('src', '#backimage');
                             flag = 0;
                         }
                     })
@@ -258,7 +258,9 @@
                 <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
                 <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
                 <!-- Credit to Tom Lechner by flickr: https://www.flickr.com/photos/tomlechner/9337477855/ -->
-                <img id="backimage" src="image/9337477855_0e3fb2f77e_o.jpg"></img>
+                <img id="night_sky" src="image/9337477855_607bb2181e_c.jpg"></img>
+
+                <img id="logo" src="image/6954057b-8eb9-479d-892a-0af76f4dc15b.jpg"></img>
             </a-assets>
 
             <a-camera
@@ -275,6 +277,7 @@
             <a-light type="ambient" intensity="1"></a-light>
 
             <a-sky src="#backimage" id="backimage" phi-length="360" phi-start="0" theta-length="90" theta-start="0"></a-sky>
+            <a-image src="#logo" id="logo" position="0 0 5"></a-image>
         </a-scene>
     </body>
 </html>
