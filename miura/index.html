@@ -23,7 +23,7 @@
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter').then(function(result) {
 
-                    var bound_text = "------------------------1ae47d990b354d1b00a4eea60e6b5b72";
+                    var bound_text = "------------------------deep4drive_mobility_inn";
                     var image_src = "--" + bound_text + "\r\n" +
                         'Content-Disposition: form-data; name="media_data"' + "\r\n" +
                         "\r\n" +
@@ -44,19 +44,15 @@
                             }
                         };
                         result.post('/1.1/statuses/update.json', param).done(function (response) {
-                            console.log("success");
                             console.log(response);
                         }).fail(function (err) {
-                            console.log("err1");
                             console.log(err);
                         });
                     }).fail(function(err) {
-                        console.log("err2");
                         console.log(err);
                     });
 
                 }).fail(function(err){
-                    console.log("err3");
                     console.log(err);
                 });
             }
