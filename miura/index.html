@@ -84,9 +84,11 @@
                     actionButton.addEventListener('click', () => {
                         if(flag == 0) {
 			    backImage.removeAttribute('src');
+			    backImage.setAttribute('opacity', 0);
                             flag = 1;
                         } else {
 			    backImage.setAttribute('src', '#backimage');
+			    backImage.setAttribute('opacity', 1);
                             flag = 0;
                         }
                     })
@@ -257,6 +259,7 @@
                 <img id="night_sky" src="image/9337477855_607bb2181e_c.jpg"></img>
 
                 <img id="logo" src="image/6954057b-8eb9-479d-892a-0af76f4dc15b.jpg"></img>
+                <video id="using" src="movie/SVID_20200102_143519_1.mp4"></video>
             </a-assets>
 
             <a-camera
@@ -274,6 +277,7 @@
 
             <a-sky src="#backimage" id="backimage" phi-length="360" phi-start="0" theta-length="90" theta-start="0"></a-sky>
             <a-image src="#logo" id="logo" position="0 0 5"></a-image>
+            <a-videosphere src="#using" id="using" position="0 0 -5"></a-videosphere>
         </a-scene>
     </body>
 </html>
