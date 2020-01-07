@@ -70,12 +70,14 @@
                     const tweet3CancelButton = document.getElementById('tweet3CancelButton');
                     const tweet3Text = document.getElementById('tweet3Text');
 		    const backImage = document.querySelector('#backimage');
+		    const video_ = document.querySelector('#usingv');
 
                     var flag = 0;
                     var photo_image;
             
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
+                    video_.play();
             
                     closeButton.addEventListener('click', () => {
                         container.classList.remove('photo');
@@ -277,7 +279,7 @@
 
             <a-sky src="#backimage" id="backimage" phi-length="360" phi-start="0" theta-length="90" theta-start="0"></a-sky>
             <a-image src="#logo" id="logo" position="0 0 7"></a-image>
-            <a-video src="#usingv" id="usingv" height="5" position="0 0 5"></a-video>
+            <a-video src="#usingv" id="usingv" position="0 0 5"></a-video>
         </a-scene>
     </body>
 </html>
