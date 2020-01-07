@@ -194,20 +194,6 @@
                 }
             })
 
-            AFRAME.registerComponent('video-handler',{
-                init: function() {
-                    let el = this.el;
-                    let vid = document.querySelector("#usingv");
-                    vid.pause();
-                    el.addEventListener('mouseenter',function(){
-                        vid.play();
-                    });
-                    el.addEventListener('mouseleave',function(){
-                        vid.pause();
-                    });
-                }
-            });
-
         </script>
         <link rel="stylesheet" href="index.css">
     </head>
@@ -273,7 +259,7 @@
                 <img id="night_sky" src="image/9337477855_607bb2181e_c.jpg"></img>
 
                 <img id="logo" src="image/6954057b-8eb9-479d-892a-0af76f4dc15b.jpg">
-                <video id="usingv" src="movie/SVID_20200102_143519_1.mp4">
+                <video id="usingv" autoplay muted loop="true" src="movie/SVID_20200102_143519_1.mp4">
             </a-assets>
 
             <a-camera
@@ -290,8 +276,8 @@
             <a-light type="ambient" intensity="1"></a-light>
 
             <a-sky src="#backimage" id="backimage" phi-length="360" phi-start="0" theta-length="90" theta-start="0"></a-sky>
-            <a-image src="#logo" id="logo" position="0 0 10"></a-image>
-            <a-plane material="src:#usingv" video-handler position="0 0 5"><a-plane>
+            <a-image src="#logo" id="logo" position="0 0 7"></a-image>
+            <a-video src="#usingv" id="usingv" height="5" position="0 0 5"></a-video>
         </a-scene>
     </body>
 </html>
