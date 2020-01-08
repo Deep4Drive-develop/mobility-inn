@@ -162,12 +162,13 @@
 }
 
 #topGuide {
+    position: absolute;
     background-color: black;
     color: white;
     width: 80vmin;
-    height: 5vmin;
+    height: 8vmin;
     left: 10%;
     top: 5%;
-    border-radius: 1%;
+    border-radius: 2%;
 }
-}
+
