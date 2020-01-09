@@ -160,3 +160,15 @@
 .tweet #tweet3Text {
     display: block;
 }
+
+#topGuide {
+    position: absolute;
+    background-color: black;
+    text-align: center;
+    color: white;
+    width: 80vmin;
+    height: 8vmin;
+    left: 10%;
+    top: 2%;
+    border-radius: 5%;
+}
