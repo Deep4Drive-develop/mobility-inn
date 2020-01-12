@@ -175,7 +175,7 @@
     z-index: 12;
 }
 
-#balloon1 {
+.balloon1 {
     position: absolute;
     background-color: white;
     width: 90vmin;
@@ -187,7 +187,7 @@
     text-align: center; /* テキストの揃え */
     border-radius: 8px; /* 角丸 */
 }
-#balloon1::before { /* 三角の部分 */
+.balloon1::before { /* 三角の部分 */
     content: '';
     position: absolute; /* 位置固定 */
     left: 10%;
