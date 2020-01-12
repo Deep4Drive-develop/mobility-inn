@@ -174,3 +174,25 @@
     background-color: black;
     z-index: 12;
 }
+
+#balloon1 {
+    position: absolute;
+    background-color: white;
+    width: 90vmin;
+    height: 15vmin;
+    bottom: 17vmin;
+    left: 5%;
+    z-index: 14;
+    padding: 20px; /* ふきだし内の余白 */
+    text-align: center; /* テキストの揃え */
+    border-radius: 8px; /* 角丸 */
+}
+#balloon1::before { /* 三角の部分 */
+  content: '';
+  position: absolute; /* 位置固定 */
+  left: 10%;
+  border: 14px solid transparent; /* 線幅の設定 */
+  bottom: -28px; /* 線幅の2倍 */
+  margin-left: -14px; /* 線幅だけずらす */
+  border-top-color: white; /* 吹き出しの地と同じ色 */
+}
