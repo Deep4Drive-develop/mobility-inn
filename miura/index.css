@@ -90,15 +90,6 @@
 	pointer-events: auto;
 }
 
-#tweetButton {
-	position: absolute;
-	width: 15vmin;
-	height: 15vmin;
-	bottom: 2vmax;
-	left: 65%; 
-	pointer-events: auto;
-}
-
 #tweet2Button {
 	position: absolute;
 	width: 30vmin;
