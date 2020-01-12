@@ -47,6 +47,12 @@
 	pointer-events: auto;
 }
 
+.tweet #photoModeImage {
+    max-width: 40%;
+    max-height: 40%;
+    z-index: 25;
+}
+
 #shutterButton {
 	position: absolute;
 	width: 15vmin;
@@ -72,7 +78,7 @@
 	bottom: 2vmax;
 	border-radius: 7.5vmin;
     border: solid 2px black;
-	left: 50%;
+	left: 5%;
 	transform: translateX(-50%);
 	background-size: 5%;
 	background-repeat: no-repeat;
@@ -112,7 +118,7 @@
 	width: 15vmin;
 	height: 15vmin;
 	bottom: 2vmax;
-	left: 50%;
+	left: 42.5%;
         z-index: 13;
 	pointer-events: auto;
 }
@@ -127,44 +133,38 @@
 	pointer-events: auto;
 }
 
-#tweet2Button {
-	position: absolute;
-	width: 30vmin;
-	height: 30vmin;
-    top: 20vmin;
-	left: 65%; 
-	pointer-events: auto;
-    z-index: 16;
-
-	display: none;
+#tweetWindow {
+    position: absolute;
+    background-color: white;
+    width: 90vmin;
+    height: 50vmin;
+    top: 5vmin;
+    left: 5vmin;
+    z-index: 20;
+    display: none;
 }
-
-.photo #tweet2Button {
-	display: block;
-}
-
 #tweet3Button {
-	position: absolute;
-	width: 30vmin;
-	height: 30vmin;
-    bottom: 20vmin;
-	left: 65%; 
-	pointer-events: auto;
-    z-index: 17;
+    position: absolute;
+    width: 30vmin;
+    height: 30vmin;
+    top: 10vmin;
+    left: 65%; 
+    pointer-events: auto;
+    z-index: 25;
 
-	display: none;
+    display: none;
 }
 
 #tweet3CancelButton {
-	position: absolute;
-	width: 30vmin;
-	height: 30vmin;
-    bottom: 20vmin;
-	left: 25%; 
-	pointer-events: auto;
-    z-index: 17;
+    position: absolute;
+    width: 30vmin;
+    height: 30vmin;
+    top: 10%;
+    left: 25%; 
+    pointer-events: auto;
+    z-index: 25;
 
-	display: none;
+    display: none;
 }
 
 #tweet3Text {
@@ -173,12 +173,15 @@
 	height: 30vmin;
 	left: 10%; 
     top: 10%;
-    z-index: 17;
+    z-index: 25;
 	pointer-events: auto;
 
 	display: none;
 }
 
+.tweet #tweetWindow {
+    display: block;
+}
 .tweet #tweet3Button {
     display: block;
 }
