@@ -125,15 +125,25 @@
                     })
 
                     actionButton.addEventListener('click', () => {
+                        const balloon1 = document.getElementById('balloon1');
+                        const balloon2 = document.getElementById('balloon2');
+                        balloon1.classList.add('hide');
                         make_tower();
+                        balloon2.classList.remove('hide'); // あとでタワー完成タイミングに変える
                     })
                     backgroundButton.addEventListener('click', () => {
+                        const balloon2 = document.getElementById('balloon2');
+                        const balloon3 = document.getElementById('balloon3');
+                        balloon2.classList.add('hide');
+
                         var scene = document.querySelector('a-scene');
                         var model = document.createElement('a-video');
                         model.setAttribute('src', '#usingv');
                         model.setAttribute('id', 'usingv');
                         scene.appendChild(model);
                         model.play();
+
+                        balloon3.classList.remove('hide');
                     })
 
                     tweet2Button.addEventListener('click', () => {
@@ -195,10 +205,12 @@
             <div id="tweet3CancelButton">Cancel</div>
 
             <div id="menuBar"></div>
-            <div id="actionButton"></div>
-            <div id="backgroundButton"></div>
+            <img id="actionButton" src="https://3.bp.blogspot.com/-O-4F2rFHaMs/WoJRvwjRkRI/AAAAAAABKXY/EEiWs__TbsMSmRJl9BssnJP8-0KTRnMNgCLcBGAs/s800/tokyo_tower.png"></img>
+            <img id="backgroundButton" src="https://4.bp.blogspot.com/-09z6pusV580/W4PJ4T9QtlI/AAAAAAABOKs/sz37atRgv9EpjfpLSXKEUZ-NHK75YTxLgCLcBGAs/s800/new_york_manhattan_yoru.png"></img>
 
-            <div class="balloon1">東京タワーを出してみよう！</div>
+            <div class="balloon1" id="balloon1">東京タワーを出してみよう！</div>
+            <div class="balloon2 hide" id="balloon2">背景を変えてみよう！</div>
+            <div class="balloon3 hide" id="balloon3">写真を撮ってTwitterにシェアしてみよう！</div>
         </div>
         <a-scene
             xrweb="disableWorldTracking: true"
