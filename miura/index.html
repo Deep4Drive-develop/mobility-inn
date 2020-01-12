@@ -109,19 +109,16 @@
                     const shutterButton = document.getElementById('shutterButton');
                     const closeButton = document.getElementById('closeButton');
                     const actionButton = document.getElementById('actionButton');
+                    const backgroundButton = document.getElementById('backgroundButton');
                     const tweet2Button = document.getElementById('tweet2Button');
                     const tweet3Button = document.getElementById('tweet3Button');
                     const tweet3CancelButton = document.getElementById('tweet3CancelButton');
                     const tweet3Text = document.getElementById('tweet3Text');
-		    const backImage = document.querySelector('#backimage');
-		    const video_ = document.querySelector('#usingv');
 
-                    var flag = 0;
                     var photo_image;
             
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
-                    video_.play();
             
                     closeButton.addEventListener('click', () => {
                         container.classList.remove('photo');
@@ -129,6 +126,11 @@
 
                     actionButton.addEventListener('click', () => {
                         make_tower();
+                    })
+                    backgroundButton.addEventListener('click', () => {
+		        const video_ = document.querySelector('#usingv');
+                        video_.style.display = 'block';
+                        video_.play();
                     })
 
                     tweet2Button.addEventListener('click', () => {
@@ -191,6 +193,7 @@
 
             <div id="menuBar"></div>
             <div id="actionButton"></div>
+            <div id="backgroundButton"></div>
         </div>
         <a-scene
             xrweb="disableWorldTracking: true"
@@ -236,8 +239,6 @@
                 <a-asset-item id="tower31" src="model/31.glb"></a-asset-item>
                 <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
                 <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
-                <!-- Credit to Tom Lechner by flickr: https://www.flickr.com/photos/tomlechner/9337477855/ -->
-                <img id="night_sky" src="image/9337477855_607bb2181e_c.jpg"></img>
 
                 <img id="logo" src="image/6954057b-8eb9-479d-892a-0af76f4dc15b.jpg">
                 <video id="usingv" autoplay muted loop="true" src="movie/SVID_20200102_143519_1.mp4">
@@ -249,16 +250,8 @@
                 cursor="fuse: false; rayOrigin: mouse;">
             </a-camera>
 
-            <a-light type="directional"
-                     intensity="0.5"
-                     animation="property: position; from: -5 -5 5; to: 5 5 5; dur: 2000; easing: linear; dir: alternate; loop: true">
-            </a-light>
-
-            <a-light type="ambient" intensity="1"></a-light>
-
-            <a-sky src="#backimage" id="backimage" phi-length="360" phi-start="0" theta-length="90" theta-start="0"></a-sky>
-            <a-image src="#logo" id="logo" position="0 0 7"></a-image>
-            <a-video src="#usingv" id="usingv" position="0 0 5"></a-video>
+            <a-image src="#logo" id="logo" style="display: none"></a-image>
+            <a-video src="#usingv" id="usingv" style="display: none"></a-video>
         </a-scene>
     </body>
 </html>
