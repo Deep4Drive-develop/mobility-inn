@@ -47,7 +47,7 @@
 	pointer-events: auto;
 }
 
-#shutterButton, #closeButton {
+#shutterButton {
 	position: absolute;
 	width: 15vmin;
 	height: 15vmin;
@@ -64,6 +64,23 @@
         z-index: 13;
 }
 
+#cancelButton {
+	position: absolute;
+	width: 15vmin;
+	height: 15vmin;
+	background-color: white;
+	bottom: 2vmax;
+	border-radius: 7.5vmin;
+    border: solid 2px black;
+	left: 50%;
+	transform: translateX(-50%);
+	background-size: 5%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	pointer-events: auto;
+        z-index: 13;
+}
+
 #shutterButton {
     background-color: white
 }
@@ -72,12 +89,12 @@
 	display: none;
 }
 
-#closeButton {
+#cancelButton {
 	background-image: url('https://1.bp.blogspot.com/-9H_g5JWwWbU/U9zqvClTrsI/AAAAAAAAkYs/uF8QvFuGi88/s1600/capital_x.png');
 	display: none;
 }
 
-.photo #closeButton {
+.photo #cancelButton {
 	display: block;
 }
 
@@ -85,18 +102,25 @@
 	position: absolute;
 	width: 15vmin;
 	height: 15vmin;
-        /* background-image: url('https://3.bp.blogspot.com/-O-4F2rFHaMs/WoJRvwjRkRI/AAAAAAABKXY/EEiWs__TbsMSmRJl9BssnJP8-0KTRnMNgCLcBGAs/s800/tokyo_tower.png'); */
 	bottom: 2vmax;
 	left: 5%;
         z-index: 13;
 	pointer-events: auto;
 }
-
-#backgroundButton {
+#saveButton {
 	position: absolute;
 	width: 15vmin;
 	height: 15vmin;
-        /* background-image: url('https://4.bp.blogspot.com/-09z6pusV580/W4PJ4T9QtlI/AAAAAAABOKs/sz37atRgv9EpjfpLSXKEUZ-NHK75YTxLgCLcBGAs/s800/new_york_manhattan_yoru.png'); */
+	bottom: 2vmax;
+	left: 50%;
+        z-index: 13;
+	pointer-events: auto;
+}
+
+#backgroundButton, #tweetButton {
+	position: absolute;
+	width: 15vmin;
+	height: 15vmin;
 	bottom: 2vmax;
 	left: 80%;
         z-index: 13;
@@ -239,6 +263,7 @@
     margin-left: -14px; /* 線幅だけずらす */
     border-top-color: white; /* 吹き出しの地と同じ色 */
 }
+
 .hide {
     display: none;
 }
