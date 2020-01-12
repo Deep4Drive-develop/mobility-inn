@@ -188,11 +188,12 @@
     border-radius: 8px; /* 角丸 */
 }
 #balloon1::before { /* 三角の部分 */
-  content: '';
-  position: absolute; /* 位置固定 */
-  left: 10%;
-  border: 14px solid transparent; /* 線幅の設定 */
-  bottom: -28px; /* 線幅の2倍 */
-  margin-left: -14px; /* 線幅だけずらす */
-  border-top-color: white; /* 吹き出しの地と同じ色 */
+    content: '';
+    position: absolute; /* 位置固定 */
+    left: 10%;
+    border: 14px solid transparent; /* 線幅の設定 */
+    bottom: -28px; /* 線幅の2倍 */
+    margin-left: -14px; /* 線幅だけずらす */
+    border-top-color: white; /* 吹き出しの地と同じ色 */
+    /* z-index: 14; */
 }

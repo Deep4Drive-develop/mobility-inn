@@ -128,9 +128,12 @@
                         make_tower();
                     })
                     backgroundButton.addEventListener('click', () => {
-		        const video_ = document.querySelector('#usingv');
-                        video_.style.display = 'block';
-                        video_.play();
+                        var scene = document.querySelector('a-scene');
+                        var model = document.createElement('a-video');
+                        model.setAttribute('src', '#usingv');
+                        model.setAttribute('id', 'usingv');
+                        scene.appendChild(model);
+                        model.play();
                     })
 
                     tweet2Button.addEventListener('click', () => {
@@ -253,7 +256,6 @@
             </a-camera>
 
             <a-image src="#logo" id="logo" style="display: none"></a-image>
-            <a-video src="#usingv" id="usingv" style="display: none"></a-video>
         </a-scene>
     </body>
 </html>
