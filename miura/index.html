@@ -19,10 +19,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
-            function twitter_init(detail, tweet_text) {
+            var oauth_result;
+
+            /* TODO: 中央の軸を表示させる */
+            /* TODO: Windowsサイズ修正 */
+            function twitter_init(container) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter').then(function(result) {
+                    container.classList.add('tweet');
+                    oauth_result;
+                }).fail(function(err){
+                    console.log(err);
+                });
+            }
 
+            function twitter_tweet(detail, tweet_text) {
                     var bound_text = "------------------------deep4drive_mobility_inn";
                     var image_src = "--" + bound_text + "\r\n" +
                         'Content-Disposition: form-data; name="media_data"' + "\r\n" +
@@ -34,7 +45,7 @@
                         },
                         data: image_src
                     };
-                    result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
+                    oauth_result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
                         console.log(response);
                         var media_id_ = response.media_id_string;
                         var param = {
@@ -43,7 +54,7 @@
                                 media_ids: media_id_
                             }
                         };
-                        result.post('/1.1/statuses/update.json', param).done(function (response) {
+                        oauth_result.post('/1.1/statuses/update.json', param).done(function (response) {
                             console.log(response);
                         }).fail(function (err) {
                             console.log(err);
@@ -66,24 +77,28 @@
                 model.setAttribute('scale', '0.0125 0.0125 0.0125');
                 //model.setAttribute("visible", "false");
                 scene.appendChild(model);
-                model = document.createElement('a-gltf-model');
+
+                var model = document.createElement('a-gltf-model');
                 model.setAttribute('src', '#mall');
                 model.setAttribute('id', 'mall');
                 model.setAttribute('scale', '0.0125 0.0125 0.0125');
                 model.setAttribute("visible", "false");
                 scene.appendChild(model);
-                model = document.createElement('a-gltf-model');
+
+                var model = document.createElement('a-gltf-model');
                 model.setAttribute('src', '#mall_h13');
                 model.setAttribute('id', 'mall_h13');
                 model.setAttribute('scale', '0.0125 0.0125 0.0125');
                 model.setAttribute("visible", "false");
                 scene.appendChild(model);
-                model = document.createElement('a-gltf-model');
+
+                var model = document.createElement('a-gltf-model');
                 model.setAttribute('src', '#h13_top');
                 model.setAttribute('id', 'h13_top');
                 model.setAttribute('scale', '0.0125 0.0125 0.0125');
                 model.setAttribute("visible", "false");
                 scene.appendChild(model);
+
                 for(var i = 1; i <= 33; i++) {
                     var tower_ = document.createElement('a-gltf-model');
                     tower_.setAttribute('src', '#tower' + String(i));
@@ -97,9 +112,9 @@
                 for(var i = 1; i <= 33; i++) {
                     document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
                 }
-                document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
-                document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
-                document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
+                document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay: 1250;")
+                document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay: 4000;")
+                document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay: 7250;")
             }
 
             AFRAME.registerComponent('photo-mode', {
@@ -164,12 +179,12 @@
                     })
 
                     tweetButton.addEventListener('click', () => {
-                        container.classList.add('tweet');
+                        twitter_init(container);
                     })
 
 
                     tweet3Button.addEventListener('click', () => {
-                        twitter_init(photo_image, tweet3Text.value);
+                        twitter_tweet(photo_image, tweet3Text.value);
                         container.classList.remove('tweet');
                     })
 
