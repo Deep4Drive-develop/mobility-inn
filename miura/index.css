@@ -141,6 +141,7 @@
     top: 5vmin;
     left: 5vmin;
     z-index: 20;
+    border-radius: 8px; /* 角丸 */
     display: none;
 }
 #tweet3Button {
@@ -151,6 +152,7 @@
     left: 65%; 
     pointer-events: auto;
     z-index: 25;
+    border: solid blue;
 
     display: none;
 }
@@ -163,20 +165,21 @@
     left: 20%; 
     pointer-events: auto;
     z-index: 25;
+    border: solid blue;
 
     display: none;
 }
 
 #tweet3Text {
-	position: absolute;
-	width: 80vmin;
-	height: 30vmin;
-	left: 10%; 
+    position: absolute;
+    width: 80vmin;
+    height: 30vmin;
+    left: 10%; 
     top: 10%;
     z-index: 25;
-	pointer-events: auto;
-
-	display: none;
+    pointer-events: auto;
+    border: solid blue;
+    display: none;
 }
 
 .tweet #tweetWindow {
