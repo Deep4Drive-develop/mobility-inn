@@ -34,38 +34,34 @@
             }
 
             function twitter_tweet(detail, tweet_text) {
-                    var bound_text = "------------------------deep4drive_mobility_inn";
-                    var image_src = "--" + bound_text + "\r\n" +
-                        'Content-Disposition: form-data; name="media_data"' + "\r\n" +
-                        "\r\n" +
-                        detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
-                    var param1 = {
-                        headers: {
-                            'Content-Type' : 'multipart/form-data; boundary=' + bound_text
-                        },
-                        data: image_src
-                    };
-                    oauth_result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
-                        console.log(response);
-                        var media_id_ = response.media_id_string;
-                        var param = {
-                            data: {
-                                status: tweet_text,
-                                media_ids: media_id_
-                            }
-                        };
-                        oauth_result.post('/1.1/statuses/update.json', param).done(function (response) {
-                            console.log(response);
-                        }).fail(function (err) {
-                            console.log(err);
-                        });
-                    }).fail(function(err) {
-                        console.log(err);
-                    });
-
-                }).fail(function(err){
-                    console.log(err);
-                });
+               var bound_text = "------------------------deep4drive_mobility_inn";
+               var image_src = "--" + bound_text + "\r\n" +
+                   'Content-Disposition: form-data; name="media_data"' + "\r\n" +
+                   "\r\n" +
+                   detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
+               var param1 = {
+                   headers: {
+                       'Content-Type' : 'multipart/form-data; boundary=' + bound_text
+                   },
+                   data: image_src
+               };
+               oauth_result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
+                   console.log(response);
+                   var media_id_ = response.media_id_string;
+                   var param = {
+                       data: {
+                           status: tweet_text,
+                           media_ids: media_id_
+                       }
+                   };
+                   oauth_result.post('/1.1/statuses/update.json', param).done(function (response) {
+                       console.log(response);
+                   }).fail(function (err) {
+                       console.log(err);
+                   });
+               }).fail(function(err) {
+                   console.log(err);
+               });
             }
 
             function make_tower() {
