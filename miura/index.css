@@ -147,11 +147,11 @@
 #tweet3Button {
     position: absolute;
     width: 30vmin;
-    height: 30vmin;
+    /* height: 30vmin; */
     top: 10vmin;
     left: 65%; 
     pointer-events: auto;
-    z-index: 25;
+    z-index: 30;
     border: solid blue;
 
     display: none;
@@ -160,11 +160,11 @@
 #tweet3CancelButton {
     position: absolute;
     width: 30vmin;
-    height: 30vmin;
+    /* height: 30vmin; */
     top: 10vmin;
     left: 20%; 
     pointer-events: auto;
-    z-index: 25;
+    z-index: 30;
     border: solid blue;
 
     display: none;
