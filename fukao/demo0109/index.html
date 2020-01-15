@@ -167,20 +167,6 @@
                     model.setAttribute('scale', '0.0125 0.0125 0.0125');
                     model.setAttribute("visible", "false");
                     scene.appendChild(model);
-                    model = document.createElement('a-gltf-model');
-                    model.setAttribute('src', '#h13_top');
-                    model.setAttribute('id', 'h13_top');
-                    model.setAttribute('scale', '0.0125 0.0125 0.0125');
-                    model.setAttribute("visible", "false");
-                    scene.appendChild(model);
-                    for(var i = 1; i <= 33; i++) {
-                        var tower_ = document.createElement('a-gltf-model');
-                        tower_.setAttribute('src', '#tower' + String(i));
-                        tower_.setAttribute('id', 'tower_' + String(i));
-                        tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
-                        tower_.setAttribute("visible", "false");
-                        scene.appendChild(tower_);
-                    }
             
                     document.querySelector('#ground').setAttribute("visible", "true");
                     for(var i = 1; i <= 33; i++) {
@@ -188,7 +174,6 @@
                     }
                     document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
                     document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
-                    document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
             
                 }
             })
@@ -222,40 +207,6 @@
                 <a-asset-item id="ground" src="model/ground.glb"></a-asset-item>
                 <a-asset-item id="mall" src="model/mall.glb"></a-asset-item>
                 <a-asset-item id="mall_h13" src="model/mall_h13.glb"></a-asset-item>
-                <a-asset-item id="h13_top" src="model/h13_top.glb"></a-asset-item>
-                <a-asset-item id="tower1" src="model/01.glb"></a-asset-item>
-                <a-asset-item id="tower2" src="model/02.glb"></a-asset-item>
-                <a-asset-item id="tower3" src="model/03.glb"></a-asset-item>
-                <a-asset-item id="tower4" src="model/04.glb"></a-asset-item>
-                <a-asset-item id="tower5" src="model/05.glb"></a-asset-item>
-                <a-asset-item id="tower6" src="model/06.glb"></a-asset-item>
-                <a-asset-item id="tower7" src="model/07.glb"></a-asset-item>
-                <a-asset-item id="tower8" src="model/08.glb"></a-asset-item>
-                <a-asset-item id="tower9" src="model/09.glb"></a-asset-item>
-                <a-asset-item id="tower10" src="model/10.glb"></a-asset-item>
-                <a-asset-item id="tower11" src="model/11.glb"></a-asset-item>
-                <a-asset-item id="tower12" src="model/12.glb"></a-asset-item>
-                <a-asset-item id="tower13" src="model/13.glb"></a-asset-item>
-                <a-asset-item id="tower14" src="model/14.glb"></a-asset-item>
-                <a-asset-item id="tower15" src="model/15.glb"></a-asset-item>
-                <a-asset-item id="tower16" src="model/16.glb"></a-asset-item>
-                <a-asset-item id="tower17" src="model/17.glb"></a-asset-item>
-                <a-asset-item id="tower18" src="model/18.glb"></a-asset-item>
-                <a-asset-item id="tower19" src="model/19.glb"></a-asset-item>
-                <a-asset-item id="tower20" src="model/20.glb"></a-asset-item>
-                <a-asset-item id="tower21" src="model/21.glb"></a-asset-item>
-                <a-asset-item id="tower22" src="model/22.glb"></a-asset-item>
-                <a-asset-item id="tower23" src="model/23.glb"></a-asset-item>
-                <a-asset-item id="tower24" src="model/24.glb"></a-asset-item>
-                <a-asset-item id="tower25" src="model/25.glb"></a-asset-item>
-                <a-asset-item id="tower26" src="model/26.glb"></a-asset-item>
-                <a-asset-item id="tower27" src="model/27.glb"></a-asset-item>
-                <a-asset-item id="tower28" src="model/28.glb"></a-asset-item>
-                <a-asset-item id="tower29" src="model/29.glb"></a-asset-item>
-                <a-asset-item id="tower30" src="model/30.glb"></a-asset-item>
-                <a-asset-item id="tower31" src="model/31.glb"></a-asset-item>
-                <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
-                <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
                 <!-- Credit to Tom Lechner by flickr: https://www.flickr.com/photos/tomlechner/9337477855/ -->
                 <img id="backimage" src="image/9337477855_0e3fb2f77e_o.jpg"></img>
             </a-assets>
