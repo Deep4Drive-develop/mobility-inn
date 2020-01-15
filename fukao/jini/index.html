@@ -1,0 +1,837 @@
+<html>
+  <head>
+    <title>JINI, powered by 8th Wall Web</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <meta name="apple-mobile-web-app-title" content="Jini AR">
+    <meta property="og:url" content="8thwall.com/web">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="JINI, powered by 8th Wall Web">
+    <meta property="og:description" content="Augmented reality is now on the web! See for yourself.">
+    <meta property="og:image" content="https://apps.8thwall.com/8w/jini/img/share/facebook-preview.jpg" >
+
+    <script src="//apps.8thwall.com/requirements.js"></script>
+
+    <script src="//cdn.8thwall.com/web/aframe/8frame-0.8.2.min.js"></script>
+
+    <!-- 8thWall (wrapper always required) -->
+    <script async src="//apps.8thwall.com/xrweb?appKey=nckJExIRh472YMNWPtIuOw40FWkbfsSvOtdICPVnPNcCBITlWr3Osq5CjdkLXRiX0b2fm8"></script>
+
+    <script src="js_external/aframe-particleplayer-component.min.js"></script>
+    <script src="//cdn.8thwall.com/web/aframe/aframe-extras-4.2.0.min.js"></script>
+    <script src="//cdn.8thwall.com/web/aframe/aframe-physics-system-3.2.0.min.js"></script>
+    <script src="//cdn.8thwall.com/web/aframe/aframe-animation-component-5.1.2.min.js"></script>
+    <script src="js_external/aframe-particle-system-component.js"></script>
+    <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+    <script src="bundle.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WHW972G');
+        </script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHW972G"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="overlay" class="absolute-fill">
+
+      <div id="recenterButtonContainer" class="hidden">
+        <img src="img/reposition.png">
+      </div>
+
+      <div id="fullscreenButtonContainer">
+        <img id="goFullscreenButton" class="hidden" src="img/gofullscreen.png">
+        <img id="exitFullscreenButton" class="hidden" src="img/exitfullscreen.png">
+      </div>
+
+      <div class="absolute-fill">
+        <input id="matrixMultiplyCount"
+          type="text"
+          style="background-color: rgba(0, 0, 0, 0); border: none;"
+          class="hidden"/>
+      </div>
+
+      <div id="tapPrompt" class="hidden">
+        <div class="prompt-image-container">
+          <img src="img/tapicon.png" class="pulse interaction-icon-shadow">
+        </div>
+        <div class="prompt-text-container">
+          <span class="prompt-text">Tap floor to start</span>
+        </div>
+      </div>
+
+      <div id="endCardContainer" class="absolute-fill hidden zoom-in">
+        <div id="endCard">
+          <div id="endCardModal">
+            <div id="endCardLogo">
+              <img id="endCardArrow" src="img/endcardarrow.png">
+              <img id="endCardLogoImage" src="img/8thwall-logo-dark.png">
+            </div>
+            <div id="endInfoText">
+              Jini is powered by<br>8th Wall Web
+            </div>
+            <a id="learnMoreLink" href="https://www.8thwall.com/products-web.html">
+              <div id="learnMoreButton">Learn more</div>
+            </a>
+            <div id="callsToAction">
+              <div id="shareButton">
+                Share<img src="img/share.png">
+              </div>
+              <div id="replayButton">
+                <img src="img/replay.png">Replay
+              </div>
+            </div>
+          </div>
+          <div id="shareTray" class="shareTrayCollapsed">
+            <a target="_blank" href="https://www.8thwall.com/tweetjini"><img src="img/share/twitter.png"></a>
+            <a target="_blank" id="facebookShareLink" href="https://www.facebook.com/sharer/sharer.php?u=https://8thwall.com/web"><img src="img/share/facebook.png"></a>
+            <a target="_blank" id="mailShareLink" href="mailto:?&subject=AR is now on the web!&body=See%20for%20yourself...%20Unleash%20JINI%20with%20the%208th%20Wall%20Web%20mobile%20demo%0Ahttps%3A//8thwall.com/web"><img src="img/share/email.png"></a>
+            <div id="copyButton"><img src="img/share/copy.png"><div id="copiedText" class="">Copied!</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Can't be in end card stacking context so the photo mode button can be in front of it -->
+      <div id="endCardModalBackground" class="absolute-fill hidden"></div>
+
+      <div id="photoModeContainer" class="absolute-fill hidden photoModeCollapsed">
+
+        <div id="photoModeToggleButton">
+          <img id="photoModeCameraButton" src="img/photomode-camera.png">
+          <img id="photoModeBackButton" src="img/photomode-back.png">
+        </div>
+
+        <div id="photoModeShutterButton">
+          <div id="photoModeShutterButtonInner"></div>
+        </div>
+
+        <div id="photoModeImageContainer">
+          <img id="photoModeImage">
+          <div id="photoModeSavePrompt">Tap & Hold to Save</div>
+        </div>
+
+        <div id="photoModeImageBackground" class="absolute-fill"></div>
+
+        <div id="jiniPosePanel">
+          <div id="jiniPosePanelShadowTop"></div>
+          <div id="jiniPosePanelShadowBottom"></div>
+          <div id="jiniPoseList">
+          </div>
+        </div>
+
+        <div id="photoModeTutorial">
+          <div class="prompt-image-container">
+            <img src="img/tapicon.png" class="pulse interaction-icon-shadow">
+          </div>
+          <div class="prompt-text-container">
+            <span class="prompt-text">Tap floor to move JINI</span>
+          </div>
+        </div>
+
+        <div id="photoModeHoldFeedback">
+          <svg style="height:30vmin;width:30vmin"
+               viewBox="0 0 38 38">
+            <circle
+              stroke-width="3"
+              stroke="white"
+              stroke-dashoffset="30"
+              fill="transparent"
+              stroke-dasharray="100 100"
+              stroke-dashoffset="100"
+              style="transform: rotate(-90deg); transform-origin: 50% 50%;"
+              r="16"
+              cx="19"
+              cy="19"/>
+          </svg>
+        </div>
+      </div> <!-- end photoModeContainer -->
+
+      <div id="photoModeFlash" class="absolute-fill hidden"></div>
+
+      <!-- Wish 1 -->
+
+      <div id="swipePrompt" class="hidden">
+        <div class="prompt-text-container">
+          <span class="prompt-text">Swipe up to throw</span>
+        </div>
+        <div class="prompt-image-container">
+          <img src="img/swipeicon.png" class="swipe-up interaction-icon-shadow">
+        </div>
+      </div>
+
+      <div id="conversionModal" class="zoom-in hidden">
+        <div id="usdCounter" class="conversion-text">
+          $1,000,000 USD
+        </div>
+        <img src="img/conversionarrow.png">
+        <div id="jtcCounter" class="conversion-text">
+          0 JTC
+        </div>
+      </div>
+
+      <div id="whiteout" class="hidden">
+        <div id="whiteoutspiralcontainer" class="hidden">
+          <img id="spiralimage" src="img/spiral.png">
+        </div>
+      </div>
+
+      <!-- Wish 2 -->
+
+      <div id="matchModal" class="absolute-fill hidden">
+        <div id="matchHintContainer">
+          <span id="matchHint" class="prompt-text">Match!</span>
+        </div>
+        <div id="matchSwipePrompt" class="swipe-left-right interaction-icon-shadow">
+          <img src="img/fingericon.png">
+        </div>
+        <div id="matchWrong" class="hidden">
+          <img src="img/wrong.png">
+        </div>
+        <div id="matchNopeArrow" class="match-arrow">
+          <span class="match-arrow-text">Nope</span>
+          <img src="img/swipearrow.png">
+        </div>
+        <div id="matchYepArrow" class="match-arrow">
+          <span class="match-arrow-text">Yep</span>
+          <img src="img/swipearrow.png">
+        </div>
+        <div id="matchCurrentCard" class="match-card">
+          <div class="match-image"></div>
+        </div>
+        <div id="matchSwipedCard" class="match-card">
+          <div class="match-image"></div>
+        </div>
+        <div id="matchBgCard2"></div>
+      </div>
+
+<!--       <div class="fade-in-out absolute-fill">
+        <div id="feedbackWrong" class="zoom-through match-card">
+          <img>
+        </div>
+      </div> -->
+
+            <!-- Wish 3 -->
+
+      <div id="messageContainer" class="hidden">
+         <div class="message">
+
+            <img id="jurassichat" src="img/jurassichat.png">
+            <p id="messageHeader">MESSAGES</p>
+
+            <div style="margin-top: 0.5em;">
+              <img class="dinomom" src="img/dinomom.png">
+              <div class="messageContent">
+                <h2 style="line-height: 0em; margin-bottom: -0.1em; font-size: 1.5em;">Mom</h2>
+                <p>Dinner's ready. We're having roast dodo bird tonight! 🍗</p>
+              </div>
+            </div>
+
+         </div>
+      </div>
+
+
+    </div> <!--End overlay-->
+
+    <a-scene swipe-detector="element: body"
+    fullscreen-button
+    load-progress
+    physics="friction: 0.3;
+    debug: false;
+    iterations: 1;"
+    xrweb="delayRun: true"
+    antialias="true"
+    recenter
+    scene-time-limit-ms
+    end-card
+    photo-mode
+    xrextras-almost-there="url:8th.io/jini"
+    xrextras-loading
+    xrextras-runtime-error
+    >
+
+      <a-assets>
+        <!-- Precomputed Particles -->
+        <a-asset-item src="particles/crash.json" id="crashparticlesJSON"></a-asset-item>
+        <a-asset-item src="particles/moneyrain.json" id="moneyparticlesJSON"></a-asset-item>
+
+        <!-- 2D Assets -->
+        <img id="skyTex" src="img/city.jpg">
+        <img id="islandSky" src="img/morning.jpg">
+        <img id="sparkTex" src="img/spark.png">
+        <img id="convertTex" src="img/conversion.png">
+        <img id="tapIcon" src="img/tapicon.png">
+        <img id="tapBG" src="img/tapBG.png">
+        <img id="swipeIcon" src="img/swipeicon.png">
+        <img id="coneTex" src="img/cone-swirl.png">
+        <img id="dollarRain" src="img/dollarRain.png">
+        <img id="soundonImg" src="img/soundon.png">
+
+        <!-- 2D Emoji Assets -->
+
+        <img id="eightImage" src="img/eight.png">
+        <img id="progress1" src="img/emoji/1of3.png">
+        <img id="progress2" src="img/emoji/2of3.png">
+        <img id="progress3" src="img/emoji/success.png">
+
+        <img id="poop-answer" src="img/emoji/poop.png">
+        <img id="fire-answer" src="img/emoji/fire.png">
+        <img id="laughing-answer" src="img/emoji/laughing.png">
+        <img id="sunglasses-answer" src="img/emoji/sunglasses.png">
+
+        <img src="img/emoji/wrong-0.png">
+        <img src="img/emoji/wrong-1.png">
+        <img src="img/emoji/wrong-2.png">
+        <img src="img/emoji/wrong-3.png">
+        <img src="img/emoji/wrong-4.png">
+        <img src="img/emoji/wrong-5.png">
+        <img src="img/emoji/wrong-6.png">
+        <img src="img/emoji/wrong-7.png">
+        <img src="img/emoji/wrong-8.png">
+        <img src="img/emoji/wrong-9.png">
+        <img src="img/emoji/wrong-10.png">
+        <img src="img/emoji/wrong-11.png">
+        <img src="img/emoji/wrong-12.png">
+        <img src="img/emoji/wrong-13.png">
+        <img src="img/emoji/wrong-14.png">
+        <img src="img/emoji/wrong-15.png">
+        <img src="img/emoji/wrong-16.png">
+        <img src="img/emoji/wrong-17.png">
+        <img src="img/emoji/wrong-18.png">
+        <img src="img/emoji/wrong-19.png">
+        <img src="img/emoji/wrong-20.png">
+        <img src="img/emoji/wrong-21.png">
+
+        <!-- Cubemap Assets -->
+        <img src="cubemap/posx.jpg">
+        <img src="cubemap/posy.jpg">
+        <img src="cubemap/posz.jpg">
+        <img src="cubemap/negx.jpg">
+        <img src="cubemap/negy.jpg">
+        <img src="cubemap/negz.jpg">
+
+         <!-- Generic UI Audio -->
+        <a-asset-item preload="auto" id="ButtonPushSrc" src="audio/ui/ButtonPush.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" id="OverlayPopInSrc" src="audio/ui/PopIn.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" id="OverlayPopOutSrc" src="audio/ui/PopOut.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" id="OverlaySlideCardSrc" src="audio/ui/SlideCard.m4a" response-type="arraybuffer"></a-asset-item>
+
+        <!-- Bookend Audio -->
+        <a-asset-item preload="auto" class="a-sound" id="MakeYourWishSrc" src="audio/bookend/jini/MakeYourWish-Full.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="FastWooshSrc" src="audio/bookend/effects/FastWoosh.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="JiniBeamInSrc" src="audio/bookend/effects/JiniBeamIn.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="ButtonSpawnSrc" src="audio/bookend/effects/ButtonSpawn.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="HighlightWishSrc" src="audio/bookend/ui/HighlightWish.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="DingSrc" src="audio/bookend/ui/Ding.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="VanishSrc" src="audio/bookend/ui/Vanish.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="EndLineSrc" src="audio/bookend/jini/ItHasBeenAPleasure.m4a" response-type="arraybuffer"></a-asset-item>
+
+        <!-- Wish 1 Audio -->
+        <a-asset-item preload="auto" class="a-sound" id="ExcellentWishSrc" src="audio/wish1/jini/ExcellentWish-MakeItRain-Full.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="YouKnowWhatSrc" src="audio/wish1/jini/YouKnowWhatsBetter.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="MoneyThrowSrc" src="audio/wish1/ui/MoneyThrow.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="CashConversionSrc" src="audio/wish1/ui/CashConversion.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="CashLostSrc" src="audio/wish1/effects/CashLost.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="CashIncomingSrc" src="audio/wish1/ui/CashIncoming.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="AlertNotificationSrc" src="audio/wish1/ui/AlertNotification.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="BelieveMeSrc" src="audio/wish1/jini/BelieveMeThisIsASound.m4a" response-type="arraybuffer"></a-asset-item>
+
+        <!-- Wish 2 Audio -->
+        <a-asset-item preload="auto" class="a-sound" id="LiveForeverSrc" src="audio/wish2/ui/LiveForever.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="YouWantToLiveSrc" src="audio/wish2/jini/YouWantToLiveForever.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="TossSomeSrc" src="audio/wish2/jini/TossSomeSocialMedia.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="YouPhotographSrc" src="audio/wish2/jini/YouPhotographSoMuchFood.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="IKnow2009Src" src="audio/wish2/jini/IKnow2009WasADifferent.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="MaybeYouShouldSrc" src="audio/wish2/jini/MaybeYouShouldGrammar.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="EveryoneHasSrc" src="audio/wish2/jini/EveryoneHasASelfie.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="YayYourSrc" src="audio/wish2/jini/YayYourReplacementIsReady.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="MachineBootupSrc" src="audio/wish2/effects/Bootup.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="SwipeSrc" src="audio/wish2/effects/Swipe.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="GulpSrc" src="audio/wish2/effects/Gulp.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="CorrectSrc" src="audio/wish2/ui/Correct.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="ErrorSrc" src="audio/wish2/ui/Error.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="DroneLowSrc" src="audio/wish2/effects/Drone0.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="DroneMedSrc" src="audio/wish2/effects/Drone1.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="WinWish2Src" src="audio/wish2/effects/WinWish2.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="MissShotSrc" src="audio/wish2/effects/MissShot.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="ServoSrc" src="audio/wish2/effects/Servo.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="Servo2Src" src="audio/wish2/effects/Servo2.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="EmojiFireSrc" src="audio/wish2/effects/EmojiFire.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="EmojiFartSrc" src="audio/wish2/effects/EmojiFart.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="EmojiLaughSrc" src="audio/wish2/effects/EmojiLaugh.m4a"response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="EmojiCoolSrc" src="audio/wish2/effects/EmojiCool.m4a"response-type="arraybuffer"></a-asset-item>
+
+        <!-- Wish 3 Audio -->
+        <a-asset-item preload="auto" class="a-sound" id="TimeTravelClickSrc" src="audio/wish3/ui/TimeTravelClick.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="OceanWavesAmbientLoopingSrc" src="audio/wish3/effects/OceanWavesAmbientLooping.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="TravelingBackSrc" src="audio/wish3/jini/TravelingBackInTime.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="AnimalsUsedSrc" src="audio/wish3/jini/AnimalsUsedToBe.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="OhNoWeSrc" src="audio/wish3/jini/OhNoWeGotta.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="WhyWouldYouSrc" src="audio/wish3/jini/WhyWouldYouDoThat.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="TimeWarpSrc" src="audio/wish3/effects/TimeWarp.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="DinoMomAlertSrc" src="audio/wish3/effects/DinoMomAlert.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="DinoReactSrc" src="audio/wish3/effects/DinoReact.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="DinoRoarSrc" src="audio/wish3/effects/DinoRoar.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="ThrowComputerSrc" src="audio/wish3/effects/ThrowComputer.m4a" response-type="arraybuffer"></a-asset-item>
+        <a-asset-item preload="auto" class="a-sound" id="CritterSrc" src="audio/wish3/effects/Critter.m4a" response-type="arraybuffer"></a-asset-item>
+
+        <!-- Bookend 3D Assets -->
+        <a-asset-item id="buttonShape" src="models/buttonDollar.glb"></a-asset-item>
+        <a-asset-item id="buttonShape2" src="models/buttonInfinity.glb"></a-asset-item>
+        <a-asset-item id="buttonShape3" src="models/buttonTime.glb"></a-asset-item>
+        <a-asset-item id="longPlate" src="models/longplate.glb"></a-asset-item>
+        <a-asset-item id="jiniModel" src="models/jini-final.glb"></a-asset-item>
+        <a-asset-item id="lampObj" src="models/justBall.glb"></a-asset-item>
+        <a-asset-item id="projObj" src="models/justProj.glb"></a-asset-item>
+
+        <!-- Wish 1 3D Assets -->
+        <a-asset-item id="dollarModel" src="models/dollar-single.glb"></a-asset-item>
+        <a-asset-item id="dollarStack" src="models/dollar-stack.glb"></a-asset-item>
+
+        <!-- Wish 2 3D Assets -->
+        <a-asset-item id="machineBodyModel" src="models/mach-body.glb"></a-asset-item>
+        <a-asset-item id="machineBaseModel" src="models/mach-base.glb"></a-asset-item>
+        <a-asset-item id="machineConveyorModel" src="models/mach-conveyor.glb"></a-asset-item>
+        <a-asset-item id="machineLipModel" src="models/mach-lip.glb"></a-asset-item>
+        <a-asset-item id="machineScreenModel" src="models/mach-screen.glb"></a-asset-item>
+        <a-asset-item id="machineDoorModel" src="models/mach-door.glb"></a-asset-item>
+
+        <a-asset-item id="chatbotModel" src="models/chatbot.glb"></a-asset-item>
+
+        <a-asset-item id="poop" src="models/poop.glb"></a-asset-item>
+        <a-asset-item id="laughing" src="models/laughing.glb"></a-asset-item>
+        <a-asset-item id="fire" src="models/fire.glb"></a-asset-item>
+        <a-asset-item id="sunglasses" src="models/sunglasses.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera
+        id="camera"
+        look-controls="touchEnabled: false"
+        position="0 4 10">
+
+        <a-entity
+            id="reticle"
+            raycaster="objects: .cantap"
+            cursor="
+              fuse: false;
+              rayOrigin: mouse;">
+        </a-entity>
+
+        <a-entity
+          id="reloadTarget"
+          reload
+          visible="false"
+          geometry="
+            primitive: plane;
+            width: 5;
+            height: 5"
+          position="0 0 -1"
+          scale="1 1 1">
+        </a-entity>
+
+        <!-- Generic UI Audio -->
+        <a-sound id="ButtonPush" src="#ButtonPushSrc"></a-sound>
+        <a-sound id="PopIn" src="#OverlayPopInSrc"></a-sound>
+        <a-sound id="PopOut" src="#OverlayPopOutSrc"></a-sound>
+        <a-sound id="SlideCard" src="#OverlaySlideCardSrc"></a-sound>
+
+        <!-- Bookend Audio -->
+        <a-sound id="MakeYourWish" src="#MakeYourWishSrc"></a-sound>
+        <a-sound id="FastWoosh" src="#FastWooshSrc"></a-sound>
+        <a-sound id="JiniBeamIn" src="#JiniBeamInSrc"></a-sound>
+        <a-sound id="ButtonSpawn" src="#ButtonSpawnSrc"></a-sound>
+        <a-sound id="HighlightWish" src="#HighlightWishSrc"></a-sound>
+        <a-sound id="Ding" src="#DingSrc"></a-sound>
+        <a-sound id="Vanish" src="#VanishSrc"></a-sound>
+        <a-sound id="EndLine" src="#EndLineSrc"></a-sound>
+
+        <!-- Wish 1 Audio -->
+        <a-sound id="ExcellentWish" src="#ExcellentWishSrc"></a-sound>
+        <a-sound id="YouKnowWhat" src="#YouKnowWhatSrc"></a-sound>
+        <a-sound id="MoneyThrow" src="#MoneyThrowSrc"></a-sound>
+        <a-sound id="CashConversion" src="#CashConversionSrc"></a-sound>
+        <a-sound id="CashLost" src="#CashLostSrc"></a-sound>
+        <a-sound id="CashIncoming" src="#CashIncomingSrc"></a-sound>
+        <a-sound id="AlertNotification" src="#AlertNotificationSrc"></a-sound>
+        <a-sound id="BelieveMe" src="#BelieveMeSrc"></a-sound>
+
+        <!-- Wish 2 Audio -->
+        <a-sound id="LiveForever" src="#LiveForeverSrc"></a-sound>
+        <a-sound id="YouWantToLive" src="#YouWantToLiveSrc"></a-sound>
+        <a-sound id="TossSome" src="#TossSomeSrc"></a-sound>
+        <a-sound id="YouPhotograph" src="#YouPhotographSrc"></a-sound>
+        <a-sound id="IKnow2009" src="#IKnow2009Src"></a-sound>
+        <a-sound id="MaybeYouShould" src="#MaybeYouShouldSrc"></a-sound>
+        <a-sound id="EveryoneHas" src="#EveryoneHasSrc"></a-sound>
+        <a-sound id="YayYour" src="#YayYourSrc"></a-sound>
+        <a-sound id="MachineBootup" src="#MachineBootupSrc"></a-sound>
+        <a-sound id="Swipe" src="#SwipeSrc"></a-sound>
+        <a-sound id="Gulp" src="#GulpSrc"></a-sound>
+        <a-sound id="Correct" src="#CorrectSrc"></a-sound>
+        <a-sound id="Error" src="#ErrorSrc"></a-sound>
+        <a-sound id="DroneLow" src="#DroneLowSrc" loop="true"></a-sound>
+        <a-sound id="DroneMed" src="#DroneMedSrc" loop="true"></a-sound>
+        <a-sound id="WinWish2" src="#WinWish2Src"></a-sound>
+        <a-sound id="MissShot" src="#MissShotSrc"></a-sound>
+        <a-sound id="Servo" src="#ServoSrc"></a-sound>
+        <a-sound id="Servo2" src="#Servo2Src"></a-sound>
+        <a-sound id="EmojiFire" src="#EmojiFireSrc"></a-sound>
+        <a-sound id="EmojiFart" src="#EmojiFartSrc"></a-sound>
+        <a-sound id="EmojiCool" src="#EmojiCoolSrc"></a-sound>
+        <a-sound id="EmojiLaugh" src="#EmojiLaughSrc"></a-sound>
+
+
+        <!-- Wish 3 Audio -->
+        <a-sound id="OceanWaves" src="#OceanWavesAmbientLoopingSrc" loop="true"></a-sound>
+        <a-sound id="TimeTravelClick" src="#TimeTravelClickSrc"></a-sound>
+        <a-sound id="TravelingBack" src="#TravelingBackSrc"></a-sound>
+        <a-sound id="AnimalsUsed" src="#AnimalsUsedSrc"></a-sound>
+        <a-sound id="OhNoWe" src="#OhNoWeSrc"></a-sound>
+        <a-sound id="WhyWouldYou" src="#WhyWouldYouSrc"></a-sound>
+        <a-sound id="TimeWarp" src="#TimeWarpSrc"></a-sound>
+        <a-sound id="DinoMomAlert" src="#DinoMomAlertSrc"></a-sound>
+        <a-sound id="DinoReact" src="#DinoReactSrc"></a-sound>
+        <a-sound id="DinoRoar" src="#DinoRoarSrc"></a-sound>
+        <a-sound id="ThrowComputer" src="#ThrowComputerSrc"></a-sound>
+        <a-sound id="Critter" src="#CritterSrc"></a-sound>
+
+      </a-camera>  <!-- /camera -->
+
+      <a-entity id="anchor"
+        particleplayer="src: #moneyparticlesJSON;
+          on: startmoneyrain;
+          img: #dollarRain;
+          scale: 1.0;
+          pscale: 3.0;
+          interpolate: true;
+          dur: 14000;
+          loop: false;
+          shader: flat">
+        <a-entity
+          id="wishes"
+          scale="0 0 0">
+          <a-entity
+            id="wish1btn"
+            wish1
+            gltf-model="#buttonShape"
+            position="-0.18 0 0.333">
+          </a-entity>
+          <a-ring
+            id="wish1-ring"
+            radiusInner="0.9"
+            radiusOuter="1"
+            position="-0.18 0.022 0.333"
+            rotation="-90 0 0"
+            scale="0.068 0.068 0.068">
+          </a-ring>
+          <a-entity
+            id="wish2btn"
+            wish2
+            gltf-model="#buttonShape2"
+            position="0 0 0.333">
+          </a-entity>
+          <a-ring
+            id="wish2-ring"
+            radiusInner="0.9"
+            radiusOuter="1"
+            position="0 0.022 0.333"
+            rotation="-90 0 0"
+            scale="0.068 0.068 0.068">
+          </a-ring>
+          <a-entity
+            id="wish3btn"
+            wish3
+            gltf-model="#buttonShape3"
+            position="0.18 0 0.333">
+          </a-entity>
+          <a-ring
+            id="wish3-ring"
+            radiusInner="0.9"
+            radiusOuter="1"
+            position="0.18 0.022 0.333"
+            rotation="-90 0 0"
+            scale="0.068 0.068 0.068">
+          </a-ring>
+          <a-entity
+            gltf-model="#longPlate"
+            cube-env-map="
+              path: cubemap/;
+              extension: jpg;"
+            position="0 0 0.32"
+            scale="0.95 0.95 0.95">
+          </a-entity>
+        </a-entity>  <!--/wishes -->
+
+        <a-entity
+          id="machineBase"
+          gltf-model="#machineBaseModel"
+          position="0 0 0"
+          rotation="0 0 0"
+          show-hide="delay: 1"
+          shadow="cast:true"
+          cube-env-map="
+            path: cubemap/;
+            extension: jpg">
+          <a-entity
+            id="machineBody"
+            gltf-model="#machineBodyModel"
+            position="0 0 0"
+            rotation="0 0 0"
+            shadow="cast: true"
+            gravity-well="position: 0.33 0.6 0.4; radius: 0.8"
+            scale-animator
+            cube-env-map="
+              path: cubemap/;
+              extension: jpg">
+            <a-entity
+              id="machineLip"
+              gltf-model="#machineLipModel"
+              position="0 0 0"
+              rotation="0 0 0"
+              shadow="cast:true"
+              cube-env-map="
+                path: cubemap/;
+                extension: jpg"
+              particleplayer="src: #crashparticlesJSON;
+                on: confetti-effect;
+                img: #sparkTex;
+                color: #0f0;
+                scale: 0.75;
+                pscale: 0.75;
+                interpolate: true;
+                dur: 1000">
+            </a-entity>
+            <a-entity
+              id="machineDoor"
+              gltf-model="#machineDoorModel"
+              position="0 0 0"
+              rotation="0 0 0"
+              cube-env-map="
+                path: cubemap/;
+                extension: jpg">
+            </a-entity>
+            <a-entity
+              id="machineConveyor"
+              gltf-model="#machineConveyorModel"
+              position="0 0 0"
+              rotation="0 0 0"
+              shadow="cast:true"
+              cube-env-map="
+                path: cubemap/;
+                extension: jpg">
+              <a-entity
+                id="chatbot"
+                gltf-model="#chatbotModel"
+                position="-0.12 0.135 0.085"
+                rotation="0 0 0"
+                scale="1.5 1.5 1.5"
+                animation-mixer="
+                  clip: idle;
+                  loop: repeat">
+              </a-entity>
+            </a-entity> <!-- end machineConveyor -->
+            <a-entity
+              id="machineScreen"
+              gltf-model="#machineScreenModel"
+              position="-0.6 0.55 0.06"
+              rotation="0 -70 0"
+              shadow="cast:true"
+              cube-env-map="
+                path: cubemap/;
+                extension: jpg">
+              <a-entity
+                id="machineDisplay"
+                geometry="
+                  primitive: plane;
+                  width: 0.2;
+                  height: 0.2"
+                material="
+                  shader: flat;
+                  transparent: true;
+                  src: #eightImage;
+                  color: #F3F2F4"
+                position="-0.16 0.04 0"
+                rotation="0.02 -88.9 1">
+              </a-entity>
+              <a-entity
+                id="machineDisplayBg"
+                geometry="
+                  primitive: plane;
+                  width: 0.42;
+                  height: 0.3"
+                material="
+                  shader: flat;
+                  color: #F3F2F4"
+                position="-0.15 0.03 0"
+                rotation="0.02 -88.9 1">
+              </a-entity>
+            </a-entity> <!-- end machineScreen -->
+          </a-entity> <!-- end machineBody -->
+        </a-entity> <!-- end machineBase -->
+
+        <a-entity
+          id="island"
+          visible="false">
+          <a-entity
+            id="dino"
+            >
+          </a-entity>
+
+          <a-entity
+            id="crab"
+            >
+          </a-entity>
+        </a-entity>
+      </a-entity> <!-- /anchor -->
+
+      <a-entity
+        id="directionalLightBase"
+        attach="target: jiniBase"
+        >
+        <a-light
+          id="dirLight"
+          target="#jiniBase"
+          position="-3 5 4"
+          intensity="1"
+          light="castShadow: true;
+            shadowMapHeight: 2048;
+            shadowMapWidth: 2048
+          "></a-light>
+      </a-entity>
+
+      <a-entity
+        id="laptop"
+        visible="false">
+      </a-entity>
+
+      <a-entity
+        id="lamp"
+        show-hide="delay: 2"
+        follow-roller="target: jiniBase;
+        ball: ball;
+        following: false"
+        scale="2 2 2"
+        particleplayer="src: #crashparticlesJSON;
+        on: landed;
+        img: #sparkTex;
+        color: #0ff;
+        scale: 0.25;
+        pscale: 0.25;
+        interpolate: true;
+        dur: 750">
+          <a-entity
+          id="ball"
+          gltf-model="#lampObj"
+          cube-env-map="path: cubemap/;
+           extension: jpg;"
+           position="0 0.125 0"
+          self-shadow
+          ></a-entity>
+          <a-entity
+          id="proj"
+          look-at-slerp="target: jini;
+            tilt: true;
+            targetOffset: 0 1.5 0;
+            axis: 0 1 0;
+            factor: 1;
+            looking: false"
+          gltf-model="#projObj"
+          cube-env-map="path: cubemap/;
+           extension: jpg;"
+          position="0 0.125 0"
+          self-shadow
+          ><a-entity
+            id="lightcone"
+            animate-cone
+            geometry="primitive: cone;
+            radiusBottom: 0;
+            radiusTop: 0;
+            height: 0.35;
+            segmentsRadial: 24;
+            segmentsHeight: 12;
+            openEnded: true;
+            "
+            material="src: #coneTex;
+            transparent: true;
+            opacity: 0;
+            depthWrite: false;
+            side: double;
+            shader: flat;
+            "
+            position="0 0.375 0"
+            rotation="180 0 0"
+          ></a-entity>
+        </a-entity>
+      </a-entity>   <!-- /lamp -->
+
+      <a-entity
+        id="jiniBase"
+        show-hide="delay: 4; last: true"
+        move-controller="moveY: false"
+        jini-tap>
+        <a-entity
+          id="jini"
+          class="cantap"
+          jini-logic
+          gltf-model="#jiniModel"
+          cube-env-map="
+            path: cubemap/;
+            extension: jpg;"
+          scale="2 2 2"
+          animation-mixer="
+            clip: idleFloat;
+            loop: repeat;"
+          shadow
+          bob
+          jini-photo-mode
+          >
+
+          <a-entity
+            id="soundon"
+            geometry="primitive: plane"
+            material="src: #soundonImg; transparent: true; opacity: 0"
+            position="0 1.5 0"
+            scale="0.3 0.3 0.3"
+            animation__sound="property: scale; dur: 300; dir: alternate; loop: true; easing: easeInOutQuad; to: 0.4 0.4 0.4;"
+            shadows="cast: false; receive: false">
+          </a-entity>
+
+        </a-entity>  <!-- /jini -->
+      </a-entity> <!-- /jini base -->
+
+
+<!--  Ground-->
+      <a-entity
+        id="groundObj"
+        ground-strike
+        class="cantap"
+        static-body
+        geometry="primitive: box"
+        scale="100 100 2"
+        position="0 -1 0"
+        rotation="90 0 0"
+        shadow-material
+        shadow>
+      </a-entity>
+
+<!--  Lights -->
+      <a-light
+        type="ambient"
+        intensity="0.9">
+      </a-light>
+
+<!--  Sky-->
+      <!-- <a-sky src="#skyTex"></a-sky> -->
+
+    </a-scene>
+  </body>
+</html>
