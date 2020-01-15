@@ -1,0 +1,174 @@
+#photoModeContainer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 10;
+	pointer-events: none;
+}
+
+#flash {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: white;
+	z-index: 10;
+	opacity: 0;
+	transition: 0.5s;
+}
+
+.flash #flash {
+	opacity: 1;
+	transition: 0s;
+	pointer-events: auto;
+}
+
+#photoModeImage {
+	position: absolute;
+	max-width: 65%;
+	max-height: 65%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0px 0px 0px 5px white;
+	border-radius: 2vmax;
+	opacity: 0;
+	transition: 0.5s;
+
+    z-index: 15;
+}
+
+.photo #photoModeImage {
+	opacity: 1;
+	transition: 0s;
+	pointer-events: auto;
+}
+
+#shutterButton, #closeButton {
+	position: absolute;
+	width: 15vmin;
+	height: 15vmin;
+	background-color: white;
+	bottom: 2vmax;
+	border-radius: 7.5vmin;
+    border: solid 2px black;
+	left: 50%;
+	transform: translateX(-50%);
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	pointer-events: auto;
+}
+
+#shutterButton {
+	/* background-image: url('https://1.bp.blogspot.com/-h1QFGKB3Q18/UnXnOgFQVCI/AAAAAAAAaKo/OVoco8B7dPE/s800/kaden_camera_compact.png'); */
+    background-color: white
+}
+
+.photo #shutterButton {
+	display: none;
+}
+
+#closeButton {
+	background-image: url('https://1.bp.blogspot.com/-9H_g5JWwWbU/U9zqvClTrsI/AAAAAAAAkYs/uF8QvFuGi88/s1600/capital_x.png');
+	display: none;
+}
+
+.photo #closeButton {
+	display: block;
+}
+
+#actionButton {
+	position: absolute;
+	width: 15vmin;
+	height: 15vmin;
+	bottom: 2vmax;
+	left: 5%;
+	pointer-events: auto;
+}
+
+#tweetButton {
+	position: absolute;
+	width: 15vmin;
+	height: 15vmin;
+	bottom: 2vmax;
+	left: 65%; 
+	pointer-events: auto;
+}
+
+#tweet2Button {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+    top: 20vmin;
+	left: 65%; 
+	pointer-events: auto;
+    z-index: 16;
+
+	display: none;
+}
+
+.photo #tweet2Button {
+	display: block;
+}
+
+#tweet3Button {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+    bottom: 20vmin;
+	left: 65%; 
+	pointer-events: auto;
+    z-index: 17;
+
+	display: none;
+}
+
+#tweet3CancelButton {
+	position: absolute;
+	width: 30vmin;
+	height: 30vmin;
+    bottom: 20vmin;
+	left: 25%; 
+	pointer-events: auto;
+    z-index: 17;
+
+	display: none;
+}
+
+#tweet3Text {
+	position: absolute;
+	width: 80vmin;
+	height: 30vmin;
+	left: 10%; 
+    top: 10%;
+    z-index: 17;
+	pointer-events: auto;
+
+	display: none;
+}
+
+.tweet #tweet3Button {
+    display: block;
+}
+.tweet #tweet3CancelButton {
+    display: block;
+}
+.tweet #tweet3Text {
+    display: block;
+}
+
+#topGuide {
+    position: absolute;
+    background-color: black;
+    text-align: center;
+    color: white;
+    width: 80vmin;
+    height: 8vmin;
+    left: 10%;
+    top: 2%;
+    border-radius: 5%;
+}
