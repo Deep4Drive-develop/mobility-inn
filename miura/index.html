@@ -26,7 +26,7 @@
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter').then(function(result) {
                     container.classList.add('tweet');
-                    oauth_result;
+                    oauth_result = result;
                 }).fail(function(err){
                     console.log(err);
                 });
@@ -73,6 +73,7 @@
                 //model.setAttribute("visible", "false");
                 scene.appendChild(tower_);
 
+                /*
                 var tower_ = document.createElement('a-gltf-model');
                 tower_.setAttribute('src', '#mall');
                 tower_.setAttribute('id', 'mall');
@@ -93,8 +94,10 @@
                 tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
                 tower_.setAttribute("visible", "false");
                 scene.appendChild(tower_);
+                */
 
-                for(var i = 1; i <= 33; i++) {
+                //for(var i = 1; i <= 33; i++) {
+                for(var i = 1; i <= 36; i++) {
                     var tower_ = document.createElement('a-gltf-model');
                     tower_.setAttribute('src', '#tower' + String(i));
                     tower_.setAttribute('id', 'tower_' + String(i));
@@ -107,9 +110,9 @@
                 for(var i = 1; i <= 33; i++) {
                     document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
                 }
-                document.querySelector('#mall').setAttribute("visible", "true");
-                document.querySelector('#mall_h13').setAttribute("visible", "true");
-                document.querySelector('#h13_top').setAttribute("visible", "true");
+                document.querySelector('#tower_34').setAttribute("animation", "property: visible; to: true; delay: 1250;")
+                document.querySelector('#tower_35').setAttribute("animation", "property: visible; to: true; delay: 4000;")
+                document.querySelector('#tower_36').setAttribute("animation", "property: visible; to: true; delay: 7250;")
                 //document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay: 1250;")
                 //document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay: 4000;")
                 //document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay: 7250;")
@@ -178,8 +181,7 @@
                     })
 
                     tweet3Button.addEventListener('click', () => {
-                        // test
-                        // twitter_tweet(photo_image, tweet3Text.value);
+                        twitter_tweet(photo_image, tweet3Text.value);
                         container.classList.remove('tweet');
                     })
 
@@ -288,9 +290,9 @@
                 <a-asset-item id="tower32"  src="model/32.glb"></a-asset-item>
                 <a-asset-item id="tower33"  src="model/33.glb"></a-asset-item>
                 <a-asset-item id="ground"   src="model/ground.glb"></a-asset-item>
-                <a-asset-item id="mall"     src="model/mall.glb"></a-asset-item>
-                <a-asset-item id="mall_h13" src="model/mall_h13.glb"></a-asset-item>
-                <a-asset-item id="h13_top"  src="model/h13_top.glb"></a-asset-item>
+                <a-asset-item id="tower34"  src="model/mall.glb"></a-asset-item>
+                <a-asset-item id="tower35"  src="model/mall_h13.glb"></a-asset-item>
+                <a-asset-item id="tower36"  src="model/h13_top.glb"></a-asset-item>
 
                 <img id="logo" src="image/6954057b-8eb9-479d-892a-0af76f4dc15b.jpg">
             </a-assets>
