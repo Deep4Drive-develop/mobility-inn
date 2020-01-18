@@ -19,45 +19,45 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
+            var oauth_result;
+
             function twitter_init(detail, tweet_text) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter').then(function(result) {
-
-                    var bound_text = "------------------------1ae47d990b354d1b00a4eea60e6b5b72";
-                    var image_src = "--" + bound_text + "\r\n" +
-                        'Content-Disposition: form-data; name="media_data"' + "\r\n" +
-                        "\r\n" +
-                        detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
-                    var param1 = {
-                        headers: {
-                            'Content-Type' : 'multipart/form-data; boundary=' + bound_text
-                        },
-                        data: image_src
-                    };
-                    result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
-                        console.log(response);
-                        var media_id_ = response.media_id_string;
-                        var param = {
-                            data: {
-                                status: tweet_text,
-                                media_ids: media_id_
-                            }
-                        };
-                        result.post('/1.1/statuses/update.json', param).done(function (response) {
-                            console.log("success");
-                            console.log(response);
-                        }).fail(function (err) {
-                            console.log("err1");
-                            console.log(err);
-                        });
-                    }).fail(function(err) {
-                        console.log("err2");
-                        console.log(err);
-                    });
-
+                    container.classList.add('tweet');
+                    oauth_result = result;
                 }).fail(function(err){
-                    console.log("err3");
-                    console.log(err);
+                    ;
+                });
+            }
+
+            function twitter_tweet(detail, tweet_text) {
+                var bound_text = "------------------------1ae47d990b354d1b00a4eea60e6b5b72";
+		var image_src = "--" + bound_text + "\r\n" +
+	            'Content-Disposition: form-data; name="media_data"' + "\r\n" +
+		    "\r\n" +
+                    detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
+                var param1 = {
+                    headers: {
+                        'Content-Type' : 'multipart/form-data; boundary=' + bound_text
+                    },
+                    data: image_src
+                };
+                oauth_result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
+                    var media_id_ = response.media_id_string;
+                    var param = {
+                        data: {
+                            status: tweet_text,
+                            media_ids: media_id_
+                        }
+                    };
+                    oauth_result.post('/1.1/statuses/update.json', param).done(function (response) {
+                        ;
+                    }).fail(function (err) {
+                        ;
+                    });
+                }).fail(function(err) {
+                    ;
                 });
             }
 
@@ -68,27 +68,8 @@
                 model.setAttribute('src', '#ground');
                 model.setAttribute('id', 'ground');
                 model.setAttribute('scale', '0.0125 0.0125 0.0125');
-                //model.setAttribute("visible", "false");
                 scene.appendChild(model);
-                model = document.createElement('a-gltf-model');
-                model.setAttribute('src', '#mall');
-                model.setAttribute('id', 'mall');
-                model.setAttribute('scale', '0.0125 0.0125 0.0125');
-                model.setAttribute("visible", "false");
-                scene.appendChild(model);
-                model = document.createElement('a-gltf-model');
-                model.setAttribute('src', '#mall_h13');
-                model.setAttribute('id', 'mall_h13');
-                model.setAttribute('scale', '0.0125 0.0125 0.0125');
-                model.setAttribute("visible", "false");
-                scene.appendChild(model);
-                model = document.createElement('a-gltf-model');
-                model.setAttribute('src', '#h13_top');
-                model.setAttribute('id', 'h13_top');
-                model.setAttribute('scale', '0.0125 0.0125 0.0125');
-                model.setAttribute("visible", "false");
-                scene.appendChild(model);
-                for(var i = 1; i <= 33; i++) {
+                for(var i = 1; i <= 36; i++) {
                     var tower_ = document.createElement('a-gltf-model');
                     tower_.setAttribute('src', '#tower' + String(i));
                     tower_.setAttribute('id', 'tower_' + String(i));
@@ -101,9 +82,9 @@
                 for(var i = 1; i <= 33; i++) {
                     document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
                 }
-                document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay:  1250;")
-                document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay:  4000;")
-                document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay:  7250;")
+                document.querySelector('#tower_34').setAttribute("animation", "property: visible; to: true; delay: 1250;")
+                document.querySelector('#tower_35').setAttribute("animation", "property: visible; to: true; delay: 4000;")
+                document.querySelector('#tower_36').setAttribute("animation", "property: visible; to: true; delay: 7250;")
             }
 
             AFRAME.registerComponent('photo-mode', {
@@ -168,12 +149,12 @@
                     })
 
                     tweetButton.addEventListener('click', () => {
-                        container.classList.add('tweet');
+                        twitter_init(container);
                     })
 
 
                     tweet3Button.addEventListener('click', () => {
-                        twitter_init(photo_image, tweet3Text.value);
+                        twitter_tweet(photo_image, tweet3Text.value);
                         container.classList.remove('tweet');
                     })
 
@@ -250,10 +231,6 @@
             xrextras-loading
             photo-mode>
             <a-assets>
-                <a-asset-item id="ground" src="model/ground.glb"></a-asset-item>
-                <a-asset-item id="mall" src="model/mall.glb"></a-asset-item>
-                <a-asset-item id="mall_h13" src="model/mall_h13.glb"></a-asset-item>
-                <a-asset-item id="h13_top" src="model/h13_top.glb"></a-asset-item>
                 <a-asset-item id="tower1" src="model/01.glb"></a-asset-item>
                 <a-asset-item id="tower2" src="model/02.glb"></a-asset-item>
                 <a-asset-item id="tower3" src="model/03.glb"></a-asset-item>
@@ -287,6 +264,10 @@
                 <a-asset-item id="tower31" src="model/31.glb"></a-asset-item>
                 <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
                 <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
+                <a-asset-item id="ground"   src="model/ground.glb"></a-asset-item>
+                <a-asset-item id="tower34"  src="model/mall.glb"></a-asset-item>
+                <a-asset-item id="tower35"  src="model/mall_h13.glb"></a-asset-item>
+                <a-asset-item id="tower36"  src="model/h13_top.glb"></a-asset-item>
                 <video id="usingv" autoplay muted loop="true" src="movie/SVID_20200102_143519_1.mp4">
             </a-assets>
 
