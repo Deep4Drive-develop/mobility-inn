@@ -146,26 +146,40 @@
 }
 #tweet3Button {
     position: absolute;
+    color: #00acee;
     width: 30vmin;
     /* height: 30vmin; */
     top: 10vmin;
     left: 65%; 
     pointer-events: auto;
     z-index: 30;
-    border: solid blue;
+    border: solid gray;
+
+    display: none;
+}
+#tweetIcon {
+    position: absolute;
+    width: 30vmin;
+    /* height: 30vmin; */
+    top: 10vmin;
+    left: 45%; 
+    pointer-events: auto;
+    z-index: 30;
+    border: solid gray;
 
     display: none;
 }
 
 #tweet3CancelButton {
     position: absolute;
+    color: #00acee;
     width: 30vmin;
     /* height: 30vmin; */
     top: 10vmin;
     left: 20%; 
     pointer-events: auto;
     z-index: 30;
-    border: solid blue;
+    border: solid gray;
 
     display: none;
 }
@@ -192,6 +206,9 @@
     display: block;
 }
 .tweet #tweet3Text {
+    display: block;
+}
+.tweet #tweetIcon {
     display: block;
 }
 
