@@ -197,17 +197,16 @@
                         saveButton.classList.remove('hide');
                         tweetButton.classList.remove('hide');
                     })
+
+                    /* 6秒後にガイドを消して、バルーン出す */
+                    var guide_hide = function() {
+                        const guide = document.getElementById('guide');
+                        const balloon1 = document.getElementById('balloon1');
+                        guide.classList.add('hide');
+                        balloon1.classList.remove('hide');
+                    };
+                    setTimeout(guide_hide, 6000);
                 }
-
-                /* 6秒後にガイドを消して、バルーン出す */
-                var guide_hide = function() {
-                    const guide = document.getElementById('guide');
-                    const balloon1 = document.getElementById('balloon1');
-                    guide.classList.add('hide');
-                    balloon1.classList.remove('hide');
-                };
-                setTimeout(guide_hide, 6000);
-
             })
         </script>
         <link rel="stylesheet" href="index.css">
