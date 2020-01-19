@@ -96,7 +96,7 @@
 }
 
 #cancelButton {
-	background-image: url('https://1.bp.blogspot.com/-9H_g5JWwWbU/U9zqvClTrsI/AAAAAAAAkYs/uF8QvFuGi88/s1600/capital_x.png');
+	background-image: url('image/back.svg');
 	display: none;
 }
 
@@ -269,4 +269,16 @@
 
 .hide {
     display: none;
+}
+
+#topGuide {
+    position: absolute;
+    background-color: lime;
+    text-align: center;
+    color: white;
+    width: 80vmin;
+    height: 8vmin;
+    left: 10%;
+    bottom: 15%;
+    border-radius: 5%;
 }
