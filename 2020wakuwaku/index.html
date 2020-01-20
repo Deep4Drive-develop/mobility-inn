@@ -21,7 +21,7 @@
         <script>
             var oauth_result;
 
-            function twitter_init(detail, tweet_text) {
+            function twitter_init(container) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter').then(function(result) {
                     container.classList.add('tweet');
@@ -142,7 +142,7 @@
                         model.setAttribute('src', '#usingv');
                         model.setAttribute('id', 'usingv');
                         model.setAttribute('scale', '2 2 2');
-                        model.setAttribute('position', '0 2 0');
+                        model.setAttribute('position', '0 3 0');
                         scene.appendChild(model);
 
                         var video_ = document.querySelector('#usingv');
@@ -224,10 +224,11 @@
             <div id="menuBar"></div>
 
             <img id="actionButton" src="image/tokyo_tower.svg"></img>
-            <div id="shutterButton"></div>
+            <img id="shutterButton" src="image/photo.svg"></img>
             <img id="backgroundButton" src="image/night_background.svg"></img>
 
             <div id="cancelButton"></div>
+            <img class="hide" id="cancelButton" src="image/back.svg"></img>
             <img class="hide" id="saveButton" src="image/save.svg"></img>
             <img class="hide" id="tweetButton" src="image/Twitter_Logo_Blue.svg"></img>
 

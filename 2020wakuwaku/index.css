@@ -57,46 +57,28 @@
 	position: absolute;
 	width: 15vmin;
 	height: 15vmin;
-	background-color: white;
 	bottom: 2vmax;
-	border-radius: 7.5vmin;
-    border: solid 2px black;
-	left: 50%;
-	transform: translateX(-50%);
-	background-size: 50%;
-	background-repeat: no-repeat;
-	background-position: center center;
-	pointer-events: auto;
+	left: 42.5%;
         z-index: 13;
+	pointer-events: auto;
 }
 
 #cancelButton {
 	position: absolute;
 	width: 15vmin;
 	height: 15vmin;
-	background-color: white;
 	bottom: 2vmax;
-	border-radius: 7.5vmin;
-    border: solid 2px black;
-	left: 12.5%;
-	transform: translateX(-50%);
-	background-size: 60%;
-	background-repeat: no-repeat;
-	background-position: center center;
-	pointer-events: auto;
+	left: 5%;
         z-index: 13;
+	pointer-events: auto;
 }
 
-#shutterButton {
-    background-color: white
-}
 
 .photo #shutterButton {
 	display: none;
 }
 
 #cancelButton {
-	background-image: url('image/back.svg');
 	display: none;
 }
 
@@ -199,7 +181,7 @@
     height: 15%;
     top: 85%;
     left: 0%;
-    background-color: navy;
+    background-color: #191970;
     z-index: 12;
 }
 
@@ -271,7 +253,7 @@
     display: none;
 }
 
-#topGuide {
+#guide {
     position: absolute;
     background-color: lime;
     text-align: center;
