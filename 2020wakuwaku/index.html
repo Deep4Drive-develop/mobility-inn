@@ -199,6 +199,14 @@
                         balloon1.classList.remove('hide');
                     };
                     setTimeout(guide_hide, 6000);
+
+                    /* 1秒ごとにカメラポジションを表示 */
+                    var camera_move = function() {
+                        const camera_ = document.getElementById('main_camera');
+                        const position_ = document.getElementById('camera_position');
+                        position_.innerText = position_.getAttribute('position');
+                    };
+                    setInterval(camera_move, 1000);
                 }
             })
         </script>
@@ -225,6 +233,7 @@
             <img class="hide" id="saveButton" src="image/save.svg"></img>
             <img class="hide" id="tweetButton" src="image/Twitter_Logo_Blue.svg"></img>
 
+            <div id="camera_position"></div>
             <div id="guide">少し上に向けてみよう！</div>
             <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
             <div class="balloon2 hide" id="balloon2">背景を変えてみよう！</div>
@@ -277,6 +286,7 @@
             </a-assets>
 
             <a-camera
+                id="main_camera"
                 position="0 -0.3 8"
                 raycaster="objects: .cantap"
                 cursor="fuse: false; rayOrigin: mouse;">
