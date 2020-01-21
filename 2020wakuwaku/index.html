@@ -64,12 +64,6 @@
             function make_tower() {
                 var scene = document.querySelector('a-scene');
        
-                var model = document.createElement('a-gltf-model');
-                model.setAttribute('src', '#ground');
-                model.setAttribute('id', 'ground');
-                model.setAttribute('scale', '0.0125 0.0125 0.0125');
-                model.setAttribute('position', '0 0 0');
-                scene.appendChild(model);
                 for(var i = 1; i <= 36; i++) {
                     var tower_ = document.createElement('a-gltf-model');
                     tower_.setAttribute('src', '#tower' + String(i));
@@ -80,7 +74,6 @@
                     scene.appendChild(tower_);
                 }
        
-                document.querySelector('#ground').setAttribute("visible", "true");
                 for(var i = 1; i <= 33; i++) {
                     document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
                 }
@@ -277,7 +270,6 @@
                 <a-asset-item id="tower31" src="model/31.glb"></a-asset-item>
                 <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
                 <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
-                <a-asset-item id="ground"   src="model/ground.glb"></a-asset-item>
                 <a-asset-item id="tower34"  src="model/mall.glb"></a-asset-item>
                 <a-asset-item id="tower35"  src="model/mall_h13.glb"></a-asset-item>
                 <a-asset-item id="tower36"  src="model/h13_top.glb"></a-asset-item>
