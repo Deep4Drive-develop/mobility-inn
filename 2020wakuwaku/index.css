@@ -282,3 +282,13 @@
     bottom: 20%;
     border-radius: 5%;
 }
+
+#camera_position {
+    position: absolute;
+    background-color: lime;
+    text-align: center;
+    color: white;
+    width: 80vmin;
+    left: 10%;
+    top: 10%;
+}
