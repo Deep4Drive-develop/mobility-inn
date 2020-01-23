@@ -196,13 +196,13 @@
     height: 15%;
     top: 85%;
     left: 0%;
-    background-color: #191970;
+    background-color: rgba(42, 83, 97, 255);
     z-index: 12;
 }
 
 .balloon1 {
     position: absolute;
-    background-color: lime;
+    background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
     height: 10vmin;
     bottom: 20vmin;
@@ -220,11 +220,11 @@
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
-    border-top-color: lime; /* 吹き出しの地と同じ色 */
+    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon2 {
     position: absolute;
-    background-color: lime;
+    background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
     height: 10vmin;
     bottom: 20vmin;
@@ -242,11 +242,11 @@
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
-    border-top-color: lime; /* 吹き出しの地と同じ色 */
+    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon3 {
     position: absolute;
-    background-color: lime;
+    background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
     height: 10vmin;
     bottom: 20vmin;
@@ -264,7 +264,7 @@
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
-    border-top-color: lime; /* 吹き出しの地と同じ色 */
+    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 
 .hide {
@@ -273,7 +273,7 @@
 
 #guide {
     position: absolute;
-    background-color: lime;
+    background-color: rgba(53, 165, 110, 255);
     text-align: center;
     color: white;
     width: 80vmin;
@@ -285,10 +285,10 @@
 
 #camera_position {
     position: absolute;
-    background-color: lime;
+    background-color: rgba(53, 165, 110, 255);
     text-align: center;
     color: white;
-    width: 80vmin;
+    width: 80%;
     left: 10%;
     top: 10%;
 }
