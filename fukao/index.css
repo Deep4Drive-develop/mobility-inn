@@ -57,46 +57,28 @@
 	position: absolute;
 	width: 15vmin;
 	height: 15vmin;
-	background-color: white;
 	bottom: 2vmax;
-	border-radius: 7.5vmin;
-    border: solid 2px black;
-	left: 50%;
-	transform: translateX(-50%);
-	background-size: 50%;
-	background-repeat: no-repeat;
-	background-position: center center;
-	pointer-events: auto;
+	left: 42.5%;
         z-index: 13;
+	pointer-events: auto;
 }
 
 #cancelButton {
 	position: absolute;
 	width: 15vmin;
 	height: 15vmin;
-	background-color: white;
 	bottom: 2vmax;
-	border-radius: 7.5vmin;
-    border: solid 2px black;
-	left: 12.5%;
-	transform: translateX(-50%);
-	background-size: 60%;
-	background-repeat: no-repeat;
-	background-position: center center;
-	pointer-events: auto;
+	left: 5%;
         z-index: 13;
+	pointer-events: auto;
 }
 
-#shutterButton {
-    background-color: white
-}
 
 .photo #shutterButton {
 	display: none;
 }
 
 #cancelButton {
-	background-image: url('https://1.bp.blogspot.com/-9H_g5JWwWbU/U9zqvClTrsI/AAAAAAAAkYs/uF8QvFuGi88/s1600/capital_x.png');
 	display: none;
 }
 
@@ -137,7 +119,7 @@
     position: absolute;
     background-color: white;
     width: 90vmin;
-    height: 70vmin;
+    height: 70%;
     top: 5vmin;
     left: 5vmin;
     z-index: 20;
@@ -145,24 +127,36 @@
 }
 #tweet3Button {
     position: absolute;
-    width: 30vmin;
-    height: 30vmin;
+    color: #00acee;
+    width: 20vmin;
+    /* height: 30vmin; */
     top: 10vmin;
     left: 65%; 
     pointer-events: auto;
-    z-index: 25;
+    z-index: 30;
+
+    display: none;
+}
+#tweetIcon {
+    position: absolute;
+    width: 15vmin;
+    height: 15vmin;
+    top: 5vmin;
+    left: 40%; 
+    z-index: 30;
 
     display: none;
 }
 
 #tweet3CancelButton {
     position: absolute;
+    color: #00acee;
     width: 30vmin;
-    height: 30vmin;
+    /* height: 30vmin; */
     top: 10vmin;
     left: 20%; 
     pointer-events: auto;
-    z-index: 25;
+    z-index: 30;
 
     display: none;
 }
@@ -172,7 +166,7 @@
 	width: 80vmin;
 	height: 30vmin;
 	left: 10%; 
-    top: 10%;
+    top: 15%;
     z-index: 25;
 	pointer-events: auto;
 
@@ -191,6 +185,9 @@
 .tweet #tweet3Text {
     display: block;
 }
+.tweet #tweetIcon {
+    display: block;
+}
 
 #menuBar {
     position: absolute;
@@ -199,13 +196,13 @@
     height: 15%;
     top: 85%;
     left: 0%;
-    background-color: black;
+    background-color: rgba(42, 83, 97, 255);
     z-index: 12;
 }
 
 .balloon1 {
     position: absolute;
-    background-color: white;
+    background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
     height: 10vmin;
     bottom: 20vmin;
@@ -213,6 +210,7 @@
     z-index: 14;
     padding: 20px; /* ふきだし内の余白 */
     text-align: center; /* テキストの揃え */
+    color: white;
     border-radius: 8px; /* 角丸 */
 }
 .balloon1::before { /* 三角の部分 */
@@ -222,11 +220,11 @@
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
-    border-top-color: white; /* 吹き出しの地と同じ色 */
+    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon2 {
     position: absolute;
-    background-color: white;
+    background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
     height: 10vmin;
     bottom: 20vmin;
@@ -234,6 +232,7 @@
     z-index: 14;
     padding: 20px; /* ふきだし内の余白 */
     text-align: center; /* テキストの揃え */
+    color: white;
     border-radius: 8px; /* 角丸 */
 }
 .balloon2::before { /* 三角の部分 */
@@ -243,11 +242,11 @@
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
-    border-top-color: white; /* 吹き出しの地と同じ色 */
+    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon3 {
     position: absolute;
-    background-color: white;
+    background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
     height: 10vmin;
     bottom: 20vmin;
@@ -255,6 +254,7 @@
     z-index: 14;
     padding: 20px; /* ふきだし内の余白 */
     text-align: center; /* テキストの揃え */
+    color: white;
     border-radius: 8px; /* 角丸 */
 }
 .balloon3::before { /* 三角の部分 */
@@ -264,9 +264,31 @@
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
-    border-top-color: white; /* 吹き出しの地と同じ色 */
+    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 
 .hide {
     display: none;
+}
+
+#guide {
+    position: absolute;
+    background-color: rgba(53, 165, 110, 255);
+    text-align: center;
+    color: white;
+    width: 80vmin;
+    height: 8vmin;
+    left: 10%;
+    bottom: 20%;
+    border-radius: 5%;
+}
+
+#camera_position {
+    position: absolute;
+    background-color: rgba(53, 165, 110, 255);
+    text-align: center;
+    color: white;
+    width: 80%;
+    left: 10%;
+    top: 10%;
 }
