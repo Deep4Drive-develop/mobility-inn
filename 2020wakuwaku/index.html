@@ -204,7 +204,7 @@
                     var camera_move = function() {
                         const camera_ = document.getElementById('main_camera');
                         const position_ = document.getElementById('camera_position');
-                        position_.innerText = position_.getAttribute('position');
+                        position_.innerText = camera_.getAttribute('position');
                     };
                     setInterval(camera_move, 1000);
                 }
