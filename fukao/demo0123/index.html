@@ -233,6 +233,9 @@
                     actionButton.addEventListener('click', () => {
                         const balloon1 = document.getElementById('balloon1');
                         const balloon2 = document.getElementById('balloon2');
+
+                        console.log(this.el.object3D.rotation);
+
                         balloon1.classList.add('hide');
                         make_tower();
                         balloon2.classList.remove('hide'); // あとでタワー完成タイミングに変える
