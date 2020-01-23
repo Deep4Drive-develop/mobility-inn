@@ -204,7 +204,8 @@
                     var camera_move = function() {
                         const camera_ = document.getElementById('main_camera');
                         const position_ = document.getElementById('camera_position');
-                        position_.innerText = camera_.getAttribute('position');
+                        const p = camera_.getAttribute('position');
+                        position_.innerText = "camera position  x = "p.x + ", y = " + p.y + ", z = " + p.z
                     };
                     setInterval(camera_move, 1000);
                 }
