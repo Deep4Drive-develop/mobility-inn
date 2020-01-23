@@ -201,12 +201,12 @@
                     setTimeout(guide_hide, 6000);
 
                     /* 1秒ごとにカメラポジションを表示 */
-                    var camera_move = function() {
+                    var camera_rotate = function() {
                         const camera_ = document.getElementById('main_camera');
-                        const position_ = document.getElementById('camera_position');
-                        position_.innerText = camera_.getAttribute('position');
+                        const rotation_ = document.getElementById('camera_rotation');
+                        rotation_.innerText = camera_.getAttribute('rotation');
                     };
-                    setInterval(camera_move, 1000);
+                    setInterval(camera_rotate, 1000);
                 }
             })
         </script>
