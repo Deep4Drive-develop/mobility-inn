@@ -8,10 +8,6 @@
 	pointer-events: none;
 }
 
-.tweet #photoModeContainer {
-	opacity: 0.3;
-}
-
 #flash {
 	position: absolute;
 	left: 0;
@@ -28,6 +24,21 @@
 	opacity: 1;
 	transition: 0s;
 	pointer-events: auto;
+}
+
+#flash2 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: white;
+	z-index: 10;
+	opacity: 0;
+}
+
+.tweet #flash2 {
+	opacity: 0.3;
 }
 
 #photoModeImage {
@@ -208,8 +219,8 @@
     position: absolute;
     background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
-    height: 48px;
-    bottom: 60px;
+    height: 36px;
+    bottom: 48px;
     left: 10%;
     z-index: 14;
     padding: 8px; /* ふきだし内の余白 */
@@ -220,7 +231,7 @@
 .balloon1::before { /* 三角の部分 */
     content: '';
     position: absolute; /* 位置固定 */
-    left: 10%;
+    left: 5%;
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
@@ -230,8 +241,8 @@
     position: absolute;
     background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
-    height: 48px;
-    bottom: 60px;
+    height: 36px;
+    bottom: 48px;
     left: 10%;
     z-index: 14;
     padding: 8px; /* ふきだし内の余白 */
@@ -242,7 +253,7 @@
 .balloon2::before { /* 三角の部分 */
     content: '';
     position: absolute; /* 位置固定 */
-    left: 90%;
+    left: 85%;
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
@@ -252,8 +263,8 @@
     position: absolute;
     background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
-    height: 48px;
-    bottom: 60px;
+    height: 36px;
+    bottom: 48px;
     left: 10%;
     z-index: 14;
     padding: 8px; /* ふきだし内の余白 */
@@ -264,7 +275,7 @@
 .balloon3::before { /* 三角の部分 */
     content: '';
     position: absolute; /* 位置固定 */
-    left: 50%;
+    left: 45%;
     border: 14px solid transparent; /* 線幅の設定 */
     bottom: -28px; /* 線幅の2倍 */
     margin-left: -14px; /* 線幅だけずらす */
