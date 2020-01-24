@@ -93,13 +93,6 @@
 	display: none;
 }
 
-#cancelButton {
-	display: none;
-}
-
-.photo #cancelButton {
-	display: block;
-}
 
 #actionButton {
 	position: absolute;
@@ -309,12 +302,22 @@
 }
 
 
+/* ソフトキーボードが出ている( 画面が小さい )時 */
 @media screen and (max-height: 480px) {
-#menuBar, #cancelButton, #saveButton, #tweetButton {
-	display: none;
+    #menuBar, #cancelButton, #saveButton, #tweetButton {
+    	display: none;
+    }
 }
-}
+
+/* ソフトキーボードが出ていない( 画面が大きい )時 */
 @media screen and (min-height: 480px) {
-#menuBar, #cancelButton, #saveButton, #tweetButton {
-	display: block;
+    #menuBar {
+    	display: block;
+    }
+    #cancelButton, #saveButton, #tweetButton {
+        display: none;
+    }
+    .photo #cancelButton, #saveButton, #tweetButton {
+        display: block;
+    }
 }
