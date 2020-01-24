@@ -315,13 +315,13 @@
     #cancelButton, #saveButton, #tweetButton {
         display: none;
     }
-    .photo#cancelButton {
+    .photo #cancelButton {
         display: block;
     }
-    .photo#saveButton {
+    .photo #saveButton {
         display: block;
     }
-    .photo#tweetButton {
+    .photo #tweetButton {
         display: block;
     }
 }
