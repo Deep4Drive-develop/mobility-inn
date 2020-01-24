@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
 
-        <title>(miura)デモページ</title>
+        <title>(miura)山手線AR</title>
 
         <script src="//cdn.8thwall.com/web/aframe/8frame-0.9.0.min.js"></script>
         <script defer src="//cdn.8thwall.com/web/aframe/aframe-animation-component-5.1.2.min.js"></script>
@@ -14,108 +14,44 @@
 
         <!-- 8th Wall API key -->
         <script async src="//apps.8thwall.com/xrweb?appKey=bnWBr8smMOtm8hsLzv1M3AsjyZEPcHize0Tqflu9nYQxqu0yf0fp8mul8iPtRtqb0oR3LW"></script>
-
         <script src="./js/oauth.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <script>
             var oauth_result;
 
-            /* TODO: 中央の軸を表示させる */
             function twitter_init(container) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
                 OAuth.popup('twitter').then(function(result) {
-                    container.classList.add('tweet');
                     oauth_result = result;
                 }).fail(function(err){
-                    console.log(err);
+                    ;
                 });
+                container.classList.add('tweet');
             }
 
             function twitter_tweet(detail, tweet_text) {
-               var bound_text = "------------------------deep4drive_mobility_inn";
-               var image_src = "--" + bound_text + "\r\n" +
-                   'Content-Disposition: form-data; name="media_data"' + "\r\n" +
-                   "\r\n" +
-                   detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
-               var param1 = {
-                   headers: {
-                       'Content-Type' : 'multipart/form-data; boundary=' + bound_text
-                   },
-                   data: image_src
-               };
-               oauth_result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
-                   console.log(response);
-                   var media_id_ = response.media_id_string;
-                   var param = {
-                       data: {
-                           status: tweet_text,
-                           media_ids: media_id_
-                       }
-                   };
-                   oauth_result.post('/1.1/statuses/update.json', param).done(function (response) {
-                       console.log(response);
-                   }).fail(function (err) {
-                       console.log(err);
-                   });
-               }).fail(function(err) {
-                   console.log(err);
-               });
+                ;
             }
 
             function make_tower() {
                 var scene = document.querySelector('a-scene');
        
-                var tower_ = document.createElement('a-gltf-model');
-                tower_.setAttribute('src', '#ground');
-                tower_.setAttribute('id', 'ground');
-                tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
-                //model.setAttribute("visible", "false");
-                scene.appendChild(tower_);
-
-                /*
-                var tower_ = document.createElement('a-gltf-model');
-                tower_.setAttribute('src', '#mall');
-                tower_.setAttribute('id', 'mall');
-                tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
-                tower_.setAttribute("visible", "false");
-                scene.appendChild(tower_);
-
-                var tower_ = document.createElement('a-gltf-model');
-                tower_.setAttribute('src', '#mall_h13');
-                tower_.setAttribute('id', 'mall_h13');
-                tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
-                tower_.setAttribute("visible", "false");
-                scene.appendChild(tower_);
-
-                var tower_ = document.createElement('a-gltf-model');
-                tower_.setAttribute('src', '#h13_top');
-                tower_.setAttribute('id', 'h13_top');
-                tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
-                tower_.setAttribute("visible", "false");
-                scene.appendChild(tower_);
-                */
-
-                //for(var i = 1; i <= 33; i++) {
                 for(var i = 1; i <= 36; i++) {
                     var tower_ = document.createElement('a-gltf-model');
                     tower_.setAttribute('src', '#tower' + String(i));
                     tower_.setAttribute('id', 'tower_' + String(i));
-                    tower_.setAttribute('scale', '0.0125 0.0125 0.0125');
+                    tower_.setAttribute('scale', '0.03 0.03 0.03');
+                    tower_.setAttribute('position', '0 0 0');
                     tower_.setAttribute("visible", "false");
                     scene.appendChild(tower_);
                 }
        
-                document.querySelector('#ground').setAttribute("visible", "true");
                 for(var i = 1; i <= 33; i++) {
                     document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
                 }
                 document.querySelector('#tower_34').setAttribute("animation", "property: visible; to: true; delay: 1250;")
                 document.querySelector('#tower_35').setAttribute("animation", "property: visible; to: true; delay: 4000;")
                 document.querySelector('#tower_36').setAttribute("animation", "property: visible; to: true; delay: 7250;")
-                //document.querySelector('#mall').setAttribute("animation", "property: visible; to: true; delay: 1250;")
-                //document.querySelector('#mall_h13').setAttribute("animation", "property: visible; to: true; delay: 4000;")
-                //document.querySelector('#h13_top').setAttribute("animation", "property: visible; to: true; delay: 7250;")
             }
 
             AFRAME.registerComponent('photo-mode', {
@@ -134,12 +70,10 @@
 
                     var photo_image;
             
-                    // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
-            
+
                     cancelButton.addEventListener('click', () => {
                         container.classList.remove('photo');
-
                         actionButton.classList.remove('hide');
                         backgroundButton.classList.remove('hide');
                         saveButton.classList.add('hide');
@@ -164,21 +98,26 @@
                     backgroundButton.addEventListener('click', () => {
                         const balloon2 = document.getElementById('balloon2');
                         const balloon3 = document.getElementById('balloon3');
-                        balloon2.classList.add('hide'); // ballon2を隠す
+                        balloon2.classList.add('hide');
 
                         var scene = document.querySelector('a-scene');
-                        var model = document.createElement('a-image');
-                        model.setAttribute('src', '#logo');
-                        model.setAttribute('id', 'logo');
-                        model.setAttribute('scale', '3 3 3');
+                        var model = document.createElement('a-video');
+                        model.setAttribute('src', '#usingv');
+                        model.setAttribute('id', 'usingv');
+                        model.setAttribute('scale', '2 2 2');
+                        model.setAttribute('position', '0 3 0');
                         scene.appendChild(model);
 
-                        balloon3.classList.remove('hide'); // balloon3 を表示する。TODO:1回だけにする
+                        var video_ = document.querySelector('#usingv');
+                        video_.play();
+
+                        balloon3.classList.remove('hide');
                     })
 
                     tweetButton.addEventListener('click', () => {
                         twitter_init(container);
                     })
+
 
                     tweet3Button.addEventListener('click', () => {
                         twitter_tweet(photo_image, tweet3Text.value);
@@ -188,31 +127,26 @@
                     tweet3CancelButton.addEventListener('click', () => {
                         container.classList.remove('tweet');
                     })
+
             
                     shutterButton.addEventListener('click', () => {
                         const balloon3 = document.getElementById('balloon3');
                         balloon3.classList.add('hide');
 
-                        // Emit a screenshotrequest to the xrweb component
                         this.el.sceneEl.emit('screenshotrequest');
             
-                        // Show the flash while the image is being taken
                         container.classList.add('flash');
                     })
             
                     this.el.sceneEl.addEventListener('screenshotready', e => {
                         container.classList.remove('flash');
-                        // If an error occurs while trying to take the screenshot, e.detail will be empty.
-                        // We could either retry or return control to the user
                         if (!e.detail) {
                             return;
                         }
                         photo_image = e.detail;
 
-                        // e.detail is the base64 representation of the JPEG screenshot
                         image.src = 'data:image/jpeg;base64,' + e.detail;
 
-                        // Show the photo
                         container.classList.add('photo');
 
                         actionButton.classList.add('hide');
@@ -220,6 +154,25 @@
                         saveButton.classList.remove('hide');
                         tweetButton.classList.remove('hide');
                     })
+
+                    /* 6秒後にガイドを消して、バルーン出す */
+                    var guide_hide = function() {
+                        const guide = document.getElementById('guide');
+                        const balloon1 = document.getElementById('balloon1');
+                        guide.classList.add('hide');
+                        balloon1.classList.remove('hide');
+                    };
+                    setTimeout(guide_hide, 6000);
+
+                    /* 1秒ごとにカメラポジションを表示 */
+                    var camera_move = function() {
+                        const camera_ = document.getElementById('main_camera');
+                        const position_ = document.getElementById('camera_position');
+                        //const p = camera_.getAttribute('position');
+                        const p = camera_.getAttribute('rotation');
+                        position_.innerText = "camera rotation  x = " + p.x + ", y = " + p.y + ", z = " + p.z;
+                    };
+                    setInterval(camera_move, 1000);
                 }
             })
         </script>
@@ -231,24 +184,26 @@
             <div id="flash"></div>
 
             <div id="tweetWindow"></div>
-            <textarea id="tweet3Text" cols="33" rows="5">テストツイート #deep4drive</textarea>
+            <textarea id="tweet3Text" cols="33" rows="5">#東京感動線 #山手線を語ろう #山手線AR @deep4drive</textarea>
             <div id="tweet3Button">TWEET</div>
-            <img id="tweetIcon" src="https://1.bp.blogspot.com/-nMTqgygyczs/VqtZItHn2_I/AAAAAAAA3ZY/5ZfrZPuZzbY/s800/bird_aoitori_bluebird.png"></img>
+            <img id="tweetIcon" src="image/Twitter_Logo_Blue.svg"></img>
             <div id="tweet3CancelButton">Cancel</div>
 
             <div id="menuBar"></div>
 
-            <img id="actionButton" src="https://3.bp.blogspot.com/-O-4F2rFHaMs/WoJRvwjRkRI/AAAAAAABKXY/EEiWs__TbsMSmRJl9BssnJP8-0KTRnMNgCLcBGAs/s800/tokyo_tower.png"></img>
-            <div id="shutterButton"></div>
-            <img id="backgroundButton" src="https://4.bp.blogspot.com/-09z6pusV580/W4PJ4T9QtlI/AAAAAAABOKs/sz37atRgv9EpjfpLSXKEUZ-NHK75YTxLgCLcBGAs/s800/new_york_manhattan_yoru.png"></img>
+            <img id="actionButton" src="image/tokyo_tower.svg"></img>
+            <img id="shutterButton" src="image/photo.svg"></img>
+            <img id="backgroundButton" src="image/night_background.svg"></img>
 
-            <div id="cancelButton"></div>
-            <img class="hide" id="saveButton" src="https://1.bp.blogspot.com/-_Klr-z5WhJA/WlGpUE2oDgI/AAAAAAABJmQ/7FTA91uQ0SI7LWdAvkzDIMh3ckGc8QQuACLcBGAs/s800/game_savepoint.png"></img>
-            <img class="hide" id="tweetButton" src="https://1.bp.blogspot.com/-nMTqgygyczs/VqtZItHn2_I/AAAAAAAA3ZY/5ZfrZPuZzbY/s800/bird_aoitori_bluebird.png"></img>
+            <img class="hide" id="cancelButton" src="image/back.svg"></img>
+            <img class="hide" id="saveButton" src="image/save.svg"></img>
+            <img class="hide" id="tweetButton" src="image/Twitter_Logo_Blue.svg"></img>
 
-            <div class="balloon1" id="balloon1">東京タワーを出してみよう！</div>
+            <div id="camera_position">camera position</div>
+            <div id="guide">少し上に向けてみよう！</div>
+            <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
             <div class="balloon2 hide" id="balloon2">背景を変えてみよう！</div>
-            <div class="balloon3 hide" id="balloon3">写真を撮ってTwitterにシェアしてみよう！</div>
+            <div class="balloon3 hide" id="balloon3">ツイッターに投稿しよう！</div>
         </div>
         <a-scene
             xrweb
@@ -257,49 +212,47 @@
             xrextras-loading
             photo-mode>
             <a-assets>
-                <a-asset-item id="tower1"   src="model/01.glb"></a-asset-item>
-                <a-asset-item id="tower2"   src="model/02.glb"></a-asset-item>
-                <a-asset-item id="tower3"   src="model/03.glb"></a-asset-item>
-                <a-asset-item id="tower4"   src="model/04.glb"></a-asset-item>
-                <a-asset-item id="tower5"   src="model/05.glb"></a-asset-item>
-                <a-asset-item id="tower6"   src="model/06.glb"></a-asset-item>
-                <a-asset-item id="tower7"   src="model/07.glb"></a-asset-item>
-                <a-asset-item id="tower8"   src="model/08.glb"></a-asset-item>
-                <a-asset-item id="tower9"   src="model/09.glb"></a-asset-item>
-                <a-asset-item id="tower10"  src="model/10.glb"></a-asset-item>
-                <a-asset-item id="tower11"  src="model/11.glb"></a-asset-item>
-                <a-asset-item id="tower12"  src="model/12.glb"></a-asset-item>
-                <a-asset-item id="tower13"  src="model/13.glb"></a-asset-item>
-                <a-asset-item id="tower14"  src="model/14.glb"></a-asset-item>
-                <a-asset-item id="tower15"  src="model/15.glb"></a-asset-item>
-                <a-asset-item id="tower16"  src="model/16.glb"></a-asset-item>
-                <a-asset-item id="tower17"  src="model/17.glb"></a-asset-item>
-                <a-asset-item id="tower18"  src="model/18.glb"></a-asset-item>
-                <a-asset-item id="tower19"  src="model/19.glb"></a-asset-item>
-                <a-asset-item id="tower20"  src="model/20.glb"></a-asset-item>
-                <a-asset-item id="tower21"  src="model/21.glb"></a-asset-item>
-                <a-asset-item id="tower22"  src="model/22.glb"></a-asset-item>
-                <a-asset-item id="tower23"  src="model/23.glb"></a-asset-item>
-                <a-asset-item id="tower24"  src="model/24.glb"></a-asset-item>
-                <a-asset-item id="tower25"  src="model/25.glb"></a-asset-item>
-                <a-asset-item id="tower26"  src="model/26.glb"></a-asset-item>
-                <a-asset-item id="tower27"  src="model/27.glb"></a-asset-item>
-                <a-asset-item id="tower28"  src="model/28.glb"></a-asset-item>
-                <a-asset-item id="tower29"  src="model/29.glb"></a-asset-item>
-                <a-asset-item id="tower30"  src="model/30.glb"></a-asset-item>
-                <a-asset-item id="tower31"  src="model/31.glb"></a-asset-item>
-                <a-asset-item id="tower32"  src="model/32.glb"></a-asset-item>
-                <a-asset-item id="tower33"  src="model/33.glb"></a-asset-item>
-                <a-asset-item id="ground"   src="model/ground.glb"></a-asset-item>
+                <a-asset-item id="tower1" src="model/01.glb"></a-asset-item>
+                <a-asset-item id="tower2" src="model/02.glb"></a-asset-item>
+                <a-asset-item id="tower3" src="model/03.glb"></a-asset-item>
+                <a-asset-item id="tower4" src="model/04.glb"></a-asset-item>
+                <a-asset-item id="tower5" src="model/05.glb"></a-asset-item>
+                <a-asset-item id="tower6" src="model/06.glb"></a-asset-item>
+                <a-asset-item id="tower7" src="model/07.glb"></a-asset-item>
+                <a-asset-item id="tower8" src="model/08.glb"></a-asset-item>
+                <a-asset-item id="tower9" src="model/09.glb"></a-asset-item>
+                <a-asset-item id="tower10" src="model/10.glb"></a-asset-item>
+                <a-asset-item id="tower11" src="model/11.glb"></a-asset-item>
+                <a-asset-item id="tower12" src="model/12.glb"></a-asset-item>
+                <a-asset-item id="tower13" src="model/13.glb"></a-asset-item>
+                <a-asset-item id="tower14" src="model/14.glb"></a-asset-item>
+                <a-asset-item id="tower15" src="model/15.glb"></a-asset-item>
+                <a-asset-item id="tower16" src="model/16.glb"></a-asset-item>
+                <a-asset-item id="tower17" src="model/17.glb"></a-asset-item>
+                <a-asset-item id="tower18" src="model/18.glb"></a-asset-item>
+                <a-asset-item id="tower19" src="model/19.glb"></a-asset-item>
+                <a-asset-item id="tower20" src="model/20.glb"></a-asset-item>
+                <a-asset-item id="tower21" src="model/21.glb"></a-asset-item>
+                <a-asset-item id="tower22" src="model/22.glb"></a-asset-item>
+                <a-asset-item id="tower23" src="model/23.glb"></a-asset-item>
+                <a-asset-item id="tower24" src="model/24.glb"></a-asset-item>
+                <a-asset-item id="tower25" src="model/25.glb"></a-asset-item>
+                <a-asset-item id="tower26" src="model/26.glb"></a-asset-item>
+                <a-asset-item id="tower27" src="model/27.glb"></a-asset-item>
+                <a-asset-item id="tower28" src="model/28.glb"></a-asset-item>
+                <a-asset-item id="tower29" src="model/29.glb"></a-asset-item>
+                <a-asset-item id="tower30" src="model/30.glb"></a-asset-item>
+                <a-asset-item id="tower31" src="model/31.glb"></a-asset-item>
+                <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
+                <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
                 <a-asset-item id="tower34"  src="model/mall.glb"></a-asset-item>
                 <a-asset-item id="tower35"  src="model/mall_h13.glb"></a-asset-item>
                 <a-asset-item id="tower36"  src="model/h13_top.glb"></a-asset-item>
-
-                <img id="logo" src="image/6954057b-8eb9-479d-892a-0af76f4dc15b.jpg">
             </a-assets>
 
             <a-camera
-                position="0 4 10"
+                id="main_camera"
+                position="0 -0.3 8"
                 raycaster="objects: .cantap"
                 cursor="fuse: false; rayOrigin: mouse;">
             </a-camera>
