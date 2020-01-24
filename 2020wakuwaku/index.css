@@ -26,6 +26,21 @@
 	pointer-events: auto;
 }
 
+#background_opacity {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: black;
+	z-index: 10;
+	opacity: 0;
+}
+
+.tweet #background_opacity {
+	opacity: 0.5;
+}
+
 #photoModeImage {
 	position: absolute;
 	max-width: 65%;
