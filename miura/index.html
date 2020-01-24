@@ -67,7 +67,6 @@
                     const tweet3Text = document.getElementById('tweet3Text');
                     const saveButton = document.getElementById('saveButton');
                     const tweetButton = document.getElementById('tweetButton');
-                    const menuBar = document.getElementById('menuBar');
 
                     var photo_image;
             
@@ -129,22 +128,6 @@
                         container.classList.remove('tweet');
                     })
 
-                    /*
-                    tweet3Text.addEventListener('focus', () => {
-                        menuBar.classList.add('hide');
-                        cancelButton.classList.add('hide');
-                        saveButton.classList.add('hide');
-                        tweetButton.classList.add('hide');
-                    })
-                    tweet3Text.addEventListener('blur', () => {
-                        menuBar.classList.remove('hide');
-                        cancelButton.classList.remove('hide');
-                        saveButton.classList.remove('hide');
-                        tweetButton.classList.remove('hide');
-                    })
-                    */
-
-            
                     shutterButton.addEventListener('click', () => {
                         const balloon3 = document.getElementById('balloon3');
                         balloon3.classList.add('hide');

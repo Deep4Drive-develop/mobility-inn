@@ -307,3 +307,13 @@
     left: 10%;
     top: 10%;
 }
+
+@media screen and (max-height: 480px) {
+#menuBar, #cancelButton, #saveButton, #tweetButton {
+	display: none;
+}
+}
+@media screen and (min-height: 480px) {
+#menuBar, #cancelButton, #saveButton, #tweetButton {
+	display: block;
+}
