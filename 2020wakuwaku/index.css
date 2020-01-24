@@ -284,10 +284,10 @@
     text-align: center;
     color: white;
     width: 80vmin;
-    height: 8vmin;
+    height: 30px;
     left: 10%;
-    bottom: 20%;
-    border-radius: 5%;
+    bottom: 48px;
+    border-radius: 8px;
 }
 
 #camera_position {
