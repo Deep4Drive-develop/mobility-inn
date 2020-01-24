@@ -32,13 +32,13 @@
 	top: 0;
 	bottom: 0;
 	right: 0;
-	background-color: white;
+	background-color: black;
 	z-index: 10;
 	opacity: 0;
 }
 
 .tweet #flash2 {
-	opacity: 0.3;
+	opacity: 0.5;
 }
 
 #photoModeImage {
@@ -219,11 +219,11 @@
     position: absolute;
     background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
-    height: 36px;
+    height: 30px;
     bottom: 48px;
     left: 10%;
     z-index: 14;
-    padding: 8px; /* ふきだし内の余白 */
+    padding: 4px; /* ふきだし内の余白 */
     text-align: center; /* テキストの揃え */
     color: white;
     border-radius: 8px; /* 角丸 */
@@ -232,20 +232,20 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 5%;
-    border: 14px solid transparent; /* 線幅の設定 */
-    bottom: -28px; /* 線幅の2倍 */
-    margin-left: -14px; /* 線幅だけずらす */
+    border: 10px solid transparent; /* 線幅の設定 */
+    bottom: -20px; /* 線幅の2倍 */
+    margin-left: -10px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon2 {
     position: absolute;
     background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
-    height: 36px;
+    height: 30px;
     bottom: 48px;
     left: 10%;
     z-index: 14;
-    padding: 8px; /* ふきだし内の余白 */
+    padding: 4px; /* ふきだし内の余白 */
     text-align: center; /* テキストの揃え */
     color: white;
     border-radius: 8px; /* 角丸 */
@@ -254,20 +254,20 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 85%;
-    border: 14px solid transparent; /* 線幅の設定 */
-    bottom: -28px; /* 線幅の2倍 */
-    margin-left: -14px; /* 線幅だけずらす */
+    border: 10px solid transparent; /* 線幅の設定 */
+    bottom: -20px; /* 線幅の2倍 */
+    margin-left: -10px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon3 {
     position: absolute;
     background-color: rgba(53, 165, 110, 255);
     width: 80vmin;
-    height: 36px;
+    height: 30px;
     bottom: 48px;
     left: 10%;
     z-index: 14;
-    padding: 8px; /* ふきだし内の余白 */
+    padding: 4px; /* ふきだし内の余白 */
     text-align: center; /* テキストの揃え */
     color: white;
     border-radius: 8px; /* 角丸 */
@@ -276,9 +276,9 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 45%;
-    border: 14px solid transparent; /* 線幅の設定 */
-    bottom: -28px; /* 線幅の2倍 */
-    margin-left: -14px; /* 線幅だけずらす */
+    border: 10px solid transparent; /* 線幅の設定 */
+    bottom: -20px; /* 線幅の2倍 */
+    margin-left: -10px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 
