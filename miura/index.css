@@ -101,6 +101,10 @@
 	display: block;
 }
 
+.hide .photo #cancelButton {
+	display: none;
+}
+
 #actionButton {
 	position: absolute;
 	width: 32px;
