@@ -156,7 +156,7 @@
     position: absolute;
     height: 32px;
     top: 16px;
-    left: calc(50% - 12px); 
+    left: 50%;
     z-index: 30;
 
     display: none;
@@ -168,6 +168,7 @@
     height: 24px;
     top: 24px;
     left: calc(5% + 12px); 
+    text-align: left;
     pointer-events: auto;
     z-index: 30;
 
