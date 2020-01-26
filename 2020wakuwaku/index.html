@@ -82,11 +82,10 @@
                 document.querySelector('#tower_36').setAttribute("animation", "property: visible; to: true; delay: 7250;")
 
                 var p = document.createElement('a-plane');
-                p.setAttribute('color', '#FF0000'); /* red */
-                p.setAttribute('opacity', '0.3');
-                p.setAttribute('position', '0 0 0');
-                p.setAttribute('height', '32');
-                p.setAttribute('width', '16');
+                p.setAttribute('opacity', '0');
+                p.setAttribute('position', '0 4 0');
+                p.setAttribute('height', '20');
+                p.setAttribute('width', '12');
                 p.setAttribute('class', 'collidable');
                 p.addEventListener('raycaster-intersected', () => {
                     const container = document.getElementById('photoModeContainer');
@@ -181,11 +180,13 @@
                         })
 
                         shutterButton.addEventListener('click', () => {
+                            const scene = document.getElementById('scene');
                             const balloon3 = document.getElementById('balloon3');
+
                             balloon3.classList.add('hide');
 
                             // Emit a screenshotrequest to the xrweb component
-                            this.el.sceneEl.emit('screenshotrequest');
+                            scene.sceneEl.emit('screenshotrequest');
             
                             // Show the flash while the image is being taken
                             container.classList.add('flash');
@@ -255,6 +256,7 @@
             <div class="balloon3 hide" id="balloon3">Twitterにシェアしてみよう！</div>
         </div>
         <a-scene
+            id="scene"
             xrweb
             xrextras-almost-there
             xrextras-runtime-error
