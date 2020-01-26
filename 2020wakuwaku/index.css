@@ -32,6 +32,25 @@
     border-radius: 8px;
 }
 
+.mask.balloon1 {
+    display: none;
+}
+.mask.balloon1::before {
+    display: none;
+}
+.mask.balloon2 {
+    display: none;
+}
+.mask.balloon2::before {
+    display: none;
+}
+.mask.balloon3 {
+    display: none;
+}
+.mask.balloon3::before {
+    display: none;
+}
+
 #flash {
 	position: absolute;
 	left: 0;
