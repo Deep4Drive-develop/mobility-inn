@@ -82,16 +82,18 @@
                 document.querySelector('#tower_36').setAttribute("animation", "property: visible; to: true; delay: 7250;")
 
                 var p = document.createElement('a-plane');
+                p.setAttribute('color', '#FF0000'); /* red */
                 p.setAttribute('opacity', '0.5');
                 p.setAttribute('position', '0 0 0');
-                p.setAttribute('scale', '2 2 2');
-                p.addEventListener('raycaster-intersected', evt => {
-                    const container = document.getElementById('photoModeContainer');
-                    container.classList.add('mask');
-                });
+                p.setAttribute('height', '40');
+                p.setAttribute('width', '20');
                 p.addEventListener('raycaster-intersected', evt => {
                     const container = document.getElementById('photoModeContainer');
                     container.classList.remove('mask');
+                });
+                p.addEventListener('raycaster-intersected-cleared', evt => {
+                    const container = document.getElementById('photoModeContainer');
+                    container.classList.add('mask');
                 });
                 scene.appendChild(p);
             }
@@ -301,7 +303,7 @@
             <a-camera
                 id="main_camera"
                 position="0 -0.3 8"
-                raycaster="objects: .cantap"
+                raycaster
                 cursor="fuse: false; rayOrigin: mouse;">
             </a-camera>
 
