@@ -132,36 +132,9 @@
                         a.click();
                     })
 
-                    actionButton.addEventListener('click', () => {
-                        const balloon1 = document.getElementById('balloon1');
-                        const balloon2 = document.getElementById('balloon2');
-                        balloon1.classList.add('hide');
-                        make_tower();
-                        balloon2.classList.remove('hide'); // あとでタワー完成タイミングに変える
-                    })
-                    backgroundButton.addEventListener('click', () => {
-                        const balloon2 = document.getElementById('balloon2');
-                        const balloon3 = document.getElementById('balloon3');
-                        balloon2.classList.add('hide');
-
-                        var scene = document.querySelector('a-scene');
-                        var model = document.createElement('a-video');
-                        model.setAttribute('src', '#usingv');
-                        model.setAttribute('id', 'usingv');
-                        model.setAttribute('scale', '2 2 2');
-                        model.setAttribute('position', '0 3 0');
-                        scene.appendChild(model);
-
-                        var video_ = document.querySelector('#usingv');
-                        video_.play();
-
-                        balloon3.classList.remove('hide');
-                    })
-
                     tweetButton.addEventListener('click', () => {
                         twitter_init(container);
                     })
-
 
                     tweet3Button.addEventListener('click', () => {
                         twitter_tweet(photo_image, tweet3Text.value);
@@ -170,18 +143,6 @@
 
                     tweet3CancelButton.addEventListener('click', () => {
                         container.classList.remove('tweet');
-                    })
-
-            
-                    shutterButton.addEventListener('click', () => {
-                        const balloon3 = document.getElementById('balloon3');
-                        balloon3.classList.add('hide');
-
-                        // Emit a screenshotrequest to the xrweb component
-                        this.el.sceneEl.emit('screenshotrequest');
-            
-                        // Show the flash while the image is being taken
-                        container.classList.add('flash');
                     })
             
                     this.el.sceneEl.addEventListener('screenshotready', e => {
@@ -209,6 +170,44 @@
                         const balloon1 = document.getElementById('balloon1');
                         guide.classList.add('hide');
                         balloon1.classList.remove('hide');
+
+                        actionButton.addEventListener('click', () => {
+                            const balloon1 = document.getElementById('balloon1');
+                            const balloon2 = document.getElementById('balloon2');
+                            balloon1.classList.add('hide');
+                            make_tower();
+                            balloon2.classList.remove('hide'); // あとでタワー完成タイミングに変える
+                        })
+
+                        shutterButton.addEventListener('click', () => {
+                            const balloon3 = document.getElementById('balloon3');
+                            balloon3.classList.add('hide');
+
+                            // Emit a screenshotrequest to the xrweb component
+                            this.el.sceneEl.emit('screenshotrequest');
+            
+                            // Show the flash while the image is being taken
+                            container.classList.add('flash');
+                        })
+
+                        backgroundButton.addEventListener('click', () => {
+                            const balloon2 = document.getElementById('balloon2');
+                            const balloon3 = document.getElementById('balloon3');
+                            balloon2.classList.add('hide');
+
+                            var scene = document.querySelector('a-scene');
+                            var model = document.createElement('a-video');
+                            model.setAttribute('src', '#usingv');
+                            model.setAttribute('id', 'usingv');
+                            model.setAttribute('scale', '2 2 2');
+                            model.setAttribute('position', '0 3 0');
+                            scene.appendChild(model);
+
+                            var video_ = document.querySelector('#usingv');
+                            video_.play();
+
+                            balloon3.classList.remove('hide');
+                        })
                     };
                     setTimeout(guide_hide, 6000);
 
