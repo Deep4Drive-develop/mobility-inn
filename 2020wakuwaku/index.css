@@ -231,7 +231,7 @@
     width: 90%;
     height: 30px;
     line-height: 30px;
-    bottom: 48px;
+    bottom: 60px;
     left: 5%;
     z-index: 14;
     text-align: center; /* テキストの揃え */
@@ -243,9 +243,9 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 11%;
-    border: 10px solid transparent; /* 線幅の設定 */
-    bottom: -20px; /* 線幅の2倍 */
-    margin-left: -10px; /* 線幅だけずらす */
+    border: 15px solid transparent; /* 線幅の設定 */
+    bottom: -30px; /* 線幅の2倍 */
+    margin-left: -15px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon2 {
@@ -254,7 +254,7 @@
     width: 90%;
     height: 30px;
     line-height: 30px;
-    bottom: 48px;
+    bottom: 60px;
     left: 5%;
     z-index: 14;
     text-align: center; /* テキストの揃え */
@@ -266,9 +266,9 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 88%;
-    border: 10px solid transparent; /* 線幅の設定 */
-    bottom: -20px; /* 線幅の2倍 */
-    margin-left: -10px; /* 線幅だけずらす */
+    border: 15px solid transparent; /* 線幅の設定 */
+    bottom: -30px; /* 線幅の2倍 */
+    margin-left: -15px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 .balloon3 {
@@ -277,7 +277,7 @@
     width: 90%;
     height: 30px;
     line-height: 30px;
-    bottom: 48px;
+    bottom: 60px;
     left: 5%;
     z-index: 14;
     text-align: center; /* テキストの揃え */
@@ -289,9 +289,9 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 50%;
-    border: 10px solid transparent; /* 線幅の設定 */
-    bottom: -20px; /* 線幅の2倍 */
-    margin-left: -10px; /* 線幅だけずらす */
+    border: 15px solid transparent; /* 線幅の設定 */
+    bottom: -30px; /* 線幅の2倍 */
+    margin-left: -15px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
 }
 
