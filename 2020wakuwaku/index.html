@@ -83,15 +83,15 @@
 
                 var p = document.createElement('a-plane');
                 p.setAttribute('color', '#FF0000'); /* red */
-                p.setAttribute('opacity', '0.5');
+                p.setAttribute('opacity', '0.3');
                 p.setAttribute('position', '0 0 0');
-                p.setAttribute('height', '40');
-                p.setAttribute('width', '20');
-                p.addEventListener('raycaster-intersected', evt => {
+                p.setAttribute('height', '32');
+                p.setAttribute('width', '16');
+                p.addEventListener('raycaster-intersected', () => {
                     const container = document.getElementById('photoModeContainer');
                     container.classList.remove('mask');
                 });
-                p.addEventListener('raycaster-intersected-cleared', evt => {
+                p.addEventListener('raycaster-intersected-cleared', () => {
                     const container = document.getElementById('photoModeContainer');
                     container.classList.add('mask');
                 });
