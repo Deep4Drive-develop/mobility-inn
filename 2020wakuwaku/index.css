@@ -8,6 +8,28 @@
 	pointer-events: none;
 }
 
+.mask#photoModeContainer {
+        background-color: black;
+}
+
+#guide2 {
+    display: none;
+}
+.mask #guide2 {
+    display: block;
+    position: absolute;
+    background-color: rgba(53, 165, 110, 255);
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    width: 90%;
+    height: 30px;
+    line-height: 30px;
+    left: 5%;
+    bottom: 60px;
+    border-radius: 8px;
+}
+
 #flash {
 	position: absolute;
 	left: 0;

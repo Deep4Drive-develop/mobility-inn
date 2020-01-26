@@ -80,6 +80,19 @@
                 document.querySelector('#tower_34').setAttribute("animation", "property: visible; to: true; delay: 1250;")
                 document.querySelector('#tower_35').setAttribute("animation", "property: visible; to: true; delay: 4000;")
                 document.querySelector('#tower_36').setAttribute("animation", "property: visible; to: true; delay: 7250;")
+
+                var p = document.createElement('a-plane');
+                p.setAttribute('opacity', '0.5');
+                p.setAttribute('position', '0 0 0');
+                p.setAttribute('scale', '2 2 2');
+                p.addEventListener('raycaster-intersected', evt => {
+                    const container = document.getElementById('photoModeContainer');
+                    container.classList.add('mask');
+                });
+                p.addEventListener('raycaster-intersected', evt => {
+                    const container = document.getElementById('photoModeContainer');
+                    container.classList.remove('mask');
+                });
             }
 
             AFRAME.registerComponent('photo-mode', {
@@ -233,6 +246,7 @@
 
             <div id="camera_position">camera position</div>
             <div id="guide">ちょっと上を向けてみよう！</div>
+            <div id="guide2">東京タワーの位置まで動かそう！</div>
             <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
             <div class="balloon2 hide" id="balloon2">背景を変えてみよう！</div>
             <div class="balloon3 hide" id="balloon3">Twitterにシェアしてみよう！</div>
