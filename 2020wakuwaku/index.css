@@ -62,12 +62,16 @@
 	pointer-events: auto;
 }
 
+.tweet#photoModeContainer {
+    text-align: center;
+}
+
 .tweet #photoModeImage {
     max-width: none;
     max-height: none;
     transform: none;
-    top: 260px;
-    height: 120px;
+    top: 240px;
+    height: 160px;
     z-index: 25;
 }
 
