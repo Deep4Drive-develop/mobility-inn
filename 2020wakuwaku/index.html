@@ -87,6 +87,7 @@
                 p.setAttribute('position', '0 0 0');
                 p.setAttribute('height', '32');
                 p.setAttribute('width', '16');
+                p.setAttribute('class', 'collidable');
                 p.addEventListener('raycaster-intersected', () => {
                     const container = document.getElementById('photoModeContainer');
                     container.classList.remove('mask');
@@ -302,8 +303,7 @@
             <a-camera
                 id="main_camera"
                 position="0 -0.3 8"
-                raycaster
-                cursor="fuse: false; rayOrigin: mouse;">
+                raycaster="objects: .collidable; showLine: true; far: 100" line="color: orange; opacity:0.5"
             </a-camera>
 
             <a-light type="directinal"
