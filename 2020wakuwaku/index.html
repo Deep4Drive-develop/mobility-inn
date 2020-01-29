@@ -205,11 +205,12 @@
 
                                 var scene = document.querySelector('a-scene');
                                 var model = document.createElement('a-circle');
+                                model.setAttribute('src', '#Moon');
                                 model.setAttribute('id', 'circle');
                                 model.setAttribute('radius', 3);
                                 model.setAttribute('position', '0 5 0');
                                 model.setAttribute('rotation', '0 0 0');
-                                model.setAttribute('material', 'shader: gif, src: url(image/Moon.gif)');
+                                model.setAttribute('material', 'shader: gif');
                                 model.setAttribute('gif', '');
                                 scene.appendChild(model);
 
@@ -217,18 +218,16 @@
                                 background_mode = 1;
                             } else if(background_mode == 1) {
                                 var model = document.querySelector('#circle');
-                                model.removeAttribute('material');
-                                model.setAttribute('material', 'shader: gif, src: url(image/Water.gif)');
+                                model.setAttribute('src', '#Water');
                                 background_mode = 2;
                             } else if(background_mode == 2) {
                                 var model = document.querySelector('#circle');
-                                model.removeAttribute('material');
-                                model.setAttribute('material', 'shader: gif, src: url(image/CherryBlossom.gif)');
+                                //model.removeAttribute('material');
+                                model.setAttribute('src', '#CherryBlossom');
                                 background_mode = 3;
                             } else {
                                 var model = document.querySelector('#circle');
-                                model.removeAttribute('material');
-                                model.setAttribute('material', 'shader: gif, src: url(image/Moon.gif)');
+                                model.setAttribute('src', '#Moon');
                                 background_mode = 1;
                             }
                         })
