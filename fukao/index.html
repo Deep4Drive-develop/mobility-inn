@@ -122,7 +122,7 @@
                         const balloon1 = document.getElementById('balloon1');
                         const balloon2 = document.getElementById('balloon2');
                         balloon1.classList.add('hide');
-                        make_tower();
+                        
                         balloon2.classList.remove('hide'); // あとでタワー完成タイミングに変える
 
                         //カメラの方向を変える。
@@ -143,7 +143,8 @@
                                         o.applyMatrix4(i), { origin: { x: t.x + o.x, y: 4, z: t.z + o.z }, facing: n }
                                 };
                         t.emit("recenterWithOrigin", i())
-
+                        
+                        make_tower();
 
                     })
                     backgroundButton.addEventListener('click', () => {
@@ -225,7 +226,7 @@
                     var camera_rotate = function() {
                         const camera_ = document.getElementById('main_camera');
                         const rotation_ = document.getElementById('camera_rotation');
-                        rotation_.innerText = e.object3D.position;
+                        rotation_.innerText = camera_.rotation;
                     };
                     setInterval(camera_rotate, 1000);
                 }
@@ -254,7 +255,7 @@
             <img class="hide" id="saveButton" src="image/save.svg"></img>
             <img class="hide" id="tweetButton" src="image/Twitter_Logo_Blue.svg"></img>
 
-            <div id="camera_position">var 2020/01/30/1324</div>
+            <div id="camera_position">var 2020/01/30/13:24</div>
             <div id="guide">少し上に向けてみよう！</div>
             <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
             <div class="balloon2 hide" id="balloon2">背景を変えてみよう！</div>
