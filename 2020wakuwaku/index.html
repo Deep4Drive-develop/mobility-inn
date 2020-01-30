@@ -183,9 +183,11 @@
                             make_tower();
 
                             var balloon2_hide = function() {
-                                balloon2.classList.remove('hide');
+                                if(background_mode == 0) {
+                                    balloon2.classList.remove('hide');
+                                }
                             }
-                            setTimeout(balloon2_hide, 7250);
+                            setTimeout(balloon2_hide, 8500);
                         })
 
                         shutterButton.addEventListener('click', () => {
@@ -236,15 +238,6 @@
                         })
                     };
                     setTimeout(guide_hide, 6000);
-
-                    /* 1秒ごとにカメラポジションを表示 */
-                    var camera_move = function() {
-                        const camera_ = document.getElementById('main_camera');
-                        const position_ = document.getElementById('camera_position');
-                        const p = camera_.getAttribute('rotation');
-                        position_.innerText = "camera position  x = " + p.x + ", y = " + p.y + ", z = " + p.z;
-                    };
-                    setInterval(camera_move, 1000);
                 }
             })
         </script>
@@ -272,7 +265,6 @@
             <img class="hide" id="saveButton" src="image/save.svg"></img>
             <img class="hide" id="tweetButton" src="image/Twitter_Logo_Blue.svg"></img>
 
-            <div id="camera_position">camera position</div>
             <div id="guide">ちょっと上に向けてみよう！</div>
             <div id="guide2">さっきの位置に戻してみよう！</div>
             <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
