@@ -126,12 +126,24 @@
                         balloon2.classList.remove('hide'); // あとでタワー完成タイミングに変える
 
                         //カメラの方向を変える。
-                        u = new THREE.Quaternion
+                        /* u = new THREE.Quaternion
                         this.el.object3D.quaternion.copy(u);
                         this.el.sceneEl.emit('recenter', {
                             origin: {x: 0, y: -0.3, z: 8},
                             facing: u
                         })
+                        */
+                        var t = this.el.sceneEl,
+                            i = function () {
+                                var t = e.object3D.position,
+                                    n = e.object3D.quaternion,
+                                    o = new THREE.Vector3(0, 0, 5),
+                                    i = new THREE.Matrix4;
+                                return i.makeRotationFromQuaternion(n),
+                                        o.applyMatrix4(i), { origin: { x: t.x + o.x, y: 4, z: t.z + o.z }, facing: n }
+                                };
+                        t.emit("recenterWithOrigin", i())
+
 
                     })
                     backgroundButton.addEventListener('click', () => {
