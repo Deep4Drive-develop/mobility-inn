@@ -225,7 +225,7 @@
                     var camera_rotate = function() {
                         const camera_ = document.getElementById('main_camera');
                         const rotation_ = document.getElementById('camera_rotation');
-                        rotation_.innerText = camera_.getAttribute('rotation');
+                        rotation_.innerText = e.object3D.position;
                     };
                     setInterval(camera_rotate, 1000);
                 }
