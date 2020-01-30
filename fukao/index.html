@@ -125,9 +125,12 @@
                         make_tower();
                         balloon2.classList.remove('hide'); // あとでタワー完成タイミングに変える
 
+                        //カメラの方向を変える。
+                        u = new THREE.Quaternion
+                        this.el.object3D.quaternion.copy(u);
                         this.el.sceneEl.emit('recenter', {
                             origin: {x: 0, y: -0.3, z: 8},
-                            facing: {w: 0, x:0, y:0, z:0}
+                            facing: u
                         })
 
                     })
@@ -252,42 +255,42 @@
             xrextras-loading
             photo-mode>
             <a-assets>
-                <a-asset-item id="tower1" src="model/01.glb"></a-asset-item>
-                <a-asset-item id="tower2" src="model/02.glb"></a-asset-item>
-                <a-asset-item id="tower3" src="model/03.glb"></a-asset-item>
-                <a-asset-item id="tower4" src="model/04.glb"></a-asset-item>
-                <a-asset-item id="tower5" src="model/05.glb"></a-asset-item>
-                <a-asset-item id="tower6" src="model/06.glb"></a-asset-item>
-                <a-asset-item id="tower7" src="model/07.glb"></a-asset-item>
-                <a-asset-item id="tower8" src="model/08.glb"></a-asset-item>
-                <a-asset-item id="tower9" src="model/09.glb"></a-asset-item>
-                <a-asset-item id="tower10" src="model/10.glb"></a-asset-item>
-                <a-asset-item id="tower11" src="model/11.glb"></a-asset-item>
-                <a-asset-item id="tower12" src="model/12.glb"></a-asset-item>
-                <a-asset-item id="tower13" src="model/13.glb"></a-asset-item>
-                <a-asset-item id="tower14" src="model/14.glb"></a-asset-item>
-                <a-asset-item id="tower15" src="model/15.glb"></a-asset-item>
-                <a-asset-item id="tower16" src="model/16.glb"></a-asset-item>
-                <a-asset-item id="tower17" src="model/17.glb"></a-asset-item>
-                <a-asset-item id="tower18" src="model/18.glb"></a-asset-item>
-                <a-asset-item id="tower19" src="model/19.glb"></a-asset-item>
-                <a-asset-item id="tower20" src="model/20.glb"></a-asset-item>
-                <a-asset-item id="tower21" src="model/21.glb"></a-asset-item>
-                <a-asset-item id="tower22" src="model/22.glb"></a-asset-item>
-                <a-asset-item id="tower23" src="model/23.glb"></a-asset-item>
-                <a-asset-item id="tower24" src="model/24.glb"></a-asset-item>
-                <a-asset-item id="tower25" src="model/25.glb"></a-asset-item>
-                <a-asset-item id="tower26" src="model/26.glb"></a-asset-item>
-                <a-asset-item id="tower27" src="model/27.glb"></a-asset-item>
-                <a-asset-item id="tower28" src="model/28.glb"></a-asset-item>
-                <a-asset-item id="tower29" src="model/29.glb"></a-asset-item>
-                <a-asset-item id="tower30" src="model/30.glb"></a-asset-item>
-                <a-asset-item id="tower31" src="model/31.glb"></a-asset-item>
-                <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
-                <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
-                <a-asset-item id="tower34"  src="model/mall.glb"></a-asset-item>
-                <a-asset-item id="tower35"  src="model/mall_h13.glb"></a-asset-item>
-                <a-asset-item id="tower36"  src="model/h13_top.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower1" src="model/01.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower2" src="model/02.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower3" src="model/03.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower4" src="model/04.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower5" src="model/05.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower6" src="model/06.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower7" src="model/07.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower8" src="model/08.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower9" src="model/09.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower10" src="model/10.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower11" src="model/11.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower12" src="model/12.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower13" src="model/13.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower14" src="model/14.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower15" src="model/15.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower16" src="model/16.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower17" src="model/17.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower18" src="model/18.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower19" src="model/19.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower20" src="model/20.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower21" src="model/21.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower22" src="model/22.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower23" src="model/23.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower24" src="model/24.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower25" src="model/25.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower26" src="model/26.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower27" src="model/27.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower28" src="model/28.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower29" src="model/29.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower30" src="model/30.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower31" src="model/31.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower32" src="model/32.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower33" src="model/33.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower34"  src="model/mall.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower35"  src="model/mall_h13.glb"></a-asset-item>
+                <a-asset-item preload="auto" id="tower36"  src="model/h13_top.glb"></a-asset-item>
                 <video id="usingv" autoplay muted loop="true" src="movie/SVID_20200102_143519_1.mp4">
             </a-assets>
 
