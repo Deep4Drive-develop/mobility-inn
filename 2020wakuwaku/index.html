@@ -23,8 +23,14 @@
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 
         <script>
+            const CAMERA = 0;
+            const PHOTO = 1;
+            const BUFFER = 2;
+            const TWEET = 3;
+            const DARKNESS = 4;
             var oauth_result;
             var mask_flag;
+            var mode;
 
             function twitter_init(container) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
@@ -98,8 +104,10 @@
                     mask_flag = 0;
                 });
                 p.addEventListener('raycaster-intersected-cleared', () => {
-                    const container = document.getElementById('photoModeContainer');
-                    container.classList.add('mask');
+                    if(mode == CAMERA) {
+                        const container = document.getElementById('photoModeContainer');
+                        container.classList.add('mask');
+                    }
                     mask_flag = 1;
                 });
                 scene.appendChild(p);
@@ -124,16 +132,23 @@
                     var photo_image;
                     var background_mode = 0;
 
+                    mode = CAMERA;
                     mask_flag = 0;
             
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
             
                     cancelButton.addEventListener('click', () => {
+                        mode = CAMERA;
                         container.classList.remove('photo');
 
                         actionButton.classList.remove('hide');
                         backgroundButton.classList.remove('hide');
+
+                        if(mask_flag == 1) {
+                            const container = document.getElementById('photoModeContainer');
+                            container.classList.add('mask');
+                        }
                     })
 
                     saveButton.addEventListener('click', () => {
@@ -145,27 +160,33 @@
                     })
 
                     tweetButton.addEventListener('click', () => {
+                        mode = BUFFER;
                         container.classList.add('buffer');
                     })
 
                     tweet3Button.addEventListener('click', () => {
+                        mode = PHOTO;
                         twitter_tweet(photo_image, tweet3Text.value);
                         container.classList.remove('tweet');
                     })
 
                     tweet3CancelButton.addEventListener('click', () => {
+                        mode = PHOTO;
                         container.classList.remove('tweet');
                     })
 
                     bufferAgreeButton.addEventListener('click', () => {
+                        mode = TWEET;
                         container.classList.remove('buffer');
                         twitter_init(container);
                     })
                     bufferBackButton.addEventListener('click', () => {
+                        mode = PHOTO;
                         container.classList.remove('buffer');
                     })
 
                     this.el.sceneEl.addEventListener('screenshotready', e => {
+                        mode = PHOTO;
                         container.classList.remove('flash');
                         // If an error occurs while trying to take the screenshot, e.detail will be empty.
                         // We could either retry or return control to the user
