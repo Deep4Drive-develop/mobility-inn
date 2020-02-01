@@ -150,13 +150,16 @@
 
                     var scene = document.querySelector('a-scene');
                     var p = document.createElement('a-plane');
-                    p.setAttribute('opacity', '0');
+                    p.setAttribute('opacity', '0.3');
+                    p.setAttribute('color', 'blue');
                     p.setAttribute('position', '0 4 -1');
-                    p.setAttribute('height', '20');
-                    p.setAttribute('width', '12');
+                    p.setAttribute('height', '30');
+                    p.setAttribute('width', '24');
                     p.setAttribute('class', 'collidable');
                     p.addEventListener('raycaster-intersected', (e) => {
-                        intersection = getNearestIntersection(e.detail.intersections);
+                        const d = document.getElementById('debug');
+                        d.innerText = "EVENT";
+                        /*
                         function getNearestIntersection(intersections) {
                             for (var i = 0, l = intersections.length; i < l; i++) {
                                 return intersections[i];
@@ -167,6 +170,7 @@
                         d.innerText = intersection.point.x + " " +
                                       intersection.point.y + " " +
                                       intersection.point.z;
+                        */
                     });
                     scene.appendChild(p);
 
