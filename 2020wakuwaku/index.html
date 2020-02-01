@@ -148,6 +148,7 @@
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
 
+                    /*
                     var scene = document.querySelector('a-scene');
                     var p = document.createElement('a-plane');
                     p.setAttribute('id', 'place');
@@ -158,6 +159,7 @@
                     p.setAttribute('width', '24');
                     p.setAttribute('class', 'collidable');
                     scene.appendChild(p);
+                    */
 
                     cancelButton.addEventListener('click', () => {
                         mode = CAMERA;
@@ -313,6 +315,7 @@
             })
 
             AFRAME.registerComponent('crawling-tower', {
+                /*
                 init: function() {
                     var el = this.el;
                     var place = document.querySelector('#place');
@@ -325,10 +328,6 @@
                                       intersection.point.y + " " +
                                       intersection.point.z;
             
-                        // cursorの座標 = 交差地点の座標 + 法線ベクトル×0.1 （少しだけ交差地点から浮かせる）
-                        // var cursorPosition = new THREE.Vector3().addVectors(intersection.point, intersection.face.normal.multiplyScalar(0.1));
-            
-                        // 最も近い交差地点を取得する
                         function getNearestIntersection(intersections) {
                             for (var i = 0, l = intersections.length; i < l; i++) {
                                 return intersections[i];
@@ -336,10 +335,28 @@
                             return null;
                         }
                     });
-                    var guide_hide = function() {
-                        el.components.raycaster.refreshObjects();
-                    };
-                    setTimeout(guide_hide, 500);
+                }
+                */
+            });
+            AFRAME.registerComponent('raycaster-listen', {
+                init: function () {
+                    // Use events to figure out what raycaster is listening so we don't have to
+                    // hardcode the raycaster.
+                    this.el.addEventListener('raycaster-intersected', (evt) => {
+                        this.raycaster = evt.detail.el;
+                    });
+                    this.el.addEventListener('raycaster-intersected-cleared', (evt) => {
+                        this.raycaster = null;
+                    });
+                },
+                tick: function () {
+                    if (!this.raycaster) { return; }  // Not intersecting.
+                    let intersection = this.raycaster.components.raycaster.getIntersection(this.el);
+                    if (!intersection) { return; }
+                    const d = document.getElementById('debug');
+                    d.innerText = intersection.point.x + " " +
+                                  intersection.point.y + " " +
+                                  intersection.point.z;
                 }
             });
         </script>
@@ -454,9 +471,7 @@
 
             <a-light type="ambient" intensity="1"></a-light>
 
-            <!--
-            <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable"></a-plane>
-            -->
+            <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable" color="blue" opacity="0.3" raycaster-listen></a-plane>
             <a-circle src="#Moon"
                       id="circle1"
                       opacity="0"
