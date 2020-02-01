@@ -27,8 +27,10 @@
     width: 90%;
     height: 30px;
     line-height: 30px;
-    left: 5%;
-    bottom: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
     border-radius: 8px;
 }
 
