@@ -278,7 +278,9 @@
     display: none;
 }
 #bufferContents {
-    position: absolute;
+    position: relative;
+    width: 90%;
+    height: 420px;
     top: 50%;
     transform: translateY(-50%);
     display: none;
