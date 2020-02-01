@@ -383,7 +383,7 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 11%;
-    bottom: -30px; /* 線幅の2倍 */
+    bottom: -15px;
     margin-left: -4px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
@@ -411,7 +411,7 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 88%;
-    bottom: -30px; /* 線幅の2倍 */
+    bottom: -15px;
     margin-left: -4px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
@@ -439,7 +439,7 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 50%;
-    bottom: -30px; /* 線幅の2倍 */
+    bottom: -15px;
     margin-left: -4px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
