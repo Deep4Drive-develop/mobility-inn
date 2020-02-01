@@ -31,7 +31,7 @@
             var oauth_result;
             var mask_flag;
             var mode;
-            var intersection;
+            var camera_front;
 
             function twitter_init(container) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
@@ -82,7 +82,7 @@
                     tower_.setAttribute('id', 'tower_' + String(i));
                     tower_.setAttribute('scale', '0.03 0.03 0.03');
                     //tower_.setAttribute('position', '0 0 0');
-                    tower_.setAttribute('position', intersection.point.x + ' ' + intersection.point.y + ' ' + intersection.point.z);
+                    tower_.setAttribute('position', camera_front.point.x + ' ' + camera_front.point.y + ' ' + camera_front.point.z);
                     tower_.setAttribute("visible", "false");
                     scene.appendChild(tower_);
                 }
@@ -97,7 +97,7 @@
                 var p = document.createElement('a-plane');
                 p.setAttribute('opacity', '0');
                 //p.setAttribute('position', '0 4 -1');
-                p.setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+4) + ' ' + (intersection.point.z-1));
+                p.setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+4) + ' ' + (camera_front.point.z-1));
                 p.setAttribute('height', '20');
                 p.setAttribute('width', '12');
                 p.setAttribute('class', 'collidable');
@@ -115,10 +115,10 @@
                 });
                 scene.appendChild(p);
 
-                document.querySelector('#circle1').setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+5) + ' ' + intersection.point.z);
-                document.querySelector('#circle2').setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+5) + ' ' + intersection.point.z);
-                document.querySelector('#circle3').setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+5) + ' ' + intersection.point.z);
-                document.querySelector('#circle4').setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+5) + ' ' + intersection.point.z);
+                document.querySelector('#circle1').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
+                document.querySelector('#circle2').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
+                document.querySelector('#circle3').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
+                document.querySelector('#circle4').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
             }
 
             AFRAME.registerComponent('photo-mode', {
@@ -314,30 +314,6 @@
                 }
             })
 
-            AFRAME.registerComponent('crawling-tower', {
-                /*
-                init: function() {
-                    var el = this.el;
-                    var place = document.querySelector('#place');
-                    
-                    el.addEventListener("raycaster-intersection", function(e) {
-                        
-                        var intersection = getNearestIntersection(e.detail.intersections);
-                        const d = document.getElementById('debug');
-                        d.innerText = intersection.point.x + " " +
-                                      intersection.point.y + " " +
-                                      intersection.point.z;
-            
-                        function getNearestIntersection(intersections) {
-                            for (var i = 0, l = intersections.length; i < l; i++) {
-                                return intersections[i];
-                            }
-                            return null;
-                        }
-                    });
-                }
-                */
-            });
             AFRAME.registerComponent('raycaster-listen', {
                 init: function () {
                     // Use events to figure out what raycaster is listening so we don't have to
@@ -353,10 +329,7 @@
                     if (!this.raycaster) { return; }  // Not intersecting.
                     let intersection = this.raycaster.components.raycaster.getIntersection(this.el);
                     if (!intersection) { return; }
-                    const d = document.getElementById('debug');
-                    d.innerText = intersection.point.x + " " +
-                                  intersection.point.y + " " +
-                                  intersection.point.z;
+                    camera_front = intersection;
                 }
             });
         </script>
@@ -401,7 +374,9 @@
 
             <div id="guide">ちょっと上に向けてみよう！</div>
             <div id="guide2">元の位置に戻してみよう！</div>
+            <!--
             <div id="debug">debug</div>
+            -->
             <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
             <div class="balloon2 hide" id="balloon2">背景を変えてみよう！</div>
             <div class="balloon3 hide" id="balloon3">Twitterにシェアしてみよう！</div>
@@ -471,7 +446,7 @@
 
             <a-light type="ambient" intensity="1"></a-light>
 
-            <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable" color="blue" opacity="0.3" raycaster-listen></a-plane>
+            <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable" raycaster-listen></a-plane>
             <a-circle src="#Moon"
                       id="circle1"
                       opacity="0"
@@ -504,7 +479,7 @@
                       opacity="0"
                       scale="5 5 5"
                       position="0 5 0.1"
-                      material="shader:gif; transparent:true;">
+                      material="shader:gif; transparent:false; alphaTest:0.5">
             </a-plane>
         </a-scene>
     </body>
