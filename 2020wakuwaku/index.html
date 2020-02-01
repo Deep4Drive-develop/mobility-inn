@@ -162,31 +162,37 @@
                     tweetButton.addEventListener('click', () => {
                         mode = BUFFER;
                         container.classList.add('buffer');
+                        container.classList.remove('mask');
                     })
 
                     tweet3Button.addEventListener('click', () => {
                         mode = PHOTO;
                         twitter_tweet(photo_image, tweet3Text.value);
                         container.classList.remove('tweet');
+                        container.classList.remove('mask');
                     })
 
                     tweet3CancelButton.addEventListener('click', () => {
                         mode = PHOTO;
                         container.classList.remove('tweet');
+                        container.classList.remove('mask');
                     })
 
                     bufferAgreeButton.addEventListener('click', () => {
                         mode = TWEET;
                         container.classList.remove('buffer');
+                        container.classList.remove('mask');
                         twitter_init(container);
                     })
                     bufferBackButton.addEventListener('click', () => {
                         mode = PHOTO;
                         container.classList.remove('buffer');
+                        container.classList.remove('mask');
                     })
 
                     this.el.sceneEl.addEventListener('screenshotready', e => {
                         mode = PHOTO;
+                        container.classList.remove('mask');
                         container.classList.remove('flash');
                         // If an error occurs while trying to take the screenshot, e.detail will be empty.
                         // We could either retry or return control to the user
@@ -228,6 +234,8 @@
 
                         shutterButton.addEventListener('click', () => {
                             if(mask_flag == 0) {
+                                mode = PHOTO;
+                                container.classList.remove('mask');
                                 const scene = document.getElementById('scene');
                                 const balloon3 = document.getElementById('balloon3');
 
