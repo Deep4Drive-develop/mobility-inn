@@ -24,6 +24,7 @@
 
         <script>
             var oauth_result;
+            var mask_flag;
 
             function twitter_init(container) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
@@ -94,10 +95,12 @@
                 p.addEventListener('raycaster-intersected', () => {
                     const container = document.getElementById('photoModeContainer');
                     container.classList.remove('mask');
+                    mask_flag = 0;
                 });
                 p.addEventListener('raycaster-intersected-cleared', () => {
                     const container = document.getElementById('photoModeContainer');
                     container.classList.add('mask');
+                    mask_flag = 1;
                 });
                 scene.appendChild(p);
             }
@@ -118,6 +121,8 @@
 
                     var photo_image;
                     var background_mode = 0;
+
+                    mask_flag = 0;
             
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
@@ -191,16 +196,18 @@
                         })
 
                         shutterButton.addEventListener('click', () => {
-                            const scene = document.getElementById('scene');
-                            const balloon3 = document.getElementById('balloon3');
+                            if(mask_flag == 0) {
+                                const scene = document.getElementById('scene');
+                                const balloon3 = document.getElementById('balloon3');
 
-                            balloon3.classList.add('hide');
+                                balloon3.classList.add('hide');
 
-                            // Emit a screenshotrequest to the xrweb component
-                            scene.sceneEl.emit('screenshotrequest');
+                                // Emit a screenshotrequest to the xrweb component
+                                scene.sceneEl.emit('screenshotrequest');
             
-                            // Show the flash while the image is being taken
-                            container.classList.add('flash');
+                                // Show the flash while the image is being taken
+                                container.classList.add('flash');
+                            }
                         })
 
                         backgroundButton.addEventListener('click', () => {
