@@ -158,7 +158,12 @@
                     p.setAttribute('class', 'collidable');
                     p.addEventListener('raycaster-intersected', (e) => {
                         const d = document.getElementById('debug');
-                        d.innerText = "EVENT";
+                        //d.innerText = "EVENT";
+		        d.innerText = "";
+                        Object.keys(e).forEach(function (key) {
+                            d.innerText = d.innerText + key + " : " + obj[key] + ", "; 
+                        });
+
                         /*
                         function getNearestIntersection(intersections) {
                             for (var i = 0, l = intersections.length; i < l; i++) {

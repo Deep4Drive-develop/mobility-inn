@@ -504,16 +504,12 @@
     display: block;
     position: absolute;
     background-color: rgba(53, 165, 110, 255);
-    text-align: center;
-    font-size: 16px;
-    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     color: white;
+    text-align: center;
     width: 90%;
-    height: 30px;
-    line-height: 30px;
+    height: 150px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 12;
-    border-radius: 8px;
 }
