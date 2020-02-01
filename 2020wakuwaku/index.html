@@ -148,6 +148,29 @@
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
 
+                    var scene = document.querySelector('a-scene');
+                    var p = document.createElement('a-plane');
+                    p.setAttribute('opacity', '0');
+                    p.setAttribute('position', '0 4 -1');
+                    p.setAttribute('height', '20');
+                    p.setAttribute('width', '12');
+                    p.setAttribute('class', 'collidable');
+                    p.addEventListener('raycaster-intersected', (e) => {
+                        intersection = getNearestIntersection(e.detail.intersections);
+                        function getNearestIntersection(intersections) {
+                            for (var i = 0, l = intersections.length; i < l; i++) {
+                                return intersections[i];
+                            }
+                            return null;
+                        }
+                        const d = document.getElementById('debug');
+                        d.innerText = intersection.point.x + " " +
+                                      intersection.point.y + " " +
+                                      intersection.point.z;
+                    });
+                    scene.appendChild(p);
+
+                    /*
                     place.addEventListener('raycaster-intersected', (e) => {
                         intersection = getNearestIntersection(e.detail.intersections);
                         function getNearestIntersection(intersections) {
@@ -161,6 +184,7 @@
                                       intersection.point.y + " " +
                                       intersection.point.z;
                     });
+                    */
             
                     cancelButton.addEventListener('click', () => {
                         mode = CAMERA;
@@ -424,7 +448,9 @@
 
             <a-light type="ambient" intensity="1"></a-light>
 
+            <!--
             <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable"></a-plane>
+            -->
             <a-circle src="#Moon"
                       id="circle1"
                       opacity="0"
