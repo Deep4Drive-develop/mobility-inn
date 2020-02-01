@@ -383,7 +383,7 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 11%;
-    bottom: -20px;
+    bottom: -24px;
     margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
@@ -410,7 +410,7 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 88%;
-    bottom: -20px;
+    bottom: -24px;
     margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
@@ -437,7 +437,7 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 50%;
-    bottom: -20px;
+    bottom: -24px;
     margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
