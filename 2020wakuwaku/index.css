@@ -190,7 +190,8 @@
     width: 90%;
     height: 420px;
     top: 8px;
-    left: 5%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 20;
     display: none;
     border-radius: 8px;
@@ -238,7 +239,8 @@
 	position: absolute;
 	width: 80%;
 	height: 144px;
-	left: 10%; 
+        left: 50%;
+        transform: translateX(-50%);
         top: 48px;
         z-index: 25;
 	pointer-events: auto;
