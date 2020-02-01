@@ -383,7 +383,8 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 11%;
-    border: 15px solid transparent; /* 線幅の設定 */
+    border-width: 15px 4px 0 4px;
+    border: solid transparent; /* 線幅の設定 */
     bottom: -30px; /* 線幅の2倍 */
     margin-left: -15px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
@@ -407,7 +408,8 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 88%;
-    border: 15px solid transparent; /* 線幅の設定 */
+    border-width: 15px 4px 0 4px;
+    border: solid transparent; /* 線幅の設定 */
     bottom: -30px; /* 線幅の2倍 */
     margin-left: -15px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
@@ -431,7 +433,8 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 50%;
-    border: 15px solid transparent; /* 線幅の設定 */
+    border-width: 15px 4px 0 4px;
+    border: solid transparent; /* 線幅の設定 */
     bottom: -30px; /* 線幅の2倍 */
     margin-left: -15px; /* 線幅だけずらす */
     border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
