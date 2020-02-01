@@ -389,7 +389,7 @@
 .balloon1::before { /* 三角の部分 */
     content: '';
     position: absolute; /* 位置固定 */
-    left: 11%;
+    left: 10.5%;
     bottom: -24px;
     margin-left: -15px; /* 線幅だけずらす */
 
