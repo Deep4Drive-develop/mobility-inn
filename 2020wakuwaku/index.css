@@ -383,14 +383,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 11%;
-    bottom: -15px;
-    margin-left: -4px; /* 線幅だけずらす */
+    bottom: -40px;
+    margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
-    border-right: 4px solid transparent;
-    border-bottom: 0 solid transparent;
-    bottom-left: 4px solid transparent;
-    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    bottom-left: 15px solid transparent;
 }
 .balloon2 {
     position: absolute;
@@ -411,14 +410,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 88%;
-    bottom: -15px;
-    margin-left: -4px; /* 線幅だけずらす */
+    bottom: -40px;
+    margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
-    border-right: 4px solid transparent;
-    border-bottom: 0 solid transparent;
-    bottom-left: 4px solid transparent;
-    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    bottom-left: 15px solid transparent;
 }
 .balloon3 {
     position: absolute;
@@ -439,14 +437,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 50%;
-    bottom: -15px;
-    margin-left: -4px; /* 線幅だけずらす */
+    bottom: -40px;
+    margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
-    border-right: 4px solid transparent;
-    border-bottom: 0 solid transparent;
-    bottom-left: 4px solid transparent;
-    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    bottom-left: 15px solid transparent;
 }
 
 .hide {
