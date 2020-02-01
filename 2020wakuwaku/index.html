@@ -150,51 +150,15 @@
 
                     var scene = document.querySelector('a-scene');
                     var p = document.createElement('a-plane');
+                    p.setAttribute('id', 'place');
                     p.setAttribute('opacity', '0.3');
                     p.setAttribute('color', 'blue');
                     p.setAttribute('position', '0 4 -1');
                     p.setAttribute('height', '30');
                     p.setAttribute('width', '24');
                     p.setAttribute('class', 'collidable');
-                    p.addEventListener('raycaster-intersected', (e) => {
-                        const d = document.getElementById('debug');
-                        //d.innerText = "EVENT";
-		        d.innerText = "";
-                        Object.keys(e).forEach(function (key) {
-                            d.innerText = d.innerText + key + " : " + e[key] + ", "; 
-                        });
-
-                        /*
-                        function getNearestIntersection(intersections) {
-                            for (var i = 0, l = intersections.length; i < l; i++) {
-                                return intersections[i];
-                            }
-                            return null;
-                        }
-                        const d = document.getElementById('debug');
-                        d.innerText = intersection.point.x + " " +
-                                      intersection.point.y + " " +
-                                      intersection.point.z;
-                        */
-                    });
                     scene.appendChild(p);
 
-                    /*
-                    place.addEventListener('raycaster-intersected', (e) => {
-                        intersection = getNearestIntersection(e.detail.intersections);
-                        function getNearestIntersection(intersections) {
-                            for (var i = 0, l = intersections.length; i < l; i++) {
-                                return intersections[i];
-                            }
-                            return null;
-                        }
-                        const p = document.getElementById('debug');
-                        p.innerText = intersection.point.x + " " +
-                                      intersection.point.y + " " +
-                                      intersection.point.z;
-                    });
-                    */
-            
                     cancelButton.addEventListener('click', () => {
                         mode = CAMERA;
                         container.classList.remove('photo');
@@ -347,6 +311,33 @@
                     setTimeout(guide_hide, 6000);
                 }
             })
+
+            AFRAME.registerComponent('crawling-cursor', {
+                init: function() {
+                    var el = this.el;
+                    var place = document.querySelector('#place');
+                    
+                    el.addEventListener("raycaster-intersection", function(e) {
+                        
+                        var intersection = getNearestIntersection(e.detail.intersections);
+                        const d = document.getElementById('debug');
+                        d.innerText = intersection.point.x + " " +
+                                      intersection.point.y + " " +
+                                      intersection.point.z;
+            
+                        // cursorの座標 = 交差地点の座標 + 法線ベクトル×0.1 （少しだけ交差地点から浮かせる）
+                        // var cursorPosition = new THREE.Vector3().addVectors(intersection.point, intersection.face.normal.multiplyScalar(0.1));
+            
+                        // 最も近い交差地点を取得する
+                        function getNearestIntersection(intersections) {
+                            for (var i = 0, l = intersections.length; i < l; i++) {
+                                return intersections[i];
+                            }
+                            return null;
+                        }
+                    });
+                }
+            });
         </script>
         <link rel="stylesheet" href="index.css">
     </head>
@@ -447,7 +438,9 @@
             <a-camera
                 id="main_camera"
                 position="0 -0.3 8"
-                raycaster="objects: .collidable; showLine: true; far: 100" line="color: orange; opacity:0.5">
+                raycaster="objects: .collidable; showLine: true; far: 100"
+                crawling-tower
+                line="color: orange; opacity:0.5">
             </a-camera>
 
             <a-light type="directinal"
