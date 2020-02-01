@@ -216,30 +216,28 @@
                                 const balloon3 = document.getElementById('balloon3');
                                 balloon2.classList.add('hide');
 
-                                var scene = document.querySelector('a-scene');
-                                var model = document.createElement('a-circle');
-                                model.setAttribute('src', '#Moon');
-                                model.setAttribute('id', 'circle');
-                                model.setAttribute('radius', 3);
-                                model.setAttribute('position', '0 5 0');
-                                model.setAttribute('rotation', '0 0 0');
-                                model.setAttribute('material', 'shader: gif');
-                                model.setAttribute('gif', '');
-                                scene.appendChild(model);
+                                var model = document.querySelector('#circle1');
+                                model.setAttribute('opacity', '1');
 
                                 balloon3.classList.remove('hide');
                                 background_mode = 1;
                             } else if(background_mode == 1) {
-                                var model = document.querySelector('#circle');
-                                model.setAttribute('src', '#Water');
+                                var model = document.querySelector('#circle1');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle2');
+                                model.setAttribute('opacity', '1');
                                 background_mode = 2;
                             } else if(background_mode == 2) {
-                                var model = document.querySelector('#circle');
-                                model.setAttribute('src', '#CherryBlossom');
+                                var model = document.querySelector('#circle2');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle3');
+                                model.setAttribute('opacity', '1');
                                 background_mode = 3;
                             } else {
-                                var model = document.querySelector('#circle');
-                                model.setAttribute('src', '#Moon');
+                                var model = document.querySelector('#circle3');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle1');
+                                model.setAttribute('opacity', '1');
                                 background_mode = 1;
                             }
                         })
@@ -339,6 +337,31 @@
             </a-light>
 
             <a-light type="ambient" intensity="1"></a-light>
+            <a-circle src="#Moon"
+                      id="circle1"
+                      opacity="0"
+                      radius="3"
+                      position="0 5 0"
+                      rotation="0 0 0"
+                      material="shader: gif"
+                      gif="">
+            <a-circle src="#Water"
+                      id="circle2"
+                      opacity="0"
+                      radius="3"
+                      position="0 5 0"
+                      rotation="0 0 0"
+                      material="shader: gif"
+                      gif="">
+            <a-circle src="#CherryBlossom"
+                      id="circle3"
+                      opacity="0"
+                      radius="3"
+                      position="0 5 0"
+                      rotation="0 0 0"
+                      material="shader: gif"
+                      gif="">
+            </a-circle>
         </a-scene>
     </body>
 </html>
