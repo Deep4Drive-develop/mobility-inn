@@ -31,6 +31,7 @@
             var oauth_result;
             var mask_flag;
             var mode;
+            var intersection;
 
             function twitter_init(container) {
                 OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
@@ -80,7 +81,8 @@
                     tower_.setAttribute('src', '#tower' + String(i));
                     tower_.setAttribute('id', 'tower_' + String(i));
                     tower_.setAttribute('scale', '0.03 0.03 0.03');
-                    tower_.setAttribute('position', '0 0 0');
+                    //tower_.setAttribute('position', '0 0 0');
+                    tower_.setAttribute('position', intersection.point.x + ' ' + intersection.point.y + ' ' + intersection.point.z);
                     tower_.setAttribute("visible", "false");
                     scene.appendChild(tower_);
                 }
@@ -94,7 +96,8 @@
 
                 var p = document.createElement('a-plane');
                 p.setAttribute('opacity', '0');
-                p.setAttribute('position', '0 4 -1');
+                //p.setAttribute('position', '0 4 -1');
+                p.setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+4) + ' ' + (intersection.point.z-1));
                 p.setAttribute('height', '20');
                 p.setAttribute('width', '12');
                 p.setAttribute('class', 'collidable');
@@ -111,6 +114,10 @@
                     mask_flag = 1;
                 });
                 scene.appendChild(p);
+
+                document.querySelector('#circle1').setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+5) + ' ' + intersection.point.z);
+                document.querySelector('#circle2').setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+5) + ' ' + intersection.point.z);
+                document.querySelector('#circle3').setAttribute('position', intersection.point.x + ' ' + (intersection.point.y+5) + ' ' + intersection.point.z);
             }
 
             AFRAME.registerComponent('photo-mode', {
@@ -128,6 +135,7 @@
                     const tweetButton = document.getElementById('tweetButton');
                     const bufferAgreeButton = document.getElementById('bufferAgreeButton');
                     const bufferBackButton = document.getElementById('bufferBackButton');
+                    const place = document.getElementById('place');
 
                     var photo_image;
                     var background_mode = 0;
@@ -137,6 +145,16 @@
             
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
+
+                    place.addEventListener('raycaster-intersected', (e) => {
+                        intersection = getNearestIntersection(e.detail.intersections);
+                        function getNearestIntersection(intersections) {
+                            for (var i = 0, l = intersections.length; i < l; i++) {
+                                return intersections[i];
+                            }
+                            return null;
+                        }
+                    });
             
                     cancelButton.addEventListener('click', () => {
                         mode = CAMERA;
@@ -391,6 +409,8 @@
             </a-light>
 
             <a-light type="ambient" intensity="1"></a-light>
+
+            <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable"></a-plane>
             <a-circle src="#Moon"
                       id="circle1"
                       opacity="0"
