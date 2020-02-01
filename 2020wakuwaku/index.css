@@ -383,13 +383,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 11%;
-    bottom: -40px;
+    bottom: -20px;
     margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
     border-right: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    bottom-left: 15px solid transparent;
+    border-left: 15px solid transparent;
 }
 .balloon2 {
     position: absolute;
@@ -410,13 +410,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 88%;
-    bottom: -40px;
+    bottom: -20px;
     margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
     border-right: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    bottom-left: 15px solid transparent;
+    border-left: 15px solid transparent;
 }
 .balloon3 {
     position: absolute;
@@ -437,13 +437,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 50%;
-    bottom: -40px;
+    bottom: -20px;
     margin-left: -15px; /* 線幅だけずらす */
 
     border-top: 15px solid rgba(53, 165, 110, 255);
     border-right: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    bottom-left: 15px solid transparent;
+    border-left: 15px solid transparent;
 }
 
 .hide {
