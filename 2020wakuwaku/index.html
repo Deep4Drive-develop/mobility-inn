@@ -125,16 +125,6 @@
                     var background_mode = 0;
 
                     mask_flag = 0;
-
-                    var model = document.querySelector('#circle1');
-                    model.removeAttribute('position');
-                    model.setAttribute('position', {x: 0, y: 5, z: 0});
-                    var model = document.querySelector('#circle2');
-                    model.removeAttribute('position');
-                    model.setAttribute('position', {x: 0, y: 5, z: 0});
-                    var model = document.querySelector('#circle3');
-                    model.removeAttribute('position');
-                    model.setAttribute('position', {x: 0, y: 5, z: 0});
             
                     // Container starts hidden so it isn't visible when the page is still loading
                     container.style.display = 'block';
@@ -285,7 +275,7 @@
                 投稿にはTwitterへのログインが必要です。<br/>
                 <br/>
                 投稿をされる方は、次の画面で<br/>
-                <div style="color: #00ACEE">「連携アプリを認証」</div>を選択すると<br/>
+                <span style="color: #00ACEE">「連携アプリを認証」</span>を選択すると<br/>
                 ログインできます。
             </div>
             <div id="bufferAgreeButton">Twitterログイン画面へ</div>
@@ -377,6 +367,7 @@
                       rotation="0 0 0"
                       material="shader: gif"
                       gif="">
+            </a-circle>
             <a-circle src="#Water"
                       id="circle2"
                       opacity="0"
@@ -385,6 +376,7 @@
                       rotation="0 0 0"
                       material="shader: gif"
                       gif="">
+            </a-circle>
             <a-circle src="#CherryBlossom"
                       id="circle3"
                       opacity="0"

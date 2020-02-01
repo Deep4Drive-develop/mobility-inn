@@ -305,7 +305,7 @@
     pointer-events: auto;
     text-align: center;
     z-index: 30;
-    padding: 1px;
+    padding: 1px 4px;
     border-radius: 8px;
 
     display: none;
