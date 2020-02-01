@@ -275,15 +275,13 @@
     z-index: 20;
     border-radius: 8px;
     text-align: center; /* テキストの揃え */
-
-	display: none;
+    display: none;
 }
 #bufferContents {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    -webkit- transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%);
+    display: none;
 }
 #bufferBackButton {
     position: absolute;
@@ -300,6 +298,7 @@
 }
 #bufferText1 {
     position: relative;
+    width: 90%;
     height: 144px;
     /* top: 48px; */
     top: 0;
@@ -311,6 +310,7 @@
 }
 #bufferAgreeButton {
     position: relative;
+    width: 90%;
     background-color: #00acee;
     color: white;
     height: 24px;
@@ -330,7 +330,7 @@
 }
 #bufferText2 {
     position: relative;
-    position: absolute;
+    width: 90%;
     height: 48px;
     /* top: 230px; */
     top: 182px;
@@ -344,17 +344,20 @@
 .buffer #bufferWindow {
     display: block;
 }
+.buffer #bufferContents {
+    display: block;
+}
 .buffer #bufferBackButton {
     display: block;
 }
 .buffer #bufferText1 {
-	display: block;
+    display: block;
 }
 .buffer #bufferAgreeButton {
     display: block;
 }
 .buffer #bufferText2 {
-	display: block;
+    display: block;
 }
 
 #menuBar {
