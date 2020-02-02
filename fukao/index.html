@@ -250,6 +250,9 @@
                             const balloon1 = document.getElementById('balloon1');
                             const balloon2 = document.getElementById('balloon2');
                             balloon1.classList.add('hide');
+
+                            this.el.sceneEl.emit('recenter')
+
                             make_tower();
 
                             var balloon2_hide = function() {
