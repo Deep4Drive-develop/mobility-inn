@@ -85,7 +85,6 @@
        
                 for(var i = 1; i <= 36; i++) {
                     var tower_ = document.createElement('a-gltf-model');
-                    var theta = Math.round(Math.atan2(8.0/camera_front.point.x) * 180/Math.PI);
                     tower_.setAttribute('src', '#tower' + String(i));
                     tower_.setAttribute('id', 'tower_' + String(i));
                     tower_.setAttribute('scale', '0.03 0.03 0.03');
