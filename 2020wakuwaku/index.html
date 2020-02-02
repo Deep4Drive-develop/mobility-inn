@@ -90,9 +90,10 @@
             }
 
             function make_tower() {
+                var camera_position = camera_.getAttribute('position');
                 var theta = Math.round(Math.atan(camera_front.point.x/camera_position.z)*180/Math.PI);
 
-                //const dbg = document.getElementById('debug');
+                const dbg = document.getElementById('debug');
                 //const camera_ = document.getElementById('main_camera');
                 //var camera_position = camera_.getAttribute('position');
                 //var vec1 = JSON.parse(JSON.stringify(camera_front.face.normal));
@@ -162,6 +163,7 @@
                 //var y_ = 0;
                 //var z_ = 0;
 
+                dbg.innerText = "theta : " + theta;
                 //dbg.innerText = "@ X: " + x_ + " , Y: " + y_ + " , Z: " + z_ + " , theta : " + theta;
                 ////dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
                 ///* 0 0 1 2.63(150°くらい) */
