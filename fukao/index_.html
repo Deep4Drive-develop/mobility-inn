@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <title>山手線AR</title>
+
+        <script src="//cdn.8thwall.com/web/aframe/8frame-0.9.0.min.js"></script>
+        <script defer src="//cdn.8thwall.com/web/aframe/aframe-animation-component-5.1.2.min.js"></script>
+        <script src="//cdn.8thwall.com/web/aframe/aframe-extras-4.2.0.min.js"></script>
+        <script src="https://cdn.8thwall.com/web/xrextras/xrextras.js"></script>
+
+        <!-- For gif img -->
+        <script src="https://raw.githubusercontent.com/thiagolopess/aframe-gif-shader/bug/transparent-gifs/dist/aframe-gif-shader.min.js"></script>
+        <script src="https://raw.githubusercontent.com/thiagolopess/aframe-gif-shader/bug/transparent-gifs/dist/aframe-gif-component.min.js"></script>
+        <!--
+        <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+        <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
+        <script src="https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js"></script>
+        -->
+
+        <!-- 8th Wall API key -->
+        <script async src="//apps.8thwall.com/xrweb?appKey=bnWBr8smMOtm8hsLzv1M3AsjyZEPcHize0Tqflu9nYQxqu0yf0fp8mul8iPtRtqb0oR3LW"></script>
+
+        <script src="./js/oauth.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
+        <script>
+            const CAMERA = 0;
+            const PHOTO = 1;
+            const BUFFER = 2;
+            const TWEET = 3;
+            const DARKNESS = 4;
+            var oauth_result;
+            var mask_flag;
+            var mode;
+            var camera_front;
+
+            function twitter_init(container) {
+                OAuth.initialize('SyBFiEar-VxM_498UO4pywHi1Z0');
+                OAuth.popup('twitter').then(function(result) {
+                    container.classList.add('tweet');
+                    oauth_result = result;
+                }).fail(function(err){
+                    ;
+                });
+            }
+
+            function twitter_tweet(detail, tweet_text) {
+                var bound_text = "------------------------1ae47d990b354d1b00a4eea60e6b5b72";
+		var image_src = "--" + bound_text + "\r\n" +
+	            'Content-Disposition: form-data; name="media_data"' + "\r\n" +
+		    "\r\n" +
+                    detail + "\r\n" + "--" + bound_text + "--\r\n\r\n";
+                var param1 = {
+                    headers: {
+                        'Content-Type' : 'multipart/form-data; boundary=' + bound_text
+                    },
+                    data: image_src
+                };
+                oauth_result.post('https://upload.twitter.com/1.1/media/upload.json', param1).done(function (response) {
+                    var media_id_ = response.media_id_string;
+                    var param = {
+                        data: {
+                            status: tweet_text,
+                            media_ids: media_id_
+                        }
+                    };
+                    oauth_result.post('/1.1/statuses/update.json', param).done(function (response) {
+                        ;
+                    }).fail(function (err) {
+                        ;
+                    });
+                }).fail(function(err) {
+                    ;
+                });
+            }
+
+            function make_tower() {
+                var scene = document.querySelector('a-scene');
+
+                var theta = Math.round(Math.atan(camera_front.point.x/camera_position.z)*180/Math.PI);
+       
+                for(var i = 1; i <= 36; i++) {
+                    var tower_ = document.createElement('a-gltf-model');
+                    tower_.setAttribute('src', '#tower' + String(i));
+                    tower_.setAttribute('id', 'tower_' + String(i));
+                    tower_.setAttribute('scale', '0.03 0.03 0.03');
+                    //tower_.setAttribute('position', '0 0 0');
+                    tower_.setAttribute('position', camera_front.point.x + ' ' + camera_front.point.y + ' ' + camera_front.point.z);
+                    tower_.setAttribute('rotation', '0 ' + theta +' 0');
+                    tower_.setAttribute("visible", "false");
+                    scene.appendChild(tower_);
+                }
+       
+                for(var i = 1; i <= 33; i++) {
+                    document.querySelector('#tower_'+String(i)).setAttribute("animation", "property: visible; to: true; delay: " + String(250*i) + ";");
+                }
+                document.querySelector('#tower_34').setAttribute("animation", "property: visible; to: true; delay: 1250;")
+                document.querySelector('#tower_35').setAttribute("animation", "property: visible; to: true; delay: 4000;")
+                document.querySelector('#tower_36').setAttribute("animation", "property: visible; to: true; delay: 7250;")
+
+                var p = document.createElement('a-plane');
+                p.setAttribute('opacity', '0');
+                //p.setAttribute('position', '0 4 -1');
+                p.setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+4) + ' ' + (camera_front.point.z-1));
+                p.setAttribute('height', '20');
+                p.setAttribute('width', '12');
+                p.setAttribute('class', 'collidable');
+                p.addEventListener('raycaster-intersected', () => {
+                    const container = document.getElementById('photoModeContainer');
+                    container.classList.remove('mask');
+                    mask_flag = 0;
+                });
+                p.addEventListener('raycaster-intersected-cleared', () => {
+                    if(mode == CAMERA) {
+                        const container = document.getElementById('photoModeContainer');
+                        container.classList.add('mask');
+                    }
+                    mask_flag = 1;
+                });
+                scene.appendChild(p);
+
+                document.querySelector('#circle1').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
+                document.querySelector('#circle2').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
+                document.querySelector('#circle3').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
+                document.querySelector('#circle4').setAttribute('position', camera_front.point.x + ' ' + (camera_front.point.y+5) + ' ' + camera_front.point.z);
+
+
+            }
+
+            AFRAME.registerComponent('photo-mode', {
+                init: function() {
+                    const container = document.getElementById('photoModeContainer');
+                    const image = document.getElementById('photoModeImage');
+                    const shutterButton = document.getElementById('shutterButton');
+                    const cancelButton = document.getElementById('cancelButton');
+                    const actionButton = document.getElementById('actionButton');
+                    const backgroundButton = document.getElementById('backgroundButton');
+                    const tweet3Button = document.getElementById('tweet3Button');
+                    const tweet3CancelButton = document.getElementById('tweet3CancelButton');
+                    const tweet3Text = document.getElementById('tweet3Text');
+                    const saveButton = document.getElementById('saveButton');
+                    const tweetButton = document.getElementById('tweetButton');
+                    const bufferAgreeButton = document.getElementById('bufferAgreeButton');
+                    const bufferBackButton = document.getElementById('bufferBackButton');
+                    //const place = document.getElementById('place');
+                    const place = document.querySelector('#place');
+
+                    var photo_image;
+                    var background_mode = 0;
+
+                    mode = CAMERA;
+                    mask_flag = 0;
+            
+                    // Container starts hidden so it isn't visible when the page is still loading
+                    container.style.display = 'block';
+
+                    /*
+                    var scene = document.querySelector('a-scene');
+                    var p = document.createElement('a-plane');
+                    p.setAttribute('id', 'place');
+                    p.setAttribute('opacity', '0.3');
+                    p.setAttribute('color', 'blue');
+                    p.setAttribute('position', '0 4 -1');
+                    p.setAttribute('height', '30');
+                    p.setAttribute('width', '24');
+                    p.setAttribute('class', 'collidable');
+                    scene.appendChild(p);
+                    */
+
+                    cancelButton.addEventListener('click', () => {
+                        mode = CAMERA;
+                        container.classList.remove('photo');
+
+                        actionButton.classList.remove('hide');
+                        backgroundButton.classList.remove('hide');
+
+                        if(mask_flag == 1) {
+                            const container = document.getElementById('photoModeContainer');
+                            container.classList.add('mask');
+                        }
+                    })
+
+                    saveButton.addEventListener('click', () => {
+                        // photo download
+                        var a = document.createElement('a');
+                        a.href = image.src;
+                        a.download = "download.jpg";
+                        a.click();
+                    })
+
+                    tweetButton.addEventListener('click', () => {
+                        mode = BUFFER;
+                        container.classList.add('buffer');
+                        container.classList.remove('mask');
+                    })
+
+                    tweet3Button.addEventListener('click', () => {
+                        mode = PHOTO;
+                        twitter_tweet(photo_image, tweet3Text.value);
+                        container.classList.remove('tweet');
+                        container.classList.remove('mask');
+                    })
+
+                    tweet3CancelButton.addEventListener('click', () => {
+                        mode = PHOTO;
+                        container.classList.remove('tweet');
+                        container.classList.remove('mask');
+                    })
+
+                    bufferAgreeButton.addEventListener('click', () => {
+                        mode = TWEET;
+                        container.classList.remove('buffer');
+                        container.classList.remove('mask');
+                        twitter_init(container);
+                    })
+                    bufferBackButton.addEventListener('click', () => {
+                        mode = PHOTO;
+                        container.classList.remove('buffer');
+                        container.classList.remove('mask');
+                    })
+
+                    this.el.sceneEl.addEventListener('screenshotready', e => {
+                        mode = PHOTO;
+                        container.classList.remove('mask');
+                        container.classList.remove('flash');
+                        // If an error occurs while trying to take the screenshot, e.detail will be empty.
+                        // We could either retry or return control to the user
+                        if (!e.detail) {
+                            return;
+                        }
+                        photo_image = e.detail;
+
+                        // e.detail is the base64 representation of the JPEG screenshot
+                        image.src = 'data:image/jpeg;base64,' + e.detail;
+
+                        // Show the photo
+                        container.classList.add('photo');
+
+                        actionButton.classList.add('hide');
+                        backgroundButton.classList.add('hide');
+                    })
+
+                    /* 6秒後にガイドを消して、バルーン出す */
+                    var guide_hide = function() {
+                        const guide = document.getElementById('guide');
+                        const balloon1 = document.getElementById('balloon1');
+                        guide.classList.add('hide');
+                        balloon1.classList.remove('hide');
+
+                        actionButton.addEventListener('click', () => {
+                            const balloon1 = document.getElementById('balloon1');
+                            const balloon2 = document.getElementById('balloon2');
+                            balloon1.classList.add('hide');
+
+                            make_tower();
+
+                            var balloon2_hide = function() {
+                                if(background_mode == 0) {
+                                    balloon2.classList.remove('hide');
+                                }
+                            }
+                            setTimeout(balloon2_hide, 8500);
+                        })
+
+                        shutterButton.addEventListener('click', () => {
+                            if(mask_flag == 0) {
+                                mode = PHOTO;
+                                container.classList.remove('mask');
+                                const scene = document.getElementById('scene');
+                                const balloon3 = document.getElementById('balloon3');
+
+                                balloon3.classList.add('hide');
+
+                                // Emit a screenshotrequest to the xrweb component
+                                scene.sceneEl.emit('screenshotrequest');
+            
+                                // Show the flash while the image is being taken
+                                container.classList.add('flash');
+                            }
+                        })
+
+                        backgroundButton.addEventListener('click', () => {
+                            if(background_mode == 0) {
+                                const balloon2 = document.getElementById('balloon2');
+                                const balloon3 = document.getElementById('balloon3');
+                                balloon2.classList.add('hide');
+
+                                var model = document.querySelector('#circle1');
+                                model.setAttribute('opacity', '1');
+
+                                balloon3.classList.remove('hide');
+                                background_mode = 1;
+                            } else if(background_mode == 1) {
+                                var model = document.querySelector('#circle1');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle2');
+                                model.setAttribute('opacity', '1');
+                                background_mode = 2;
+                            } else if(background_mode == 2) {
+                                var model = document.querySelector('#circle2');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle3');
+                                model.setAttribute('opacity', '1');
+                                background_mode = 3;
+                            } else if(background_mode == 3) {
+                                var model = document.querySelector('#circle3');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle4');
+                                model.setAttribute('opacity', '1');
+                                background_mode = 4;
+                            } else if(background_mode == 4) {
+                                var model = document.querySelector('#circle4');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle1');
+                                model.setAttribute('opacity', '1');
+                                background_mode = 1;
+                            }
+                        })
+                    };
+                    setTimeout(guide_hide, 6000);
+                }
+            })
+
+            AFRAME.registerComponent('raycaster-listen', {
+                init: function () {
+                    // Use events to figure out what raycaster is listening so we don't have to
+                    // hardcode the raycaster.
+                    this.el.addEventListener('raycaster-intersected', (evt) => {
+                        this.raycaster = evt.detail.el;
+                    });
+                    this.el.addEventListener('raycaster-intersected-cleared', (evt) => {
+                        this.raycaster = null;
+                    });
+                },
+                tick: function () {
+                    if (!this.raycaster) { return; }  // Not intersecting.
+                    let intersection = this.raycaster.components.raycaster.getIntersection(this.el);
+                    if (!intersection) { return; }
+                    camera_front = intersection;
+                }
+            });
+        </script>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div id="photoModeContainer" style="display: none">
+            <img id="photoModeImage">
+            <div id="flash"></div>
+            <div id="background_opacity"></div>
+
+            <div id="tweetWindow"></div>
+            <textarea id="tweet3Text" cols="33" rows="5">#東京感動線 #山手線を語ろう #山手線AR @deep4drive</textarea>
+            <div id="tweet3Button">ツイート</div>
+            <img id="tweetIcon" src="image/Twitter_Logo_Blue.svg"></img>
+            <div id="tweet3CancelButton">Cancel</div>
+
+            <div id="bufferWindow">
+                <div id="bufferBackButton">&lt;</div>
+                <div id="bufferContents">
+                    <div id="bufferText1">
+                        投稿にはTwitterへのログインが必要です。<br/>
+                        <br/>
+                        投稿をされる方は、次の画面で<br/>
+                        <span style="color: #00ACEE">「連携アプリを認証」</span>を選択すると<br/>
+                        ログインできます。
+                    </div>
+                    <div id="bufferAgreeButton">Twitterログイン画面へ</div>
+                    <div id="bufferText2">当サービスにおいて、JR東日本とDeep4Driveは<br/>一切の個人情報を取得しておりません。</div>
+                </div> <!-- bufferContents -->
+            </div> <!-- bufferWindow -->
+
+            <div id="menuBar"></div>
+
+            <img id="actionButton" src="image/tokyo_tower.svg"></img>
+            <img id="shutterButton" src="image/photo.svg"></img>
+            <img id="backgroundButton" src="image/night_background.svg"></img>
+
+            <img class="hide" id="cancelButton" src="image/back.svg"></img>
+            <img class="hide" id="saveButton" src="image/save.svg"></img>
+            <img class="hide" id="tweetButton" src="image/Twitter_Logo_Blue.svg"></img>
+
+            <div id="guide">ちょっと上に向けてみよう！</div>
+            <div id="guide2">元の位置に戻してみよう！</div>
+            <!--
+            <div id="debug">debug</div>
+            -->
+            <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
+            <div class="balloon2 hide" id="balloon2">背景を変えてみよう！</div>
+            <div class="balloon3 hide" id="balloon3">Twitterにシェアしてみよう！</div>
+        </div>
+        <a-scene
+            id="scene"
+            xrweb
+            xrextras-almost-there
+            xrextras-runtime-error
+            xrextras-loading
+            photo-mode>
+            <a-assets>
+                <a-asset-item id="tower1" src="model/01.glb"></a-asset-item>
+                <a-asset-item id="tower2" src="model/02.glb"></a-asset-item>
+                <a-asset-item id="tower3" src="model/03.glb"></a-asset-item>
+                <a-asset-item id="tower4" src="model/04.glb"></a-asset-item>
+                <a-asset-item id="tower5" src="model/05.glb"></a-asset-item>
+                <a-asset-item id="tower6" src="model/06.glb"></a-asset-item>
+                <a-asset-item id="tower7" src="model/07.glb"></a-asset-item>
+                <a-asset-item id="tower8" src="model/08.glb"></a-asset-item>
+                <a-asset-item id="tower9" src="model/09.glb"></a-asset-item>
+                <a-asset-item id="tower10" src="model/10.glb"></a-asset-item>
+                <a-asset-item id="tower11" src="model/11.glb"></a-asset-item>
+                <a-asset-item id="tower12" src="model/12.glb"></a-asset-item>
+                <a-asset-item id="tower13" src="model/13.glb"></a-asset-item>
+                <a-asset-item id="tower14" src="model/14.glb"></a-asset-item>
+                <a-asset-item id="tower15" src="model/15.glb"></a-asset-item>
+                <a-asset-item id="tower16" src="model/16.glb"></a-asset-item>
+                <a-asset-item id="tower17" src="model/17.glb"></a-asset-item>
+                <a-asset-item id="tower18" src="model/18.glb"></a-asset-item>
+                <a-asset-item id="tower19" src="model/19.glb"></a-asset-item>
+                <a-asset-item id="tower20" src="model/20.glb"></a-asset-item>
+                <a-asset-item id="tower21" src="model/21.glb"></a-asset-item>
+                <a-asset-item id="tower22" src="model/22.glb"></a-asset-item>
+                <a-asset-item id="tower23" src="model/23.glb"></a-asset-item>
+                <a-asset-item id="tower24" src="model/24.glb"></a-asset-item>
+                <a-asset-item id="tower25" src="model/25.glb"></a-asset-item>
+                <a-asset-item id="tower26" src="model/26.glb"></a-asset-item>
+                <a-asset-item id="tower27" src="model/27.glb"></a-asset-item>
+                <a-asset-item id="tower28" src="model/28.glb"></a-asset-item>
+                <a-asset-item id="tower29" src="model/29.glb"></a-asset-item>
+                <a-asset-item id="tower30" src="model/30.glb"></a-asset-item>
+                <a-asset-item id="tower31" src="model/31.glb"></a-asset-item>
+                <a-asset-item id="tower32" src="model/32.glb"></a-asset-item>
+                <a-asset-item id="tower33" src="model/33.glb"></a-asset-item>
+                <a-asset-item id="tower34"  src="model/mall.glb"></a-asset-item>
+                <a-asset-item id="tower35"  src="model/mall_h13.glb"></a-asset-item>
+                <a-asset-item id="tower36"  src="model/h13_top.glb"></a-asset-item>
+                <img id="CherryBlossom" src="image/CherryBlossom.gif">
+                <img id="Moon" src="image/Moon.gif">
+                <img id="Water" src="image/Water.gif">
+                <img id="CherryBlossom2" src="image/2yqT.gif">
+            </a-assets>
+
+            <a-camera
+                id="main_camera"
+                position="0 -0.3 8"
+                raycaster="objects: .collidable; showLine: true; far: 100"
+                crawling-tower
+                line="color: orange; opacity:0.5">
+            </a-camera>
+
+            <a-light type="directinal"
+                     intensity="0.5"
+                     animation="property: position; from: -5 -5 5; to: 5 5 5; dur: 2000; easing: linear; dir: alternate; loop: true">
+            </a-light>
+
+            <a-light type="ambient" intensity="1"></a-light>
+
+            <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable" raycaster-listen></a-plane>
+            <a-circle src="#Moon"
+                      id="circle1"
+                      opacity="0"
+                      radius="3"
+                      position="0 5 0"
+                      rotation="0 0 0"
+                      material="shader: gif"
+                      gif="">
+            </a-circle>
+            <a-circle src="#Water"
+                      id="circle2"
+                      opacity="0"
+                      radius="3"
+                      position="0 5 0"
+                      rotation="0 0 0"
+                      material="shader: gif"
+                      gif="">
+            </a-circle>
+            <a-circle src="#CherryBlossom"
+                      id="circle3"
+                      opacity="0"
+                      radius="3"
+                      position="0 5 0"
+                      rotation="0 0 0"
+                      material="shader: gif"
+                      gif="">
+            </a-circle>
+            <a-plane src="#CherryBlossom2"
+                      id="circle4"
+                      opacity="0"
+                      scale="5 5 5"
+                      position="0 5 0.1"
+                      material="shader:gif; transparent:false; alphaTest:0.5">
+            </a-plane>
+        </a-scene>
+    </body>
+</html>
