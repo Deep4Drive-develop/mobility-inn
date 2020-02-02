@@ -99,10 +99,10 @@
                 var theta = Math.atan2(tan_theta);
 
                 var x_rot = 0;
-                var y_rot = 45;
+                var y_rot = theta;
                 var z_rot = 0;
 
-                dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
+                dbg.innerText = "Y: " + y_rot;
 
                 var scene = document.querySelector('a-scene');
        
