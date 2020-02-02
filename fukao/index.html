@@ -251,10 +251,7 @@
                             const balloon2 = document.getElementById('balloon2');
                             balloon1.classList.add('hide');
 
-                            scene.emit('recenter', {
-                                origin: {x: 0, y: -0.3, z: 8},
-                                facing: {w: 1, x:0, y:0, z:0}
-                            });
+                            
 
                             make_tower();
 
@@ -457,7 +454,7 @@
 
             <a-light type="ambient" intensity="1"></a-light>
 
-            <a-plane id="place" opacity="0" position="0 0 0" height="30" width="24" class="collidable" raycaster-listen></a-plane>
+            <a-plane id="place" opacity="1" position="0 0 0" height="30" width="24" class="collidable" raycaster-listen></a-plane>
             <a-circle src="#Moon"
                       id="circle1"
                       opacity="0"
