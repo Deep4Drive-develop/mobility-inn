@@ -257,13 +257,13 @@
 
                         actionButton.addEventListener('click', () => {
                             const balloon1 = document.getElementById('balloon1');
-                            const balloon2 = document.getElementById('balloon2');
+                            const balloon2_1 = document.getElementById('balloon2-1');
                             balloon1.classList.add('hide');
                             make_tower();
 
                             var balloon2_hide = function() {
                                 if(background_mode == 0) {
-                                    balloon2.classList.remove('hide');
+                                    balloon2_1.classList.remove('hide');
                                 }
                             }
                             setTimeout(balloon2_hide, 8500);
