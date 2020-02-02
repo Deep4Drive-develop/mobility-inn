@@ -251,7 +251,10 @@
                             const balloon2 = document.getElementById('balloon2');
                             balloon1.classList.add('hide');
 
-                            this.el.sceneEl.emit('recenter')
+                            this.el.sceneEl.emit('recenter', {
+                                origin: {x: 0, y: -0.3, z: 8},
+                                facing: {w: 1, x:0, y:0, z:0}
+                            })
 
                             make_tower();
 
