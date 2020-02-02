@@ -83,12 +83,13 @@
        
                 for(var i = 1; i <= 36; i++) {
                     var tower_ = document.createElement('a-gltf-model');
+                    var theta = Math.atan2(8.0/camera_front.point.x) * 180/Math.PI;
                     tower_.setAttribute('src', '#tower' + String(i));
                     tower_.setAttribute('id', 'tower_' + String(i));
                     tower_.setAttribute('scale', '0.03 0.03 0.03');
                     //tower_.setAttribute('position', '0 0 0');
                     tower_.setAttribute('position', camera_front.point.x + ' ' + camera_front.point.y + ' ' + camera_front.point.z);
-                    tower_.setAttribute('rotation', '0 20 0');
+                    tower_.setAttribute('rotation', '0 ' + theta +' 0');
                     tower_.setAttribute("visible", "false");
                     scene.appendChild(tower_);
                 }
