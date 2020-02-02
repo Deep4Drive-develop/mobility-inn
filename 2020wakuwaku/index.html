@@ -116,9 +116,10 @@
                                   Math.sqrt(vec2.x*vec2.x + vec2.y*vec2.y + vec2.z*vec2.z))
                 var theta = Math.acos(cos_theta);
 
-                var x_ = 45;
-                var y_ = 0; /* y軸を中心に回転 */
-                var z_ = 0;
+                /* 前に倒れてくる形 */
+                //var x_ = 45;
+                //var y_ = 0;
+                //var z_ = 0;
 
                 /* x */
                 //var x_ = 0;
@@ -130,9 +131,9 @@
                 // x = cos theta x + sin theta z
                 // y = y
                 // z = - sin theta x + cos theta z
-                //var x_ = (Math.cos(theta)*360 + Math.sin(theta)*360) % 360;
-                //var y_ = 0;
-                //var z_ = (Math.sin(theta)*-1*360 + Math.cos(theta)*360) % 360;
+                var x_ = (Math.cos(theta)*360 + Math.sin(theta)*360) % 360;
+                var y_ = 0;
+                var z_ = (Math.sin(theta)*-1*360 + Math.cos(theta)*360) % 360;
 
                 /* z軸固定で回転 */
                 /* 0 - 359 , 360=0 */
@@ -143,8 +144,8 @@
                 //var y_ = (Math.sin(theta)*360 + Math.cos(theta)*360) % 360;
                 //var z_ = 0;
 
-                //dbg.innerText = "X: " + x_ + " , Y: " + y_ + " , Z: " + z_;
-                dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
+                dbg.innerText = "X: " + x_ + " , Y: " + y_ + " , Z: " + z_ + " , theta : " + theta;
+                //dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
                 /* 0 0 1 2.63(150°くらい) */
 
                 var scene = document.querySelector('a-scene');
