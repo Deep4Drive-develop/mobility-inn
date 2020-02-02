@@ -145,12 +145,18 @@
                 //var z_ = 0;
 
                 /* 各軸足しこんでみる */
+                /*
                 var _x = 360;
                 var _y = 360;
                 var _z = 360;
-                var x_ = (x_ + (Math.cos(theta)*_x + Math.sin(theta)*_z) + (Math.cos(theta)*_x + Math.sin(theta)*-1*_y)) % 360;
+                var x_ = (_x + (Math.cos(theta)*_x + Math.sin(theta)*_z) + (Math.cos(theta)*_x + Math.sin(theta)*-1*_y)) % 360;
                 var y_ = ((Math.cos(theta)*_y - Math.sin(theta)*_z) + _y + (Math.sin(theta)*_x + Math.cos(theta)*_y)) % 360;
                 var z_ = ((Math.sin(theta)*_y + Math.cos(theta)*_z) + (Math.sin(theta)*-1*_x + Math.cos(theta)*_z) + _z) % 360;
+                */
+
+                var x_ = Math.round((theta * 180) / 3.14);
+                var y_ = 0;
+                var z_ = 0;
 
                 dbg.innerText = "X: " + x_ + " , Y: " + y_ + " , Z: " + z_ + " , theta : " + theta;
                 //dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
