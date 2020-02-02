@@ -96,23 +96,30 @@
                 var camera_position = camera_.getAttribute('position');
                 var vec1 = JSON.parse(JSON.stringify(camera_front.face.normal));
                 var vec2 = JSON.parse(JSON.stringify(camera_front.face.normal));
+                /*
                 vec2.x = camera_front.point.x - camera_position.x;
                 vec2.y = camera_front.point.y - camera_position.y;
                 vec2.z = camera_front.point.z - camera_position.z;
-		/*
                 vec2.x = camera_front.point.x;
                 vec2.y = camera_front.point.y;
                 vec2.z = camera_front.point.z;
 		*/
+                vec1.x = vec1.x + camera_front.point.x;
+                vec1.y = vec1.y + camera_front.point.y;
+                vec1.z = vec1.z + camera_front.point.z;
+                vec2.x = camera_position.x;
+                vec2.y = camera_position.y;
+                vec2.z = camera_position.z;
 
                 var cos_theta = ((vec1.x*vec2.x)+(vec1.y*vec2.y)+(vec1.z*vec2.z)) / 
                                 ( Math.sqrt(vec1.x*vec1.x + vec1.y*vec1.y + vec1.z*vec1.z) *
                                   Math.sqrt(vec2.x*vec2.x + vec2.y*vec2.y + vec2.z*vec2.z))
                 var theta = Math.acos(cos_theta);
 
-                var x_ = 0;
-                var y_ = 45;
-                var z_ = 0;
+                /* 前に倒れてくる形 */
+                //var x_ = 45;
+                //var y_ = 0;
+                //var z_ = 0;
 
                 /* x */
                 //var x_ = 0;
@@ -124,9 +131,9 @@
                 // x = cos theta x + sin theta z
                 // y = y
                 // z = - sin theta x + cos theta z
-                //var x_ = (Math.cos(theta)*360 + Math.sin(theta)*360) % 360;
-                //var y_ = 0;
-                //var z_ = (Math.sin(theta)*-1*360 + Math.cos(theta)*360) % 360;
+                var x_ = (Math.cos(theta)*360 + Math.sin(theta)*360) % 360;
+                var y_ = 0;
+                var z_ = (Math.sin(theta)*-1*360 + Math.cos(theta)*360) % 360;
 
                 /* z軸固定で回転 */
                 /* 0 - 359 , 360=0 */
@@ -137,8 +144,9 @@
                 //var y_ = (Math.sin(theta)*360 + Math.cos(theta)*360) % 360;
                 //var z_ = 0;
 
-                //dbg.innerText = "X: " + x_ + " , Y: " + y_ + " , Z: " + z_;
-                dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
+                dbg.innerText = "X: " + x_ + " , Y: " + y_ + " , Z: " + z_ + " , theta : " + theta;
+                //dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
+                /* 0 0 1 2.63(150°くらい) */
 
                 var scene = document.querySelector('a-scene');
        
