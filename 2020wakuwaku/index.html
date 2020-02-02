@@ -90,6 +90,7 @@
             }
 
             function make_tower() {
+                const camera_ = document.getElementById('main_camera');
                 var camera_position = camera_.getAttribute('position');
                 var theta = Math.round(Math.atan(camera_front.point.x/camera_position.z)*180/Math.PI);
 
