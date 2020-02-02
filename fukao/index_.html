@@ -81,7 +81,7 @@
             function make_tower() {
                 var scene = document.querySelector('a-scene');
 
-                var theta = Math.atan(camera_front.point.x/camera_position.z)*180/Math.PI;
+                var theta = Math.round(Math.atan(camera_front.point.x/camera_position.z)*180/Math.PI);
        
                 for(var i = 1; i <= 36; i++) {
                     var tower_ = document.createElement('a-gltf-model');
