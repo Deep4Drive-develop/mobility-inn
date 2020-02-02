@@ -342,11 +342,12 @@
     display: none;
 }
 #bufferAgreeButton {
+    left: 100%;
     position: relative;
+    transform: translateX(-100%);
     color: #00acee;
     height: 24px;
     line-height: 24px;
-    right: 0;
     pointer-events: auto;
     z-index: 21;
     font-size: 14px;
