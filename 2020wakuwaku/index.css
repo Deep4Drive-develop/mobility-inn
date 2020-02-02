@@ -342,9 +342,8 @@
     display: none;
 }
 #bufferAgreeButton {
-    left: 100%;
-    position: relative;
-    transform: translateX(-100%);
+    position: absolute;
+    right: 0;
     color: #00acee;
     height: 24px;
     line-height: 24px;
