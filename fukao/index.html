@@ -95,7 +95,7 @@
                 const camera_ = document.getElementById('main_camera');
                 var camera_position = camera_.getAttribute('position');
 
-                var theta = Math.atan2(camera_position.z/camera_front.point.x);
+                var theta = 90 - (Math.atan2(camera_front.point.x/camera_position.z)*180/Math.PI);
 
                 dbg.innerText = "camera_z: " + camera_position.z + ", y_rot: " + theta + ", ic_x" + camera_front.point.x;
 
