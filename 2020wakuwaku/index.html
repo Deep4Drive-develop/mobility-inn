@@ -97,12 +97,12 @@
                 var vec1 = JSON.parse(JSON.stringify(camera_front.face.normal));
                 var vec2 = JSON.parse(JSON.stringify(camera_front.face.normal));
 
-                vec2.x = camera_front.point.x - camera_position.x;
-                vec2.y = camera_front.point.y - camera_position.y;
-                vec2.z = camera_front.point.z - camera_position.z;
-                //vec2.x = camera_front.point.x;
-                //vec2.y = camera_front.point.y;
-                //vec2.z = camera_front.point.z;
+                // vec2.x = camera_front.point.x - camera_position.x;
+                // vec2.y = camera_front.point.y - camera_position.y;
+                // vec2.z = camera_front.point.z - camera_position.z;
+                vec2.x = camera_front.point.x;
+                vec2.y = camera_front.point.y;
+                vec2.z = camera_front.point.z;
 
                 /*
                 vec1.x = vec1.x + camera_front.point.x;
@@ -160,7 +160,7 @@
                 var y_ = 0;
                 var z_ = 0;
 
-                dbg.innerText = "X: " + x_ + " , Y: " + y_ + " , Z: " + z_ + " , theta : " + theta;
+                dbg.innerText = "! X: " + x_ + " , Y: " + y_ + " , Z: " + z_ + " , theta : " + theta;
                 //dbg.innerText = "X: " + vec1.x + " , Y: " + vec1.y + " , Z: " + vec1.z + " , theta : " + theta;
                 /* 0 0 1 2.63(150°くらい) */
 
