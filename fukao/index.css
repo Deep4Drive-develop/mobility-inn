@@ -23,6 +23,7 @@
     background-color: rgba(53, 165, 110, 255);
     text-align: center;
     font-size: 16px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     color: white;
     width: 90%;
     height: 30px;
@@ -114,7 +115,7 @@
 
     transform: translateX(-50%);
 
-    top: 220px;
+    top: 230px;
     height: 180px;
     z-index: 25;
 }
@@ -189,7 +190,8 @@
     width: 90%;
     height: 420px;
     top: 8px;
-    left: 5%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 20;
     display: none;
     border-radius: 8px;
@@ -204,6 +206,7 @@
     text-align: right;
     pointer-events: auto;
     z-index: 30;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
 
     display: none;
 }
@@ -227,6 +230,7 @@
     left: calc(5% + 12px); 
     pointer-events: auto;
     z-index: 30;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
 
     display: none;
 }
@@ -235,10 +239,12 @@
 	position: absolute;
 	width: 80%;
 	height: 144px;
-	left: 10%; 
-        top: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 64px;
         z-index: 25;
 	pointer-events: auto;
+        font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
 
 	display: none;
 }
@@ -256,6 +262,93 @@
     display: block;
 }
 .tweet #tweetIcon {
+    display: block;
+}
+
+#bufferWindow {
+    position: absolute;
+    background-color: white;
+    width: 90%;
+    height: 420px;
+    top: 8px;
+    left: 5%;
+    z-index: 20;
+    border-radius: 8px;
+    text-align: center; /* テキストの揃え */
+    display: none;
+}
+#bufferContents {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+}
+#bufferBackButton {
+    position: absolute;
+    height: 24px;
+    line-height: 24px;
+    top: 20px;
+    left: calc(5% + 12px); 
+    pointer-events: auto;
+    z-index: 30;
+    font-size: 16px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
+
+    display: none;
+}
+#bufferText1 {
+    position: relative;
+    z-index: 25;
+    font-size: 14px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
+    text-align: center; /* テキストの揃え */
+    display: none;
+}
+#bufferAgreeButton {
+    position: relative;
+    background-color: #00acee;
+    color: white;
+    width: 50%;
+    height: 24px;
+    line-height: 24px;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: auto;
+    text-align: center;
+    z-index: 30;
+    padding: 1px 4px;
+    border-radius: 8px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
+
+    display: none;
+}
+#bufferText2 {
+    position: relative;
+    top: 12px;
+    z-index: 25;
+    font-size: 10px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
+    text-align: center; /* テキストの揃え */
+    display: none;
+}
+
+.buffer #bufferWindow {
+    display: block;
+}
+.buffer #bufferContents {
+    display: block;
+}
+.buffer #bufferBackButton {
+    display: block;
+}
+.buffer #bufferText1 {
+    display: block;
+}
+.buffer #bufferAgreeButton {
+    display: block;
+}
+.buffer #bufferText2 {
     display: block;
 }
 
@@ -281,17 +374,21 @@
     z-index: 14;
     text-align: center; /* テキストの揃え */
     font-size: 16px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     color: white;
     border-radius: 8px; /* 角丸 */
 }
 .balloon1::before { /* 三角の部分 */
     content: '';
     position: absolute; /* 位置固定 */
-    left: 11%;
-    border: 15px solid transparent; /* 線幅の設定 */
-    bottom: -30px; /* 線幅の2倍 */
+    left: 10.5%;
+    bottom: -24px;
     margin-left: -15px; /* 線幅だけずらす */
-    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
+
+    border-top: 15px solid rgba(53, 165, 110, 255);
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid transparent;
 }
 .balloon2 {
     position: absolute;
@@ -304,6 +401,7 @@
     z-index: 14;
     text-align: center; /* テキストの揃え */
     font-size: 16px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     color: white;
     border-radius: 8px; /* 角丸 */
 }
@@ -311,10 +409,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 88%;
-    border: 15px solid transparent; /* 線幅の設定 */
-    bottom: -30px; /* 線幅の2倍 */
+    bottom: -24px;
     margin-left: -15px; /* 線幅だけずらす */
-    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
+
+    border-top: 15px solid rgba(53, 165, 110, 255);
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid transparent;
 }
 .balloon3 {
     position: absolute;
@@ -327,6 +428,7 @@
     z-index: 14;
     text-align: center; /* テキストの揃え */
     font-size: 16px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     color: white;
     border-radius: 8px; /* 角丸 */
 }
@@ -334,10 +436,13 @@
     content: '';
     position: absolute; /* 位置固定 */
     left: 50%;
-    border: 15px solid transparent; /* 線幅の設定 */
-    bottom: -30px; /* 線幅の2倍 */
+    bottom: -24px;
     margin-left: -15px; /* 線幅だけずらす */
-    border-top-color: rgba(53, 165, 110, 255); /* 吹き出しの地と同じ色 */
+
+    border-top: 15px solid rgba(53, 165, 110, 255);
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid transparent;
 }
 
 .hide {
@@ -349,6 +454,7 @@
     background-color: rgba(53, 165, 110, 255);
     text-align: center;
     font-size: 16px;
+    font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     color: white;
     width: 90%;
     height: 30px;
@@ -393,3 +499,19 @@
         display: block;
     }
 }
+
+/*
+#debug {
+    display: block;
+    position: absolute;
+    background-color: rgba(53, 165, 110, 255);
+    color: white;
+    text-align: center;
+    width: 90%;
+    height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+}
+*/
