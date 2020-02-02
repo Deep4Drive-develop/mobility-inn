@@ -303,7 +303,7 @@
 #bufferBody {
     position: relative;
     z-index: 21;
-    top: 8px;
+    top: 2px;
     display: none;
 }
 #bufferBody1 {
@@ -316,7 +316,7 @@
 #bufferBody2 {
     position: relative;
     z-index: 21;
-    top: 6px;
+    top: 2px;
     font-size: 10px;
     font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     display: none;
@@ -325,7 +325,7 @@
 #bufferFooter {
     position: relative;
     z-index: 21;
-    top: 16px;
+    top: 6px;
     display: none;
 }
 #bufferBackButton {
@@ -379,10 +379,10 @@
     display: block;
 }
 .buffer #bufferBackButton {
-    display: block;
+    display: inline;
 }
 .buffer #bufferAgreeButton {
-    display: block;
+    display: inline;
 }
 
 #menuBar {
