@@ -110,9 +110,18 @@
                 // x = cos theta x + sin theta z
                 // y = y
                 // z = - sin theta x + cos theta z
-                var x_ = (Math.cos(theta)*360 + Math.sin(theta)*360) % 360;
-                var y_ = 0;
-                var z_ = (Math.sin(theta)*-1*360 + Math.cos(theta)*360) % 360;
+                //var x_ = (Math.cos(theta)*360 + Math.sin(theta)*360) % 360;
+                //var y_ = 0;
+                //var z_ = (Math.sin(theta)*-1*360 + Math.cos(theta)*360) % 360;
+
+                /* z軸固定で回転 */
+                /* 0 - 359 , 360=0 */
+                // x = cos theta x + - sin theta y
+                // y = sin theta x + cos theta y
+                // z = z
+                var x_ = (Math.cos(theta)*360 + Math.sin(theta)*-1*360) % 360;
+                var y_ = (Math.sin(theta)*360 + Math.cos(theta)*360) % 360;
+                var z_ = 0;
 
                 dbg.innerText = "X: " + x_ + " , Y: " + y_ + " , Z: " + z_;
 
