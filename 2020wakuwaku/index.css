@@ -272,7 +272,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    margin: 6px;
+    padding: 6px;
     z-index: 20;
     border-radius: 8px;
     display: none;
@@ -286,15 +286,15 @@
     position: relative;
     float: left;
     z-index: 21;
-    height: 28px;
-    width: 28px;
+    height: 32px;
+    width: 32px;
     display: none;
 }
 #bufferTitleText {
     position: relative;
     overflow: hidden;
-    height: 20px;
-    line-height: 20px;
+    height: 32px;
+    line-height: 32px;
     font-size: 20px;
     z-index: 21;
     font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
@@ -330,6 +330,7 @@
 }
 #bufferBackButton {
     position: relative;
+    float: left;
     color: #00acee;
     height: 24px;
     line-height: 24px;
@@ -348,6 +349,7 @@
     right: 0;
     pointer-events: auto;
     z-index: 21;
+    font-size: 14px;
     font-family: Meiryo, メイリオ, 'MS PGothic', arial, helvetica, sans-serif;
     display: none;
 }
