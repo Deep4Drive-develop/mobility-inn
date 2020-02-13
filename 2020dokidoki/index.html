@@ -304,15 +304,31 @@
                                 var model = document.querySelector('#circle2');
                                 model.setAttribute('opacity', '1');
 
+                                const balloon2_3 = document.getElementById('balloon2-3');
+                                balloon2_3.classList.remove('hide');
+
+                                const backgroundButton = document.getElementById('backgroundButton');
+                                backgroundButton.src = "image/heart.svg";
+
+                                background_mode = 2;
+                            } else if(background_mode == 2) {
+                                const balloon2_3 = document.getElementById('balloon2-3');
+                                balloon2_3.classList.add('hide');
+
+                                var model = document.querySelector('#circle2');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle3');
+                                model.setAttribute('opacity', '1');
+
                                 const balloon3 = document.getElementById('balloon3');
                                 balloon3.classList.remove('hide');
 
                                 const backgroundButton = document.getElementById('backgroundButton');
                                 backgroundButton.src = "image/yuki.svg";
 
-                                background_mode = 2;
-                            } else if(background_mode == 2) {
-                                var model = document.querySelector('#circle2');
+                                background_mode = 3;
+                            } else if(background_mode == 3) {
+                                var model = document.querySelector('#circle3');
                                 model.setAttribute('opacity', '0');
                                 var model = document.querySelector('#circle1');
                                 model.setAttribute('opacity', '1');
@@ -320,17 +336,27 @@
                                 const backgroundButton = document.getElementById('backgroundButton');
                                 backgroundButton.src = "image/sakura.svg";
 
-                                background_mode = 3;
-                            } else if(background_mode == 3) {
+                                background_mode = 4;
+                            } else if(background_mode == 4) {
                                 var model = document.querySelector('#circle1');
                                 model.setAttribute('opacity', '0');
                                 var model = document.querySelector('#circle2');
                                 model.setAttribute('opacity', '1');
 
                                 const backgroundButton = document.getElementById('backgroundButton');
+                                backgroundButton.src = "image/heart.svg";
+
+                                background_mode = 5;
+                            } else if(background_mode == 5) {
+                                var model = document.querySelector('#circle2');
+                                model.setAttribute('opacity', '0');
+                                var model = document.querySelector('#circle3');
+                                model.setAttribute('opacity', '1');
+
+                                const backgroundButton = document.getElementById('backgroundButton');
                                 backgroundButton.src = "image/yuki.svg";
 
-                                background_mode = 2;
+                                background_mode = 3;
                             }
                         })
                     };
@@ -402,6 +428,7 @@
             <div class="balloon1 hide" id="balloon1">東京タワーを出してみよう！</div>
             <div class="balloon2 hide" id="balloon2-1">雪を降らせてみよう！</div>
             <div class="balloon2 hide" id="balloon2-2">桜を降らせてみよう！</div>
+            <div class="balloon2 hide" id="balloon2-3">今日はバレンタイン！</div>
             <div class="balloon3 hide" id="balloon3">Twitterにシェアしてみよう！</div>
         </div>
         <a-scene
@@ -450,6 +477,7 @@
                 <a-asset-item id="tower36"  src="model/h13_top.glb"></a-asset-item>
                 <img id="sakura" src="image/sakura-touka.gif">
                 <img id="yuki" src="image/yuki-touka.gif">
+                <img id="valentine" src="image/valentine.gif">
             </a-assets>
 
             <a-camera
@@ -478,6 +506,14 @@
             </a-circle>
             <a-circle src="#sakura"
                       id="circle2"
+                      opacity="0"
+                      radius="3"
+                      position="0 5 0.1"
+                      rotation="0 0 0"
+                      material="shader:gif; transparent:false; alphaTest:0.5">
+            </a-circle>
+            <a-circle src="#valentine"
+                      id="circle3"
                       opacity="0"
                       radius="3"
                       position="0 5 0.1"
